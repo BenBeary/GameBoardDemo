@@ -37,11 +37,13 @@ public class TutorialUIFiller : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(buttonObject);
         Time.timeScale = 0;
+        GameManager.Instance.cantPause = true;
     }
 
     public void CloseTutorial()
     {
         transform.GetChild(0).gameObject.SetActive(false);
+        GameManager.Instance.cantPause = false;
         Time.timeScale = 1f;
     }
 

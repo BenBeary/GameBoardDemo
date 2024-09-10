@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetButtonDown("Pause"))
+        if(Input.GetButtonDown("Pause") && !cantPause)
         {
             if(!isPaused) PauseGame();
             else UnPauseGame();
