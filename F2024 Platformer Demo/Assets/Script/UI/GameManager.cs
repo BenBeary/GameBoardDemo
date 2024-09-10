@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
         {
             PlayerController.instance.hasInputPaused = true;
             PlayerController.instance.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-            cam.GetCinemachineComponent<Cinemachine.CinemachineFramingTransposer>().m_DeadZoneHeight = .5f;
+            cam.GetCinemachineComponent<CinemachineFramingTransposer>().m_DeadZoneHeight = .5f;
         }
         else
         {

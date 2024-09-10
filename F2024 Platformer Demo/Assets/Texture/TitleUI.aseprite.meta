@@ -121,15 +121,15 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: TitleUI
     originalName: 
-    pivot: {x: 1.0313808, y: -0.023529414}
+    pivot: {x: 0.49898785, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 239
-      height: 170
+      width: 494
+      height: 174
     spriteID: 5287319153f77fd439a15299084be920
     spriteBone: []
     spriteOutline: []
@@ -152,9 +152,9 @@ ScriptedImporter:
       frameIndex: 0
       cellRect:
         x: 1
-        y: 4
-        width: 239
-        height: 170
+        y: 0
+        width: 494
+        height: 174
       spriteId: 5287319153f77fd439a15299084be920
     linkedCells: []
     parentIndex: -1

@@ -11,7 +11,7 @@ public class MadKnightManager : MonoBehaviour
 
     bool hasJumped;
     Vector2 startPos;
-    private void Start()
+    private void Awake()
     {
         jumpingState = GetComponent<BasicEnemy>();
         startPos = transform.position;
@@ -25,9 +25,9 @@ public class MadKnightManager : MonoBehaviour
     private void OnDisable()
     {
         StopAllCoroutines();
-        ResetStates();
         GetComponent<SpriteRenderer>().flipX = false;
         transform.position = startPos;
+        ResetStates();
     }
 
     private void Update()
