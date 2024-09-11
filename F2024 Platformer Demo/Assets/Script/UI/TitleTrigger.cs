@@ -23,6 +23,7 @@ public class TitleTrigger : MonoBehaviour
             hasBeenTriggered = true;
             TitleManager.Instance.ShowTitle(titleImage, titleDuration, titleFadeSpeed);
         }
+        Debug.Log(collision.gameObject.name);
     }
 
 }

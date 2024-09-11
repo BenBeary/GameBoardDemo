@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public int Maxhealth = 6;
     public Transform checkPoint;
     public static Action playerReset;
-
+    [SerializeField] GameObject deadPrefab;
 
     [Header("Movement")]
     public int dotCount = 1;
@@ -29,9 +29,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool dotAnim;
     [SerializeField] float currentAnimTime;
     public int currentHealth = 6;
-    [SerializeField] bool grounded;
+    public bool grounded;
     [SerializeField] bool leftWallHang, rightWallHang;
-    [SerializeField] bool doubleJump = true;
+    public bool doubleJump = true;
     public bool hasInputPaused;
 
 
@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
     bool wallJump;
     bool hasJumped;
     bool isDying;
+    string animationsToPlay;
 
     private void Awake()
     {
@@ -79,7 +80,24 @@ public class PlayerController : MonoBehaviour
     private IEnumerator PlayerDeath()
     {
         isDying = true;
-        yield return new WaitForSecondsRealtime(1f);
+
+        #region Corpse Spawning
+        GetComponent<SpriteRenderer>().enabled = false;
+        rb.bodyType = RigidbodyType2D.Static;
+
+        GameObject corpse = Instantiate(deadPrefab);
+        corpse.transform.position = transform.position;
+        corpse.GetComponent<Animator>().runtimeAnimatorController = animMan.runtimeAnimatorController;
+        corpse.GetComponent<Animator>().Play(animationsToPlay);
+        corpse.GetComponent<Animator>().speed = 1.5f;
+        corpse.GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpForce * 1000 + Vector2.left * (motionInput.x*1000));
+        Destroy(corpse, 2);
+
+        #endregion
+
+        yield return new WaitForSecondsRealtime(2f);
+        GetComponent<SpriteRenderer>().enabled = true;
+        rb.bodyType = RigidbodyType2D.Dynamic;
         resetToCheckpoint();
         isDying = false;
     }
@@ -204,7 +222,7 @@ public class PlayerController : MonoBehaviour
 
     private void AnimManager()
     {
-        string animationsToPlay = dotCount.ToString() + "_Walk";
+        animationsToPlay = dotCount.ToString() + "_Walk";
         currentAnimTime = Mathf.Round((animMan.GetCurrentAnimatorStateInfo(0).normalizedTime % (int)animMan.GetCurrentAnimatorStateInfo(0).normalizedTime) * 10) / 10;
         if (motionInput.x < 0)
         {
@@ -280,6 +298,10 @@ public class PlayerController : MonoBehaviour
             rb.velocity = Vector2.zero;
             resetToCheckpoint();
             resetToCheckpoint();
+        }
+        if (collision.gameObject.CompareTag("DeathBoxes"))
+        {
+            DamagePlayer(currentHealth);
         }
     }
 }

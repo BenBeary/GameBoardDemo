@@ -6,7 +6,6 @@ public class Domino_Dropper : MonoBehaviour
 
     [SerializeField] float timeBeforeDrop;
     [SerializeField] float timeAfterDrop;
-
     [Header("Debug")]
     [SerializeField] bool triggered;
     [SerializeField] Collider2D boxCol;
@@ -38,12 +37,13 @@ public class Domino_Dropper : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(!triggered && collision.gameObject.GetComponent<PlayerController>() != null)
+        if(!triggered && collision.gameObject.GetComponent<PlayerController>() != null || !triggered && collision.tag == "Enemy")
         {
             Debug.Log("Dropper Triggered");
             triggered = true;
             StartCoroutine(dropper());
         }
+       
     }
 
 }

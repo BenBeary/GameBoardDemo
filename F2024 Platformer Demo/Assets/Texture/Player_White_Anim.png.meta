@@ -1298,6 +1298,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Centered-Piece
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 157
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e47f1f8e239fce438ef5bb45b67818f
+      internalID: -1484162631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1309,6 +1330,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Centered-Piece: -1484162631
       Player_White_Anim_0: -665576150
       Player_White_Anim_1: -350961126
       Player_White_Anim_10: -1163630036

@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Checkpoint
   - OutOfBounds
+  - DeathBoxes
   layers:
   - Default
   - TransparentFX

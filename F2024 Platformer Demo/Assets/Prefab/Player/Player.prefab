@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Maxhealth: 6
   checkPoint: {fileID: 0}
+  deadPrefab: {fileID: 6546377182887985787, guid: 480e6db061d093740bf8dc384ddbc4a1, type: 3}
   dotCount: 1
   maxDots: 3
   speed: 5

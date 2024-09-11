@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class MadKnightManager : MonoBehaviour
 {
-    [Tooltip("The Amount of times the boss jumps around")]
-    [SerializeField] int jumpingCycles = 1;
+    [SerializeField] Collider2D antiJumpOverBox;
 
     BasicEnemy jumpingState;
 
+    float startingJumpPause;
     bool hasJumped;
     Vector2 startPos;
     private void Awake()
     {
         jumpingState = GetComponent<BasicEnemy>();
         startPos = transform.position;
+        startingJumpPause = jumpingState.pauseInBetween;
     }
 
     private void OnEnable()
@@ -35,7 +36,7 @@ public class MadKnightManager : MonoBehaviour
         if (!hasJumped && jumpingState.backOnGround)
         {
             hasJumped = true;
-            GameManager.Instance.CameraShake(1.2f, .25f);
+            GameManager.Instance.CameraShake(.8f, .25f);
         }
         if (hasJumped && !jumpingState.backOnGround) hasJumped = false;
     }
@@ -48,27 +49,46 @@ public class MadKnightManager : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(1);
         jumpingState.enabled = true;
+        yield return new WaitForSecondsRealtime(6); // wait till after first point
+        antiJumpOverBox.enabled = true;
 
-        int currentCycle = 0;
-        bool cycleComplete = true;
-        while(jumpingCycles > currentCycle)
+        while(jumpingState.currentTarget != 0 || jumpingState.enabled == false)
         {
-            if(jumpingState.currentTarget == 0 && !cycleComplete)
-            {
-                cycleComplete = true;
-                currentCycle++;
-
-            }
-            if(jumpingState.currentTarget == 1) cycleComplete = false;
-
+            if (jumpingState.currentTarget == 16) jumpingState.pauseInBetween = .5f;
+            else if (jumpingState.currentTarget == 20) jumpingState.pauseInBetween = startingJumpPause;
             yield return null;
         }
-        yield return new WaitForSecondsRealtime(jumpingState.timeToJump + jumpingState.pauseInBetween + .1f); // Wait for 1 more jump to complete
+        jumpingState.stopJumpCylce = true;
+        yield return new WaitForSecondsRealtime(1);
+
+        for(int i = 0; i < 3; i++)
+        {
+            if(jumpingState.enabled == false) break;
+            jumpingState.CallToJump(transform.position, jumpingState.targetPoints[jumpingState.targetPoints.Length-1].position, .5f, 2);
+            GetComponent<SpriteRenderer>().flipX = true;
+            yield return new WaitForSecondsRealtime(jumpingState.pauseInBetween + .5f);
+        }
+        yield return new WaitForSecondsRealtime(.5f);
+        transform.GetChild(1).gameObject.SetActive(true);
+        transform.GetChild(1).transform.localPosition *= new Vector2(-1, 1); // This is what I get for wanting it to breath at the end
+        transform.GetChild(1).GetComponent<SpriteRenderer>().flipX = false;
+        transform.GetChild(1).transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false; // this will break if player resets -> put checkpoint at end
+        transform.GetChild(1).transform.Rotate(0, 0, -90);
         jumpingState.enabled = false;
     }
 
     private void ResetStates()
     {
+        jumpingState.pauseInBetween = startingJumpPause;
         jumpingState.enabled = false;
+        antiJumpOverBox.enabled = false;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject == PlayerController.instance.gameObject)
+        {
+            PlayerController.instance.DamagePlayer(PlayerController.instance.currentHealth);
+        }
     }
 }

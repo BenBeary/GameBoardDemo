@@ -38,6 +38,7 @@ public class TutorialUIFiller : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(buttonObject);
         Time.timeScale = 0;
         GameManager.Instance.cantPause = true;
+        GameManager.Instance.clearCameraShake();
     }
 
     public void CloseTutorial()

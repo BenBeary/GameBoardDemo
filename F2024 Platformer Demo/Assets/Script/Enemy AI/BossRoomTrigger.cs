@@ -22,15 +22,6 @@ public class BossRoomTrigger : MonoBehaviour
         PlayerController.playerReset -= ResetFight;
     }
 
-    private void FixedUpdate()
-    {
-        if(!fightIsOver && !boss)
-        {
-            fightIsOver = true;
-            FinishedFight();
-        }
-    }
-
     private void StartFight()
     {
         ChangeDoorState(false);
@@ -46,14 +37,6 @@ public class BossRoomTrigger : MonoBehaviour
         }
     }
 
-
-
-    private void FinishedFight()
-    {
-        ChangeDoorState(true);
-        GameManager.Instance.SetNewTarget(null,1);
-
-    }
 
     private void ResetFight()
     {

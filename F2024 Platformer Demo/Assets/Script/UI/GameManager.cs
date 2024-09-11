@@ -100,6 +100,17 @@ public class GameManager : MonoBehaviour
         shakeTimeTotal = time; ;
     }
 
+    public void SetPlayerCameraSize(float size)
+    {
+        groupTargeting.GetComponent<CinemachineTargetGroup>().m_Targets[0].radius = size;
+    }
+
+    public void clearCameraShake()
+    {
+        cam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
+        cam.transform.parent.transform.rotation = Quaternion.identity;
+    }
+
     private void DecreaseShaking()
     {
         if(shakeTimer > 0)
@@ -109,9 +120,7 @@ public class GameManager : MonoBehaviour
             {
                 CinemachineBasicMultiChannelPerlin cameraShakeComp = cam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
                 cameraShakeComp.m_AmplitudeGain = Mathf.Lerp(shakeIntensity, 0f, 1 - (shakeTimer / shakeTimeTotal));
-
-                cam.transform.parent.transform.Rotate(Vector3.zero); // resets camera because Cinemachine doesnt, Thanks for that
-                cam.transform.parent.transform.position = new Vector3(cam.transform.parent.transform.position.x, cam.transform.parent.transform.position.y, -14);
+               
             }
         }
     }
@@ -167,7 +176,7 @@ public class GameManager : MonoBehaviour
     public void PauseGame()
     {
         PauseMenu.SetActive(true);
-        cam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
+        clearCameraShake();
         Time.timeScale = 0;
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(PauseExitButton);
@@ -194,6 +203,8 @@ public class GameManager : MonoBehaviour
     {
         UnPauseGame();
         if (PlayerController.instance.checkPoint != null) PlayerController.instance.resetToCheckpoint();
+        cam.transform.parent.transform.Rotate(Vector3.zero);
+
     }
     #endregion
 

@@ -7628,13 +7628,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1793383873186082491, guid: 2d186d2ae386ae24ca60a2bb3fca0816, type: 3}
+      propertyPath: m_Color.g
+      value: 0.809734
+      objectReference: {fileID: 0}
+    - target: {fileID: 1793383873186082491, guid: 2d186d2ae386ae24ca60a2bb3fca0816, type: 3}
+      propertyPath: m_SortingOrder
+      value: -5
+      objectReference: {fileID: 0}
     - target: {fileID: 5577054635097540489, guid: 2d186d2ae386ae24ca60a2bb3fca0816, type: 3}
       propertyPath: m_Name
       value: PlayerResetBox
-      objectReference: {fileID: 0}
-    - target: {fileID: 5577054635097540489, guid: 2d186d2ae386ae24ca60a2bb3fca0816, type: 3}
-      propertyPath: m_TagString
-      value: OutOfBounds
       objectReference: {fileID: 0}
     - target: {fileID: 7172947333134150409, guid: 2d186d2ae386ae24ca60a2bb3fca0816, type: 3}
       propertyPath: m_LocalScale.y

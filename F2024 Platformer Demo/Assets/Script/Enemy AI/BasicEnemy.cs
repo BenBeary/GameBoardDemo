@@ -19,12 +19,13 @@ public class BasicEnemy : MonoBehaviour
     public float pauseInBetween;
 
     [Space(15)]
-    [SerializeField] Transform[] targetPoints;
+    public Transform[] targetPoints;
 
 
     [Header("Debug")]
     [SerializeField] bool finishedJump = true;
     public bool backOnGround;
+    public bool stopJumpCylce;
     public int currentTarget = 0;
     Transform jumpPoint;
 
@@ -36,30 +37,30 @@ public class BasicEnemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!finishedJump) return;
+        if (!finishedJump || stopJumpCylce) return;
 
-        float jumpDist = Vector2.Distance(transform.position, jumpPoint.position);
-        float targDist = Vector2.Distance(transform.position, targetPoints[currentTarget].position);
-        float jumpPointToTarget = Vector2.Distance(jumpPoint.position, targetPoints[currentTarget].position);
+        float jumpDist = Mathf.Abs(transform.position.x - jumpPoint.position.x);
+        float targDist = Mathf.Abs(transform.position.x -  targetPoints[currentTarget].position.x);
+        float jumpPointToTarget = Mathf.Abs(jumpPoint.position.x - targetPoints[currentTarget].position.x);
 
         if(jumpPointToTarget > targDist) jumpPoint.localPosition = -jumpPoint.localPosition; // if the jumpoint is further than Object, flip direction
 
         if (targDist <= jumpDist)
         {
-            StartCoroutine(Curve(transform.position, targetPoints[currentTarget].position));
+            StartCoroutine(Curve(transform.position, targetPoints[currentTarget].position,timeToJump,jumpHeight));
             currentTarget++;
             if (currentTarget > targetPoints.Length - 1) currentTarget = 0;
         }
         else // Using Jump point instead of target
         {
             
-            StartCoroutine(Curve(transform.position,jumpPoint.position));
+            StartCoroutine(Curve(transform.position,jumpPoint.position,timeToJump,jumpHeight));
         }
 
         finishedJump = false;
     }
 
-    public IEnumerator Curve(Vector2 start, Vector2 target)
+    public IEnumerator Curve(Vector2 start, Vector2 target, float timeToJump, float jumpHeight)
     {
         float timePassed = 0f;
         Vector2 end = target;
@@ -88,11 +89,19 @@ public class BasicEnemy : MonoBehaviour
         finishedJump = true;
     }
 
+    public void CallToJump(Vector2 start, Vector2 target, float jumpTime, float jumpHeight)
+    {
+        StartCoroutine(Curve(start, target, jumpTime, jumpHeight));
+    }
+
     private void OnDisable()
     {
         backOnGround = true;
         finishedJump = true;
         currentTarget = 0;
+        stopJumpCylce = false;
     }
+
+
 }
 
