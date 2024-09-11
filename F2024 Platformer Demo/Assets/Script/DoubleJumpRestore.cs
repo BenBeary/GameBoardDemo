@@ -20,7 +20,7 @@ public class DoubleJumpRestore : MonoBehaviour
         if(collision.gameObject == PlayerController.instance.gameObject)
         {
             PlayerController.instance.doubleJump = true;
-            PlayerController.instance.maxDots++;
+            PlayerController.instance.dotCount++;
             Destroy(gameObject);
         }
     }

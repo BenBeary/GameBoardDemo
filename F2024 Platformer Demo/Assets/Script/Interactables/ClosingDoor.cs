@@ -40,7 +40,7 @@ public class ClosingDoor : MonoBehaviour
         {
             timePassed += Time.deltaTime;
             float linearT = timePassed / timeToClose;
-
+            
             transform.position = Vector2.Lerp(transform.position, targetPos, linearT);
             yield return null;
         }

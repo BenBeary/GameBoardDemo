@@ -12,7 +12,7 @@ public class DotRandomizer : MonoBehaviour
         int rand = Random.Range(0, dots.Length+1);
         if(isDomino)
         {
-            rand = Random.Range(0, dots.Length-1);
+            rand = Random.Range(0, dots.Length);
         }
 
         if (rand == dots.Length)

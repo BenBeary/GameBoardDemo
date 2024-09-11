@@ -49,13 +49,18 @@ public class MadKnightManager : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(1);
         jumpingState.enabled = true;
-        yield return new WaitForSecondsRealtime(6); // wait till after first point
+        while (jumpingState.currentTarget == 0)
+        {
+            yield return null;
+        }// wait till after first point
         antiJumpOverBox.enabled = true;
 
         while(jumpingState.currentTarget != 0 || jumpingState.enabled == false)
         {
             if (jumpingState.currentTarget == 16) jumpingState.pauseInBetween = .5f;
             else if (jumpingState.currentTarget == 20) jumpingState.pauseInBetween = startingJumpPause;
+            else if (jumpingState.currentTarget == 22) antiJumpOverBox.enabled = false;
+            else if (jumpingState.currentTarget == 27) antiJumpOverBox.enabled = true;
             yield return null;
         }
         jumpingState.stopJumpCylce = true;
