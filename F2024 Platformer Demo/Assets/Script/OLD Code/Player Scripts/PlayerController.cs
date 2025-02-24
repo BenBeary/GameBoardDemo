@@ -62,6 +62,12 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if(Input.GetKey(KeyCode.Alpha1) && Input.GetKey(KeyCode.Alpha2))
+        {
+            Debug.Log("Application Closing");
+            Application.Quit();
+        }
+
         if(!isDying && !hasInputPaused) MovementManager();
         AnimManager();
     }
@@ -98,6 +104,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSecondsRealtime(2f);
         GetComponent<SpriteRenderer>().enabled = true;
         rb.bodyType = RigidbodyType2D.Dynamic;
+        GameManager.Instance.clearCameraShake();
         resetToCheckpoint();
         isDying = false;
     }

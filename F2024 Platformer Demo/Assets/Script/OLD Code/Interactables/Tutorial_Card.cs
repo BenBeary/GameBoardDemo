@@ -40,4 +40,6 @@ public class Tutorial_Card : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+
+
 }

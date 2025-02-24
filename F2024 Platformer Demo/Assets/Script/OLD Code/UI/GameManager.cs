@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour
     public void clearCameraShake()
     {
         cam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
-        cam.transform.parent.transform.rotation = Quaternion.identity;
+        cam.transform.parent.transform.eulerAngles = Vector3.zero;
     }
 
     private void DecreaseShaking()

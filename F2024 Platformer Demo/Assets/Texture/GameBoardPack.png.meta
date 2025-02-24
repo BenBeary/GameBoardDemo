@@ -1240,16 +1240,16 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GameBoardPack_4
+      name: BlockSize
       rect:
         serializedVersion: 2
-        x: 69
-        y: 416
-        width: 54
-        height: 80
+        x: 96
+        y: 432
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 5, y: 3, z: 3, w: 5}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1408,22 +1408,85 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pawn_White
+      name: 32Block_Transparent
       rect:
         serializedVersion: 2
-        x: 0
-        y: 416
+        x: 64
+        y: 432
         width: 32
-        height: 45
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 5, y: 3, z: 3, w: 5}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff345a2ef3ef088488ba6eabe758d015
+      internalID: -1078005446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hint Card
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 416
+        width: 54
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 80c52c23b00c9a04888cc4ce5e3e7410
-      internalID: 357392294
+      spriteID: 9601acd4c49147e4f8e5fb6ddee58d2b
+      internalID: -112161361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameBoardPack_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 497
+        width: 192
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 60, y: 4, z: 43, w: 4}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3721c64868107b142827b4e59e2fe855
+      internalID: 564333434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameBoardPack_11
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 464
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51df1711384e2154daf9fe2617511d9d
+      internalID: 1331652714
       vertices: []
       indices: 
       edges: []
@@ -1439,6 +1502,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      32Block_Transparent: -1078005446
       Background: -710548648
       Black_Dot_1: -2121727096
       Black_Dot_2: 1617542235
@@ -1447,6 +1511,7 @@ TextureImporter:
       Black_Dot_5: -227849873
       Black_Dot_6: 306687789
       Blank_Space: 535001579
+      BlockSize: -1671453251
       CheckPoint: 1297257507
       ChessBoard: 1344019621
       ChessBoard_Center: 1529179044
@@ -1482,6 +1547,7 @@ TextureImporter:
       GameBoardPack_0: -1974951954
       GameBoardPack_1: -1913019565
       GameBoardPack_10: -739917760
+      GameBoardPack_11: 1331652714
       GameBoardPack_12: 401839778
       GameBoardPack_17: -1742082350
       GameBoardPack_18: 1975702322
@@ -1489,7 +1555,7 @@ TextureImporter:
       GameBoardPack_23: 728398380
       GameBoardPack_24: 1594137869
       GameBoardPack_3: -1455618226
-      GameBoardPack_4: -1671453251
+      GameBoardPack_4: 564333434
       GameBoardPack_42: -810259288
       GameBoardPack_43: 1992744015
       GameBoardPack_47: -586453676
@@ -1517,6 +1583,7 @@ TextureImporter:
       GameBoardPack_7: -690026374
       GameBoardPack_8: 1566384333
       GameBoardPack_9: -1841217523
+      Hint Card: -112161361
       Pawn_White: 357392294
       Pencil: -861225712
       Pin_Black: 1005473492
