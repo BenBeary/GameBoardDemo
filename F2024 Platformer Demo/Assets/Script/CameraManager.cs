@@ -19,6 +19,12 @@ public class CameraManager : MonoBehaviour
     public static bool frozen;
     [Range(0,16f)]
     [SerializeField] float deadZone = 1f;
+
+    [Header("Transition Settings")]
+    [Min(0)]
+    [SerializeField] float transitionTime = 1f;
+    bool transitioning;
+
     [Header("Debug")]
     [SerializeField] Vector3 clampedMove;
     public Transform target;
@@ -51,9 +57,9 @@ public class CameraManager : MonoBehaviour
 
 
 
-            // check if target is in bounds
-
-            PutTargetInBox();
+        // check if target is in bounds
+        if (transitioning) return;
+        PutTargetInBox();
 
     }
 
@@ -98,12 +104,7 @@ public class CameraManager : MonoBehaviour
 
         clampedMove = transform.position + (Vector3)moveInput;
 
-        clampedMove.x = Mathf.Clamp(clampedMove.x,
-                                        SceneController.Instance.activeChunk.transform.position.x - SceneController.Instance.activeChunk.cameraClampArea.x / 2f,
-                                        SceneController.Instance.activeChunk.transform.position.x + SceneController.Instance.activeChunk.cameraClampArea.x / 2f);
-        clampedMove.y = Mathf.Clamp(clampedMove.y,
-                                        SceneController.Instance.activeChunk.transform.position.y - SceneController.Instance.activeChunk.cameraClampArea.y / 2f,
-                                        SceneController.Instance.activeChunk.transform.position.y + SceneController.Instance.activeChunk.cameraClampArea.y / 2f);
+        clampedMove = ClampMovement(clampedMove);
 
 
         if (dynamicSpeed)
@@ -124,8 +125,44 @@ public class CameraManager : MonoBehaviour
     }
 
 
+    Vector3 ClampMovement(Vector3 input)
+    {
+        input.x = Mathf.Clamp(clampedMove.x,
+                                SceneController.Instance.activeChunk.transform.position.x - SceneController.Instance.activeChunk.cameraClampArea.x / 2f,
+                                SceneController.Instance.activeChunk.transform.position.x + SceneController.Instance.activeChunk.cameraClampArea.x / 2f);
+        input.y = Mathf.Clamp(clampedMove.y,
+                                        SceneController.Instance.activeChunk.transform.position.y - SceneController.Instance.activeChunk.cameraClampArea.y / 2f,
+                                        SceneController.Instance.activeChunk.transform.position.y + SceneController.Instance.activeChunk.cameraClampArea.y / 2f);
+
+        return input;
+    }
 
 
+    public void TransitionCamera(Vector3 targetSpot)
+    {
+        if (transitioning) return;
+        transitioning = true;
+        targetSpot.z = cam.transform.position.z;
+        StartCoroutine(CameraTransition(targetSpot));
+    }
+
+    IEnumerator CameraTransition(Vector3 targetSpot)
+    {
+        float timePassed = Time.deltaTime;
+
+        while (true)
+        {
+            timePassed += Time.deltaTime / transitionTime;
+
+            transform.position = Vector3.Lerp(transform.position, targetSpot, timePassed);
+
+            if (timePassed >= 1f) break;
+
+            yield return null;
+        }
+        
+        transitioning = true;
+    }
 
     private void OnDrawGizmosSelected()
     {
@@ -145,7 +182,7 @@ public class CameraManager : MonoBehaviour
 
 
 
-
+        // Camera Move Bounds
         Gizmos.color = Color.blue;
         Gizmos.DrawLine((Vector2)horizontalPoint, new Vector2(horizontalPoint.x,horizontalPoint.z));
         Gizmos.color = Color.blue;
@@ -161,6 +198,7 @@ public class CameraManager : MonoBehaviour
         Gizmos.DrawLine((Vector2)verticalPoint, new Vector2(verticalPoint.z, verticalPoint.y));
         #endregion
 
+        // Deadzone
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position, cam.pixelRect.size / 32 / 2 - Vector2.one * deadZone);
 
