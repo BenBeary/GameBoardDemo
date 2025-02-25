@@ -207,7 +207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Flag: {fileID: 8566417339162787730}
   moveAmount: 1
-  speed: 5
+  animDuration: 0.25
 --- !u!61 &6385224266695182381
 BoxCollider2D:
   m_ObjectHideFlags: 0

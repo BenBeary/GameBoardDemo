@@ -23,7 +23,7 @@ public class CameraManager : MonoBehaviour
     [Header("Transition Settings")]
     [Min(0)]
     [SerializeField] float transitionTime = 1f;
-    bool transitioning;
+    [SerializeField] bool transitioning;
 
     [Header("Debug")]
     [SerializeField] Vector3 clampedMove;
@@ -115,7 +115,6 @@ public class CameraManager : MonoBehaviour
                 target.position.y < boundary.y - cam.pixelHeight / 128 + deadZone || target.position.y > boundary.w + cam.pixelHeight / 128 - deadZone) // Player is out of camera
             {
                 catchUpSpeed *= 10f;
-                Debug.Log("Player Out of Camera View");
             }
 
         }
@@ -125,7 +124,7 @@ public class CameraManager : MonoBehaviour
     }
 
 
-    Vector3 ClampMovement(Vector3 input)
+    public Vector3 ClampMovement(Vector3 input)
     {
         input.x = Mathf.Clamp(clampedMove.x,
                                 SceneController.Instance.activeChunk.transform.position.x - SceneController.Instance.activeChunk.cameraClampArea.x / 2f,
@@ -148,20 +147,31 @@ public class CameraManager : MonoBehaviour
 
     IEnumerator CameraTransition(Vector3 targetSpot)
     {
-        float timePassed = Time.deltaTime;
+        float timePassed = 0;
+        Vector3 start = transform.position;
+
+        if (targetSpot.y > start.y + 10) // 2 = 1 block so if 5 blocks above current camera causes boost 
+        {
+            PlayerController.instance.JumpCall(); // add extra velocity up if coming from chunk below
+            Debug.Log("added Force for Chunk");
+        }
+
+        PlayerController.instance.FreezePlayer();
 
         while (true)
         {
-            timePassed += Time.deltaTime / transitionTime;
+            timePassed += Time.deltaTime;
 
-            transform.position = Vector3.Lerp(transform.position, targetSpot, timePassed);
+            transform.position = Vector3.Lerp(start, targetSpot, timePassed / transitionTime);
 
-            if (timePassed >= 1f) break;
+            if (Vector2.Distance(transform.position,targetSpot) <= 0.1f) break;
 
             yield return null;
         }
-        
-        transitioning = true;
+
+        PlayerController.instance.UnFreezePlayer();
+
+        transitioning = false;
     }
 
     private void OnDrawGizmosSelected()

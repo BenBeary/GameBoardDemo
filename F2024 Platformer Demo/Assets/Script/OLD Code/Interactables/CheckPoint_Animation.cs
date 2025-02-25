@@ -7,7 +7,7 @@ public class CheckPoint_Animation : MonoBehaviour
 
     [SerializeField] Transform Flag;
     [SerializeField] float moveAmount;
-    [SerializeField] float speed;
+    [SerializeField] float animDuration;
 
     public void MoveFlag(bool moveDown)
     {
@@ -22,12 +22,13 @@ public class CheckPoint_Animation : MonoBehaviour
     IEnumerator flagAnimate(Vector2 endPos)
     {
         float count = Time.deltaTime;
+        Vector2 start = Flag.localPosition;
 
         while (true)
         {
             yield return null;
-            count += Time.deltaTime / speed;
-            Flag.localPosition = Vector2.Lerp(Flag.localPosition, endPos, count);
+            count += Time.deltaTime;
+            Flag.localPosition = Vector2.Lerp(start, endPos, count / animDuration);
             if (count >= 1f) break;
         }
     }

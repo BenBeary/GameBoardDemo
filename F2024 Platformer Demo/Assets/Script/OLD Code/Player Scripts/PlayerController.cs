@@ -46,6 +46,9 @@ public class PlayerController : MonoBehaviour
     bool isDying;
     string animationsToPlay;
 
+    Vector2 storedVelocity;
+    Vector2 storedForce;
+
     private void Awake()
     {
         if(instance  == null) instance = this;
@@ -128,7 +131,6 @@ public class PlayerController : MonoBehaviour
         grounded = (Physics2D.Raycast(transform.position, Vector2.down, .1f, LayerMask.GetMask("Ground")));
         leftWallHang = (Physics2D.Raycast(transform.position + (Vector3.left * 0.35f) + Vector3.up * .2f, Vector2.left, .1f, LayerMask.GetMask("Wall")));
         rightWallHang = (Physics2D.Raycast(transform.position + (Vector3.right * 0.35f) + Vector3.up * .2f, Vector2.right, .1f, LayerMask.GetMask("Wall")));
-
 
 
         #region Jumping
@@ -220,7 +222,29 @@ public class PlayerController : MonoBehaviour
         replenishing = false;
     }
 
-    private void JumpCall()
+
+    public void FreezePlayer()
+    {
+        hasInputPaused = true;
+        storedVelocity = rb.velocity;
+        storedForce = rb.totalForce;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        animMan.enabled = false;
+        
+    }
+
+    public void UnFreezePlayer()
+    {
+        hasInputPaused = false;
+        rb.constraints = RigidbodyConstraints2D.None;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        rb.velocity = storedVelocity;
+        rb.totalForce = storedForce;
+        animMan.enabled = true;
+       
+    }
+
+    public void JumpCall()
     {
         rb.velocity = Vector2.zero;
         rb.AddForce(Vector2.up * jumpForce * 1000);

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [RequireComponent(typeof(BoxCollider2D))]
 public class ChunkData : MonoBehaviour
 {
@@ -13,11 +14,12 @@ public class ChunkData : MonoBehaviour
         [HideInInspector] public bool hasBeenCleared;
     }
 
+    [Header("Chunking Chunk")]
     public bool isActiveChunk;
+    public string ChunkID;
 
 
-    [Header("Camera Settings")]
-    public Vector2Int cameraClampArea;
+    public Vector2 cameraClampArea { get { return Vector2.one * 2 + (Vector2)GetComponent<BoxCollider2D>().bounds.size - Camera.main.pixelRect.size / 64; } }
 
     [Header("Double Chunk Chocolate Chip Cookie")]
     [Tooltip("Only Store Items that need to be destoryed on load")]
@@ -27,10 +29,13 @@ public class ChunkData : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.black;
-        Gizmos.DrawWireCube((Vector2)transform.position, (Vector2)cameraClampArea);
+        Gizmos.DrawWireCube((Vector2)transform.position, cameraClampArea);
         Gizmos.color = Color.magenta;
-        Gizmos.DrawWireCube((Vector2)transform.position, cameraClampArea + new Vector2(Camera.main.pixelWidth/32, Camera.main.pixelHeight/32)/2);
+        Gizmos.DrawWireCube((Vector2)transform.position, cameraClampArea + new Vector2(Camera.main.pixelWidth / 64, Camera.main.pixelHeight / 64));
     }
+
+
+
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -38,6 +43,7 @@ public class ChunkData : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             SceneController.Instance.SetNewChunk(this);
+            Camera.main.GetComponent<CameraManager>().TransitionCamera(Camera.main.GetComponent<CameraManager>().ClampMovement(Camera.main.transform.position));
         }
     }
 }
