@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5371247145436462341}
   - component: {fileID: 693620100951394393}
   - component: {fileID: 4011732779537768452}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Pencil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 2.7993543, y: 0.46875143}
+  m_Size: {x: 5.471094, y: 0.469}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -122,7 +122,7 @@ BoxCollider2D:
     border: {x: 0.6875, y: 0, z: 0.71875, w: 0}
     pivot: {x: 0, y: 0.5}
     oldSize: {x: 6, y: 0.46875}
-    newSize: {x: 2.7993543, y: 0.46875143}
+    newSize: {x: 5.471094, y: 0.469}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0

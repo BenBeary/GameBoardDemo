@@ -4,8 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Ground
-  - Wall
   - Enemy
   - Checkpoint
   - OutOfBounds

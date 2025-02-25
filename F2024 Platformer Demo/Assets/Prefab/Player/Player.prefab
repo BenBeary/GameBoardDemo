@@ -66,6 +66,7 @@ MonoBehaviour:
   rightWallHang: 0
   doubleJump: 1
   hasInputPaused: 0
+  currentMomentum: {x: 0, y: 0}
 --- !u!212 &4185716319996758202
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -164,7 +165,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &3554362938351777563
 BoxCollider2D:

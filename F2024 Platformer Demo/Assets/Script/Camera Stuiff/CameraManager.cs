@@ -10,15 +10,20 @@ public class CameraManager : MonoBehaviour
     [SerializeField] int paddingX;
     [Range(0, 100)]
     [SerializeField] int paddingY;
+    [Range(0,16f)]
+    [SerializeField] float deadZone = 1f;
     [Min(0)]
     [SerializeField] float speedDampening;
     [SerializeField] float catchUpSpeed;
     [SerializeField] bool dynamicSpeed;
-    [SerializeField] float lookAheadDistance;
+
+    [Header("Look Ahead Settings")]
+    [SerializeField] bool useLookAhead;
+    [SerializeField] Vector2 lookAheadDistance;
     [SerializeField] float lookAheadSpeed;
-    public static bool frozen;
-    [Range(0,16f)]
-    [SerializeField] float deadZone = 1f;
+    
+
+    
 
     [Header("Transition Settings")]
     [Min(0)]
@@ -26,10 +31,11 @@ public class CameraManager : MonoBehaviour
     [SerializeField] bool transitioning;
 
     [Header("Debug")]
-    [SerializeField] Vector3 clampedMove;
+    [SerializeField] Vector3 targetPosition;
+    [SerializeField] Vector2 lookAheadOffset;
     public Transform target;
+    public static bool frozen;
     
-    Vector3 targetLastPos;
 
     Camera cam
     {
@@ -40,33 +46,60 @@ public class CameraManager : MonoBehaviour
         get
         {
             if(cam == null) { return Vector2.zero; }
-            return new Vector2(cam.pixelWidth / 32 / 4 * (paddingX / 100f),
-                               cam.pixelHeight / 32 / 4 * (paddingY / 100f));
+            return new Vector2(cam.pixelWidth / 64 * (paddingX / 100f),
+                               cam.pixelHeight / 64 * (paddingY / 100f));
         }
     }
 
-
-
-    private void Update()
+    private void LateUpdate()
     {
         if (target == null)
         {
             Debug.LogWarning("Camera has no target (Will be Broken)");
             return;
         }
+        
 
 
-
-        // check if target is in bounds
-        if (transitioning) return;
-        PutTargetInBox();
+        
+        if (transitioning || frozen) return;
+        PutTargetInBox(); // Movement Function
 
     }
 
 
-    private void FixedUpdate()
+
+
+    bool checkWithinBounds(Vector4 boundary, bool xAxisOnly = default, bool yAxisOnly = default, bool useDeadzone = default)
     {
-        targetLastPos = transform.position;
+
+        Vector2 targetPos = (Vector2)target.position + lookAheadOffset;
+
+        
+        Rect deadzoneConvert = new Rect(transform.position.x, transform.position.y, cam.pixelRect.size.x / 64 - deadZone*2, cam.pixelRect.size.y/64 - deadZone*2);
+        Debug.DrawLine(deadzoneConvert.position, deadzoneConvert.position + Vector2.down * deadzoneConvert.height/2, Color.white);
+        Debug.DrawLine(deadzoneConvert.position, deadzoneConvert.position + Vector2.left * deadzoneConvert.width/2, Color.white);
+
+
+        if (xAxisOnly)
+        {
+            return targetPos.x < boundary.x || targetPos.x > boundary.z;
+        }
+
+        if(yAxisOnly)
+        {
+            return targetPos.y < boundary.y || targetPos.y > boundary.w;
+        }
+
+        if (useDeadzone)
+        {
+            return targetPos.x < deadzoneConvert.position.x - deadzoneConvert.width || targetPos.x > deadzoneConvert.position.x + deadzoneConvert.width ||
+                   targetPos.y < deadzoneConvert.position.y - deadzoneConvert.height || targetPos.y > deadzoneConvert.position.y + deadzoneConvert.height;
+        }
+
+        return targetPos.x < boundary.x || targetPos.x > boundary.z ||
+               targetPos.y < boundary.y || targetPos.y > boundary.w;
+
     }
 
 
@@ -78,60 +111,81 @@ public class CameraManager : MonoBehaviour
             return;
         }
 
+        Vector4 boundary = new Vector4(transform.position.x - percentConvert.x/2, 
+                                       transform.position.y - percentConvert.y/2, 
+                                       transform.position.x + percentConvert.x/2, 
+                                       transform.position.y + percentConvert.y/2);
 
         Vector2 moveInput = Vector2.zero;
-        Vector4 boundary = new Vector4(transform.position.x - percentConvert.x, transform.position.y - percentConvert.y, transform.position.x + percentConvert.x, transform.position.y + percentConvert.y);
 
 
-        // Outside of border box
 
-        if (target.position.x < boundary.x || target.position.x > boundary.z)
+
+        if (target.position.x + lookAheadOffset.x < boundary.x || target.position.x + lookAheadOffset.x > boundary.z)
         {
-            moveInput.x = target.position.x > boundary.z ? 1f : -1f;
-
+            moveInput.x = target.position.x + lookAheadOffset.x > boundary.z ? .5f : -.5f;
         }
-        if (target.position.y < boundary.y || target.position.y > boundary.w)
+        if (target.position.y + lookAheadOffset.y < boundary.y || target.position.y + lookAheadOffset.y > boundary.w)
         {
-            moveInput.y = target.position.y > boundary.w ? 1f : -1f;
+            moveInput.y = target.position.y + lookAheadOffset.y > boundary.w ? .5f : -.5f;
 
         }
 
 
+        if (useLookAhead && !checkWithinBounds(boundary,false,false,true)) // only run if not in Deadzone
+        {
+            if(PlayerController.instance.currentMomentum.x > 0f) 
+            { 
+                lookAheadOffset.x = Mathf.Lerp(lookAheadOffset.x, lookAheadDistance.x, lookAheadSpeed * Time.deltaTime);
+            }
+            else if (PlayerController.instance.currentMomentum.x < 0f)
+            {
+                lookAheadOffset.x = Mathf.Lerp(lookAheadOffset.x, -lookAheadDistance.x, lookAheadSpeed * Time.deltaTime);
+            }
+            if (PlayerController.instance.currentMomentum.y > 0f)
+            {
+                lookAheadOffset.y = Mathf.Lerp(lookAheadOffset.y, lookAheadDistance.y, lookAheadSpeed * Time.deltaTime);
+            }
+            else if (PlayerController.instance.currentMomentum.y < 0f)
+            {
+                lookAheadOffset.y = Mathf.Lerp(lookAheadOffset.y, -lookAheadDistance.y, lookAheadSpeed * Time.deltaTime);
+            }
 
+            lookAheadOffset.x = PlayerController.instance.currentMomentum.x == 0 ? 0f : lookAheadOffset.x;
+            lookAheadOffset.y = PlayerController.instance.currentMomentum.y == 0 ? 0f : lookAheadOffset.y;
 
+        }
 
-        // movement with current chunks restrictions
+        targetPosition = transform.position + (Vector3)moveInput;
 
-        clampedMove = transform.position + (Vector3)moveInput;
-
-        clampedMove = ClampMovement(clampedMove);
-
+        targetPosition = ClampMovement(targetPosition);
 
         if (dynamicSpeed)
         {
-            catchUpSpeed = Vector2.Distance(target.position, transform.position) * 2;
+            catchUpSpeed = Vector2.Distance(target.position + (Vector3)lookAheadOffset, targetPosition) * 2;
 
-            if (target.position.x < boundary.x - cam.pixelWidth / 128 + deadZone || target.position.x > boundary.z + cam.pixelWidth / 128 - deadZone ||
-                target.position.y < boundary.y - cam.pixelHeight / 128 + deadZone || target.position.y > boundary.w + cam.pixelHeight / 128 - deadZone) // Player is out of camera
+            if (checkWithinBounds(boundary,false,false,true)) // Deadzone
             {
-                catchUpSpeed *= 10f;
+                Debug.Log("Target in Deadzone");
+                catchUpSpeed *= PlayerController.instance.speed;
             }
 
         }
 
-        transform.position = Vector3.Lerp(transform.position, clampedMove, (catchUpSpeed / (1+speedDampening)) * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, targetPosition, (catchUpSpeed / (1+speedDampening)) * Time.deltaTime);
+
         
     }
 
 
     public Vector3 ClampMovement(Vector3 input)
     {
-        input.x = Mathf.Clamp(clampedMove.x,
-                                SceneController.Instance.activeChunk.transform.position.x - SceneController.Instance.activeChunk.cameraClampArea.x / 2f,
-                                SceneController.Instance.activeChunk.transform.position.x + SceneController.Instance.activeChunk.cameraClampArea.x / 2f);
-        input.y = Mathf.Clamp(clampedMove.y,
-                                        SceneController.Instance.activeChunk.transform.position.y - SceneController.Instance.activeChunk.cameraClampArea.y / 2f,
-                                        SceneController.Instance.activeChunk.transform.position.y + SceneController.Instance.activeChunk.cameraClampArea.y / 2f);
+        input.x = Mathf.Clamp(targetPosition.x,
+                                SceneController.Instance.activeChunk.transform.position.x + SceneController.Instance.activeChunk.offset.x - SceneController.Instance.activeChunk.cameraClampArea.x / 2f,
+                                SceneController.Instance.activeChunk.transform.position.x + SceneController.Instance.activeChunk.offset.x + SceneController.Instance.activeChunk.cameraClampArea.x / 2f);
+        input.y = Mathf.Clamp(targetPosition.y,
+                                        SceneController.Instance.activeChunk.transform.position.y + SceneController.Instance.activeChunk.offset.y - SceneController.Instance.activeChunk.cameraClampArea.y / 2f,
+                                        SceneController.Instance.activeChunk.transform.position.y + SceneController.Instance.activeChunk.offset.y + SceneController.Instance.activeChunk.cameraClampArea.y / 2f);
 
         return input;
     }
@@ -140,7 +194,10 @@ public class CameraManager : MonoBehaviour
     public void TransitionCamera(Vector3 targetSpot)
     {
         if (transitioning) return;
+
+        lookAheadOffset = Vector2.zero;
         transitioning = true;
+
         targetSpot.z = cam.transform.position.z;
         StartCoroutine(CameraTransition(targetSpot));
     }
@@ -178,39 +235,24 @@ public class CameraManager : MonoBehaviour
     {
         #region Camera Linger Settings
 
-       
-
-
-        Vector3 horizontalPoint = new Vector3(transform.position.x + percentConvert.x,
-                                              transform.position.y + (cam.pixelHeight / 32) / 4,
-                                              transform.position.y - (cam.pixelHeight / 32) / 4);
-
-        Vector3 verticalPoint = new Vector3(transform.position.x + (cam.pixelWidth / 32) / 4,
-                                            transform.position.y + percentConvert.y,
-                                            transform.position.x - (cam.pixelWidth / 32) / 4);
-                                            
-
-
-
-        // Camera Move Bounds
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine((Vector2)horizontalPoint, new Vector2(horizontalPoint.x,horizontalPoint.z));
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine((Vector2)verticalPoint, new Vector2(verticalPoint.z,verticalPoint.y));
-
-        horizontalPoint.x = transform.position.x - percentConvert.x;
-        verticalPoint.y = transform.position.y - percentConvert.y;
-        
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawLine((Vector2)horizontalPoint, new Vector2(horizontalPoint.x, horizontalPoint.z));
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine((Vector2)verticalPoint, new Vector2(verticalPoint.z, verticalPoint.y));
+        Gizmos.DrawWireCube(transform.position, percentConvert);
+
         #endregion
 
         // Deadzone
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, cam.pixelRect.size / 32 / 2 - Vector2.one * deadZone);
+        Gizmos.DrawWireCube(transform.position, cam.pixelRect.size / 64 - Vector2.one * deadZone);
+
+
+        Gizmos.DrawWireSphere(targetPosition, .25f);
+
+
+        // Look Ahead
+        if(!useLookAhead) return;
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(target.transform.position + (Vector3)lookAheadOffset, .25f);
 
     }
 

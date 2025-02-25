@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject dustPrefab;
     [Space(10)]
     [SerializeField] float wallSlideSpeed = 2f;
-
+    
 
 
     [Header("Debug")]
@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
 
     Vector2 storedVelocity;
     Vector2 storedForce;
+    public Vector2 currentMomentum;
 
     private void Awake()
     {
@@ -128,9 +129,10 @@ public class PlayerController : MonoBehaviour
         
         motionInput = new Vector2(Input.GetAxisRaw("Horizontal"), 0);
         // Raycasts for ground / Wall Movements
+
         grounded = (Physics2D.Raycast(transform.position, Vector2.down, .1f, LayerMask.GetMask("Ground")));
-        leftWallHang = (Physics2D.Raycast(transform.position + (Vector3.left * 0.35f) + Vector3.up * .2f, Vector2.left, .1f, LayerMask.GetMask("Wall")));
-        rightWallHang = (Physics2D.Raycast(transform.position + (Vector3.right * 0.35f) + Vector3.up * .2f, Vector2.right, .1f, LayerMask.GetMask("Wall")));
+        leftWallHang = (Physics2D.Raycast(transform.position + (Vector3.left * 0.35f) + Vector3.up * .2f, Vector2.left, .1f, LayerMask.GetMask("Ground")));
+        rightWallHang = (Physics2D.Raycast(transform.position + (Vector3.right * 0.35f) + Vector3.up * .2f, Vector2.right, .1f, LayerMask.GetMask("Ground")));
 
 
         #region Jumping
@@ -192,13 +194,16 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (wallJump && motionInput.x < 0 && rb.velocity.x > 0) motionInput = Vector2.zero; // Cancel movement input to stop player from going back to same wall
-        else if(wallJump && motionInput.x > 0 && rb.velocity.x < 0) motionInput = Vector2.zero;
+        if (wallJump && motionInput.x < 0 && rb.velocity.x > 0 || wallJump && motionInput.x > 0 && rb.velocity.x < 0) motionInput = Vector2.zero; // Cancel movement input to stop player from going back to same wall
         else if(!wallJump && motionInput.x != 0 && rb.velocity.x != 0) rb.velocity = new Vector2(0,rb.velocity.y); 
         #endregion
 
 
         transform.Translate(motionInput * speed * Time.deltaTime);
+
+        if (motionInput.x == 0) rb.velocity.Set(0, rb.velocity.y);
+
+        currentMomentum = motionInput + Vector2.up * rb.velocity.y;
     }
 
     IEnumerator wallJumpVelocityCooldown() // cant stop jumping away from wall
