@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public float dotReplenishSpeed = 1f;
     [SerializeField] float jumpForce = 3f;
     [SerializeField] GameObject dustPrefab;
+    [SerializeField] GameObject halfDust;
     [Space(10)]
     [SerializeField] float wallSlideSpeed = 2f;
     
@@ -123,14 +124,16 @@ public class PlayerController : MonoBehaviour
 
     private void MovementManager()
     {
-        Debug.DrawRay(transform.position, Vector2.down * .1f, Color.red);
+        //Debug.DrawRay(transform.position, Vector2.down * .1f, Color.red);
         Debug.DrawRay(transform.position + (Vector3.left * 0.35f) + Vector3.up * .2f, Vector2.left * .1f, Color.yellow);
         Debug.DrawRay(transform.position + (Vector3.right * 0.35f) + Vector3.up * .2f, Vector2.right * .1f, Color.yellow);
         
         motionInput = new Vector2(Input.GetAxisRaw("Horizontal"), 0);
         // Raycasts for ground / Wall Movements
 
-        grounded = (Physics2D.Raycast(transform.position, Vector2.down, .1f, LayerMask.GetMask("Ground")));
+        
+
+        grounded = Physics2D.BoxCast(transform.position, new Vector2(GetComponent<SpriteRenderer>().sprite.bounds.size.x * .8f, 0.1f), 0,Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
         leftWallHang = (Physics2D.Raycast(transform.position + (Vector3.left * 0.35f) + Vector3.up * .2f, Vector2.left, .1f, LayerMask.GetMask("Ground")));
         rightWallHang = (Physics2D.Raycast(transform.position + (Vector3.right * 0.35f) + Vector3.up * .2f, Vector2.right, .1f, LayerMask.GetMask("Ground")));
 
@@ -172,8 +175,22 @@ public class PlayerController : MonoBehaviour
         if (rightWallHang && !grounded || leftWallHang && !grounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlideSpeed, float.MaxValue));
-            if (rightWallHang && motionInput.x > 0) motionInput = Vector2.zero; // stop pushing into wall and allow to leave wall 
-            else if(leftWallHang && motionInput.x < 0) motionInput = Vector2.zero;
+            if (rightWallHang && motionInput.x > 0 || leftWallHang && motionInput.x < 0)
+            {
+                motionInput = Vector2.zero; // stop pushing into wall and allow to leave wall 
+                if(rb.velocity.y != 0 && !halfDust.activeSelf)
+                {
+                    halfDust.SetActive(true);
+                    halfDust.GetComponent<SpriteRenderer>().flipY = rightWallHang;
+
+                    halfDust.transform.position = halfDust.transform.position.x < 0 ? new Vector2(-halfDust.transform.position.x, halfDust.transform.position.y) : Vector2.zero;
+                }
+            }
+            else
+            {
+                halfDust.SetActive(false);
+            }
+
 
             if (Input.GetButtonDown("Jump") && dotCount > 1)
             {
@@ -184,7 +201,7 @@ public class PlayerController : MonoBehaviour
                     StartCoroutine(wallJumpVelocityCooldown());
                 }
 
-                else if(leftWallHang)
+                else if (leftWallHang)
                 {
                     rb.velocity = Vector2.zero;
                     rb.AddForce(Vector2.up * jumpForce * 1000 + Vector2.right * speed * 250);
@@ -339,5 +356,11 @@ public class PlayerController : MonoBehaviour
         {
             DamagePlayer(currentHealth);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(transform.position, new Vector2(GetComponent<SpriteRenderer>().sprite.bounds.size.x, 0.1f));
     }
 }
