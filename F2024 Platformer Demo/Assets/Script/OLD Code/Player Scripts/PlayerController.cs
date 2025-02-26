@@ -20,11 +20,13 @@ public class PlayerController : MonoBehaviour
     public float dotReplenishSpeed = 1f;
     [SerializeField] float jumpForce = 3f;
     [SerializeField] GameObject dustPrefab;
-    [SerializeField] GameObject halfDust;
+    [SerializeField] GameObject halfDustPrefab;
+    bool dustSpawnCD;
+
     [Space(10)]
     [SerializeField] float wallSlideSpeed = 2f;
-    
-
+    [SerializeField] float wallSlideSlow = 2.5f;
+    [SerializeField] float wallJumpCD = .2f;
 
     [Header("Debug")]
     [SerializeField] bool dotAnim;
@@ -121,6 +123,37 @@ public class PlayerController : MonoBehaviour
         playerReset?.Invoke();
     }
 
+    void wallSlideDustEffect()
+    {
+        if (rb.velocity.y < 0 && !dustSpawnCD) // Wall Slide Effect
+        {
+            GameObject temp = Instantiate(halfDustPrefab);
+            StartCoroutine(wallSlideDustDelay());
+            if (rightWallHang)
+            {
+                temp.transform.position = (Vector2)transform.position + GetComponent<SpriteRenderer>().size + Vector2.left * GetComponent<SpriteRenderer>().size.x * .5f;
+            }
+            else
+            {
+                temp.transform.position = (Vector2)transform.position + GetComponent<SpriteRenderer>().size + Vector2.left * (GetComponent<SpriteRenderer>().size.x * 1.5f);
+                temp.GetComponent<SpriteRenderer>().flipY = true;
+            }
+        }
+    }
+    IEnumerator wallSlideDustDelay()
+    {
+        dustSpawnCD = true;
+
+        if(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.LeftCommand))
+        {
+            yield return new WaitForSeconds(.1f + wallSlideSlow / 20f);
+        }
+        else yield return new WaitForSeconds(.1f);
+
+
+        dustSpawnCD = false;
+    }
+
 
     private void MovementManager()
     {
@@ -170,26 +203,25 @@ public class PlayerController : MonoBehaviour
 
         #region Wall Jumping
 
+        if (rightWallHang && motionInput.x > 0 || leftWallHang && motionInput.x < 0)
+        {
+            motionInput = Vector2.zero; // stop pushing into wall and allow to leave wall 
+
+        }
 
 
         if (rightWallHang && !grounded || leftWallHang && !grounded)
         {
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlideSpeed, float.MaxValue));
-            if (rightWallHang && motionInput.x > 0 || leftWallHang && motionInput.x < 0)
+            if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.LeftCommand)) // stick to the wall longer
             {
-                motionInput = Vector2.zero; // stop pushing into wall and allow to leave wall 
-                if(rb.velocity.y != 0 && !halfDust.activeSelf)
-                {
-                    halfDust.SetActive(true);
-                    halfDust.GetComponent<SpriteRenderer>().flipY = rightWallHang;
+                rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlideSpeed + wallSlideSlow, float.MaxValue));
+            }
+            else rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlideSpeed, float.MaxValue));
 
-                    halfDust.transform.position = halfDust.transform.position.x < 0 ? new Vector2(-halfDust.transform.position.x, halfDust.transform.position.y) : Vector2.zero;
-                }
-            }
-            else
-            {
-                halfDust.SetActive(false);
-            }
+
+            wallSlideDustEffect();
+            
+
 
 
             if (Input.GetButtonDown("Jump") && dotCount > 1)
@@ -211,8 +243,14 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (wallJump && motionInput.x < 0 && rb.velocity.x > 0 || wallJump && motionInput.x > 0 && rb.velocity.x < 0) motionInput = Vector2.zero; // Cancel movement input to stop player from going back to same wall
-        else if(!wallJump && motionInput.x != 0 && rb.velocity.x != 0) rb.velocity = new Vector2(0,rb.velocity.y); 
+        if (wallJump && motionInput.x < 0 && rb.velocity.x > 0 || wallJump && motionInput.x > 0 && rb.velocity.x < 0)
+        {
+            motionInput = Vector2.zero; // Cancel movement input to stop player from going back to same wall
+        }
+        else if (!wallJump && motionInput.x != 0 && rb.velocity.x != 0) 
+        {
+            rb.velocity = new Vector2(0,rb.velocity.y); 
+        }
         #endregion
 
 
@@ -226,7 +264,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator wallJumpVelocityCooldown() // cant stop jumping away from wall
     {
         wallJump = true;
-        yield return new WaitForSecondsRealtime(.2f);
+        yield return new WaitForSecondsRealtime(wallJumpCD);
         wallJump = false;
     }
 
