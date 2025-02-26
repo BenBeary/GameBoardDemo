@@ -20,13 +20,21 @@ public class PlayerController : MonoBehaviour
     public float dotReplenishSpeed = 1f;
     [SerializeField] float jumpForce = 3f;
     [SerializeField] GameObject dustPrefab;
-    [SerializeField] GameObject halfDustPrefab;
-    bool dustSpawnCD;
 
-    [Space(10)]
+    [Header("Dash Settings")]
+    public bool canDash;
+    public float dashLength = 4f;
+    public float dashCDTime = 1f;
+    [SerializeField] bool dashCD;
+    [SerializeField] bool dashLocked;
+
+
+    [Header("Wall Slide")]
     [SerializeField] float wallSlideSpeed = 2f;
     [SerializeField] float wallSlideSlow = 2.5f;
     [SerializeField] float wallJumpCD = .2f;
+    [SerializeField] GameObject halfDustPrefab;
+    bool dustSpawnCD;
 
     [Header("Debug")]
     [SerializeField] bool dotAnim;
@@ -111,8 +119,9 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSecondsRealtime(2f);
         GetComponent<SpriteRenderer>().enabled = true;
         rb.bodyType = RigidbodyType2D.Dynamic;
-        GameManager.Instance.clearCameraShake();
+        GameManager.Instance?.clearCameraShake();
         resetToCheckpoint();
+
         isDying = false;
     }
     
@@ -171,8 +180,14 @@ public class PlayerController : MonoBehaviour
         rightWallHang = (Physics2D.Raycast(transform.position + (Vector3.right * 0.35f) + Vector3.up * .2f, Vector2.right, .1f, LayerMask.GetMask("Ground")));
 
 
+
+
         #region Jumping
-        if (grounded) doubleJump = true;
+        if (grounded) 
+        {
+            doubleJump = true;
+            dashLocked = false;
+        }
 
 
         if (grounded && !replenishing && dotCount < maxDots ) 
@@ -254,11 +269,40 @@ public class PlayerController : MonoBehaviour
         #endregion
 
 
+
+        #region Dashing
+
+        if (canDash && !dashCD && !dashLocked && Input.GetKeyDown(KeyCode.LeftShift))
+        {
+
+            StartCoroutine(DashCooldown());
+            dashLocked = true;
+        }
+
+        #endregion
+
+
+
         transform.Translate(motionInput * speed * Time.deltaTime);
 
         if (motionInput.x == 0) rb.velocity.Set(0, rb.velocity.y);
 
         currentMomentum = motionInput + Vector2.up * rb.velocity.y;
+    }
+
+    IEnumerator DashCooldown() // doesnt WorK ##########################################################################################################
+    {
+        dashCD = true;
+        float timePassed = Time.deltaTime;
+
+        while (timePassed < dashCDTime)
+        {
+            rb.velocity.Set(dashLength, rb.velocity.y);
+            timePassed += Time.deltaTime;
+            yield return null;
+        }
+        rb.velocity.Set(1, rb.velocity.y);
+        dashCD = false;
     }
 
     IEnumerator wallJumpVelocityCooldown() // cant stop jumping away from wall
@@ -304,10 +348,11 @@ public class PlayerController : MonoBehaviour
        
     }
 
-    public void JumpCall()
+    public void JumpCall(Vector2 forceDir = default)
     {
+        if (forceDir == default) forceDir = Vector2.up;
         rb.velocity = Vector2.zero;
-        rb.AddForce(Vector2.up * jumpForce * 1000);
+        rb.AddForce(forceDir * jumpForce * 1000);
         Debug.Log("Jump! ");
     }
 
@@ -374,7 +419,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Checkpoint"))
+        if (collision.CompareTag("Checkpoint"))
         {
             if (collision.transform == checkPoint) return;
 
@@ -384,13 +429,13 @@ public class PlayerController : MonoBehaviour
             currentHealth = Maxhealth;
          
         }
-        if (collision.gameObject.CompareTag("OutOfBounds"))
+        if (collision.CompareTag("OutOfBounds"))
         {
             rb.velocity = Vector2.zero;
             resetToCheckpoint();
             resetToCheckpoint();
         }
-        if (collision.gameObject.CompareTag("DeathBoxes"))
+        if (collision.CompareTag("DeathBoxes"))
         {
             DamagePlayer(currentHealth);
         }

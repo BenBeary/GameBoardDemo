@@ -57,7 +57,10 @@ MonoBehaviour:
   dotReplenishSpeed: 0.25
   jumpForce: 2
   dustPrefab: {fileID: 8534826118363843145, guid: f0d525781b8d03c4dad585bb1f3d21af, type: 3}
+  halfDustPrefab: {fileID: 0}
   wallSlideSpeed: 5
+  wallSlideSlow: 2.5
+  wallJumpCD: 0.2
   dotAnim: 0
   currentAnimTime: 0
   currentHealth: 6
@@ -156,7 +159,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 2
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 0ea8e54f79c66fb45ba2de7541dc0561, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
