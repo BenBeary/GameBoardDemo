@@ -36,7 +36,7 @@ public class MadKnightManager : MonoBehaviour
         if (!hasJumped && jumpingState.backOnGround)
         {
             hasJumped = true;
-            GameManager.Instance.CameraShake(.8f, .25f);
+            //GameManager.Instance.CameraShake(.8f, .25f);
         }
         if (hasJumped && !jumpingState.backOnGround) hasJumped = false;
     }

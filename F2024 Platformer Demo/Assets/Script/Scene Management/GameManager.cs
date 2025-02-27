@@ -77,56 +77,10 @@ public class GameManager : MonoBehaviour
         }
         
         secondTarget.position = (targetStorage == null) ? PlayerController.instance.transform.position : targetStorage.transform.position;
-        DecreaseShaking();
+        
     }
 
-    #region Camera Management
-
-    public void SetNewTarget(Transform target, float cameraSize)
-    {
-        targetStorage = target;
-        if(cameraSize != 0)
-        {
-            groupTargeting.GetComponent<CinemachineTargetGroup>().m_Targets[1].radius = cameraSize;
-        }
-    }
-
-    public void CameraShake(float intensity, float time)
-    {
-        CinemachineBasicMultiChannelPerlin cameraShakeComp = cam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-        cameraShakeComp.m_AmplitudeGain = intensity;
-        shakeIntensity = intensity;
-        shakeTimer = time;
-        shakeTimeTotal = time; ;
-    }
-
-    public void SetPlayerCameraSize(float size)
-    {
-        groupTargeting.GetComponent<CinemachineTargetGroup>().m_Targets[0].radius = size;
-    }
-
-    public void clearCameraShake()
-    {
-        cam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
-        cam.transform.parent.transform.eulerAngles = Vector3.zero;
-    }
-
-    private void DecreaseShaking()
-    {
-        if(shakeTimer > 0)
-        {
-            shakeTimer -= Time.deltaTime;
-            if(shakeTimer <= 0f)
-            {
-                CinemachineBasicMultiChannelPerlin cameraShakeComp = cam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-                cameraShakeComp.m_AmplitudeGain = Mathf.Lerp(shakeIntensity, 0f, 1 - (shakeTimer / shakeTimeTotal));
-               
-            }
-        }
-    }
-
-
-    #endregion
+   
 
     #region UI Buttons
 
@@ -176,7 +130,6 @@ public class GameManager : MonoBehaviour
     public void PauseGame()
     {
         PauseMenu.SetActive(true);
-        clearCameraShake();
         Time.timeScale = 0;
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(PauseExitButton);

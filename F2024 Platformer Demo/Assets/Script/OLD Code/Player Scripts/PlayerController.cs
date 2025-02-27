@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public float dotReplenishSpeed = 1f;
     [SerializeField] float jumpForce = 3f;
     [SerializeField] GameObject dustPrefab;
+    public float maxVelocity = 10f;
 
     [Header("Dash Settings")]
     public bool canDash;
@@ -82,6 +83,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Application Closing");
             Application.Quit();
         }
+        if (rb.velocity.magnitude > maxVelocity) rb.velocity = rb.velocity.normalized * maxVelocity;
 
         if(!isDying && !hasInputPaused) MovementManager();
         AnimManager();
@@ -119,7 +121,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSecondsRealtime(2f);
         GetComponent<SpriteRenderer>().enabled = true;
         rb.bodyType = RigidbodyType2D.Dynamic;
-        GameManager.Instance?.clearCameraShake();
+        //GameManager.Instance?.clearCameraShake();
         resetToCheckpoint();
 
         isDying = false;

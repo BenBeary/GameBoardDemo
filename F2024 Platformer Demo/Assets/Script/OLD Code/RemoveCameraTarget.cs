@@ -10,7 +10,7 @@ public class RemoveCameraTarget : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (changeToTarget != null && changeToTarget.gameObject.activeSelf == false) return;
-        GameManager.Instance.SetNewTarget(changeToTarget, cameraSizeForTarget);
-        GameManager.Instance.SetPlayerCameraSize(addToPlayerCameraSize);
+        //GameManager.Instance.SetNewTarget(changeToTarget, cameraSizeForTarget);
+        //GameManager.Instance.SetPlayerCameraSize(addToPlayerCameraSize);
     }
 }

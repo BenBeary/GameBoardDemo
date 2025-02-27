@@ -26,7 +26,7 @@ public class BossRoomTrigger : MonoBehaviour
     {
         ChangeDoorState(false);
         boss.SetActive(true);
-        GameManager.Instance.SetNewTarget(boss.transform, bossCameraSize);
+        //GameManager.Instance.SetNewTarget(boss.transform, bossCameraSize);
     }
 
     private void ChangeDoorState(bool moveUp)
@@ -40,7 +40,7 @@ public class BossRoomTrigger : MonoBehaviour
 
     private void ResetFight()
     {
-        GameManager.Instance.SetNewTarget(null, 1);
+        //GameManager.Instance.SetNewTarget(null, 1);
         hasBeenTriggered = false;
         foreach(var door in doorsToClose)
         {

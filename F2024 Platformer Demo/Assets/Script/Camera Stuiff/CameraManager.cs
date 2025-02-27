@@ -76,7 +76,7 @@ public class CameraManager : MonoBehaviour
         Vector2 targetPos = (Vector2)target.position + lookAheadOffset;
 
         
-        Rect deadzoneConvert = new Rect(transform.position.x, transform.position.y, cam.pixelRect.size.x / 64 - deadZone*2, cam.pixelRect.size.y/64 - deadZone*2);
+        Rect deadzoneConvert = new Rect(transform.position.x, transform.position.y, cam.pixelRect.size.x / 64 - deadZone, cam.pixelRect.size.y / 64 - deadZone);
         Debug.DrawLine(deadzoneConvert.position, deadzoneConvert.position + Vector2.down * deadzoneConvert.height/2, Color.white);
         Debug.DrawLine(deadzoneConvert.position, deadzoneConvert.position + Vector2.left * deadzoneConvert.width/2, Color.white);
 
@@ -105,7 +105,7 @@ public class CameraManager : MonoBehaviour
 
     void PutTargetInBox()
     {
-        if (!SceneController.Instance || !SceneController.Instance.activeChunk)
+        if (!RegionController.Instance || !RegionController.Instance.activeChunk)
         {
             Debug.LogWarning("No Scene Controller to apply Clamp (Camera will no Move)");
             return;
@@ -167,7 +167,7 @@ public class CameraManager : MonoBehaviour
             if (checkWithinBounds(boundary,false,false,true)) // Deadzone
             {
                 Debug.Log("Target in Deadzone");
-                catchUpSpeed *= PlayerController.instance.speed;
+                catchUpSpeed += PlayerController.instance.maxVelocity + 4f;
             }
 
         }
@@ -181,11 +181,11 @@ public class CameraManager : MonoBehaviour
     public Vector3 ClampMovement(Vector3 input)
     {
         input.x = Mathf.Clamp(targetPosition.x,
-                                SceneController.Instance.activeChunk.transform.position.x + SceneController.Instance.activeChunk.offset.x - SceneController.Instance.activeChunk.cameraClampArea.x / 2f,
-                                SceneController.Instance.activeChunk.transform.position.x + SceneController.Instance.activeChunk.offset.x + SceneController.Instance.activeChunk.cameraClampArea.x / 2f);
+                                RegionController.Instance.activeChunk.transform.position.x + RegionController.Instance.activeChunk.offset.x - RegionController.Instance.activeChunk.cameraClampArea.x / 2f,
+                                RegionController.Instance.activeChunk.transform.position.x + RegionController.Instance.activeChunk.offset.x + RegionController.Instance.activeChunk.cameraClampArea.x / 2f);
         input.y = Mathf.Clamp(targetPosition.y,
-                                        SceneController.Instance.activeChunk.transform.position.y + SceneController.Instance.activeChunk.offset.y - SceneController.Instance.activeChunk.cameraClampArea.y / 2f,
-                                        SceneController.Instance.activeChunk.transform.position.y + SceneController.Instance.activeChunk.offset.y + SceneController.Instance.activeChunk.cameraClampArea.y / 2f);
+                                        RegionController.Instance.activeChunk.transform.position.y + RegionController.Instance.activeChunk.offset.y - RegionController.Instance.activeChunk.cameraClampArea.y / 2f,
+                                        RegionController.Instance.activeChunk.transform.position.y + RegionController.Instance.activeChunk.offset.y + RegionController.Instance.activeChunk.cameraClampArea.y / 2f);
 
         return input;
     }
