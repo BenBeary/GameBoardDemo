@@ -105,7 +105,7 @@ public class CameraManager : MonoBehaviour
 
     void PutTargetInBox()
     {
-        if (!RegionController.Instance || !RegionController.Instance.activeChunk)
+        if (!GameManager.Instance || !GameManager.Instance.activeChunk)
         {
             Debug.LogWarning("No Scene Controller to apply Clamp (Camera will no Move)");
             return;
@@ -181,11 +181,11 @@ public class CameraManager : MonoBehaviour
     public Vector3 ClampMovement(Vector3 input)
     {
         input.x = Mathf.Clamp(targetPosition.x,
-                                RegionController.Instance.activeChunk.transform.position.x + RegionController.Instance.activeChunk.offset.x - RegionController.Instance.activeChunk.cameraClampArea.x / 2f,
-                                RegionController.Instance.activeChunk.transform.position.x + RegionController.Instance.activeChunk.offset.x + RegionController.Instance.activeChunk.cameraClampArea.x / 2f);
+                                GameManager.Instance.activeChunk.transform.position.x + GameManager.Instance.activeChunk.offset.x - GameManager.Instance.activeChunk.cameraClampArea.x / 2f,
+                                GameManager.Instance.activeChunk.transform.position.x + GameManager.Instance.activeChunk.offset.x + GameManager.Instance.activeChunk.cameraClampArea.x / 2f);
         input.y = Mathf.Clamp(targetPosition.y,
-                                        RegionController.Instance.activeChunk.transform.position.y + RegionController.Instance.activeChunk.offset.y - RegionController.Instance.activeChunk.cameraClampArea.y / 2f,
-                                        RegionController.Instance.activeChunk.transform.position.y + RegionController.Instance.activeChunk.offset.y + RegionController.Instance.activeChunk.cameraClampArea.y / 2f);
+                                        GameManager.Instance.activeChunk.transform.position.y + GameManager.Instance.activeChunk.offset.y - GameManager.Instance.activeChunk.cameraClampArea.y / 2f,
+                                        GameManager.Instance.activeChunk.transform.position.y + GameManager.Instance.activeChunk.offset.y + GameManager.Instance.activeChunk.cameraClampArea.y / 2f);
 
         return input;
     }

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+
 
 public class RegionController : MonoBehaviour
 {
@@ -10,48 +12,64 @@ public class RegionController : MonoBehaviour
     {
         public string itemId;
         public GameObject obj;
-        [HideInInspector] public bool hasBeenCleared;
     }
 
-    public static RegionController Instance;
+
+
+
+    public string RegionName;
+    public List<ItemData> itemsInScene = new List<ItemData>();
+
+    [Header("Debug")]
+    public List<string> saveditemIDs = new List<string>();
 
 
 
 
-    public ChunkData activeChunk;
-
-    List<ItemData> saveditems = new List<ItemData>();
-
-    private void Awake()
-    {
-        if(Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(Instance);
-        }
-    }
 
 
     private void OnEnable()
     {
-        foreach(ItemData item in saveditems)
+        if (GameManager.Instance.CheckForData(RegionName)) // grab any saved data that is on the game manager
         {
+            saveditemIDs = new List<string>(GameManager.Instance.GetRegionData(RegionName));
 
+            foreach(string item in saveditemIDs)
+            {
+                Destroy(itemsInScene.First(x => x.itemId == item).obj);
+            }
         }
     }
 
 
-    public void SetNewChunk(ChunkData newChunk)
+
+    public void AddCollectedItem(GameObject itemID)
     {
+        if(!itemsInScene.Any(x => x.obj == itemID))
+        {
+            Debug.LogWarning(itemID.name + " tried to save but its not on " + this.name + "'s list");
+            return;
+        }
 
-        // do chunky stuff
-
-        activeChunk = newChunk;
-
-
+        saveditemIDs.Add(itemsInScene.First(x => x.obj == itemID).itemId);
     }
+
+
+
+    private void OnDisable()
+    {
+        if(saveditemIDs.Count > 0)
+        {
+            if (!GameManager.Instance.CheckForData(RegionName)) // Send Data
+            {
+                GameManager.Instance.addRegion(this);
+                return;
+            }
+            GameManager.Instance.UpdateRegionData(RegionName, saveditemIDs);
+        }
+    }
+
+
+
 
 }

@@ -11,7 +11,7 @@ public class ChunkData : MonoBehaviour
     [Header("Chunking Chunk")]
     public bool isActiveChunk;
 
-
+    [SerializeField] RegionController rgController;
     public Vector2 cameraClampArea { get { return Vector2.one * 2 + GetComponent<BoxCollider2D>().size - Camera.main.pixelRect.size / 64; } }
     public Vector2 offset { get { return GetComponent<BoxCollider2D>().offset; } }
 
@@ -33,7 +33,7 @@ public class ChunkData : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            RegionController.Instance.SetNewChunk(this);
+            GameManager.Instance.SetActiveChunk(this);
             Camera.main.GetComponent<CameraManager>().TransitionCamera(Camera.main.GetComponent<CameraManager>().ClampMovement(Camera.main.transform.position));
         }
     }

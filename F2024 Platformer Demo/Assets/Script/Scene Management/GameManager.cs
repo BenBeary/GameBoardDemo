@@ -9,6 +9,18 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [System.Serializable]
+    public class regionData
+    {
+        public string RegionID;
+        public List<string> savedData = new List<string>();
+        public regionData(string regionID, List<string> savedItems)
+        {
+            
+            RegionID = regionID;
+            savedData.AddRange(savedItems);
+        }
+    }
 
 
     public static GameManager Instance;
@@ -20,19 +32,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] int currentHealthSkin = 1;
     [SerializeField] Animator playerHealthAnim;
 
-    [Header("Camera Stuff")]
-    [SerializeField] CinemachineVirtualCamera cam;
-    [SerializeField] GameObject groupTargeting;
-    [SerializeField] Transform secondTarget;
-    [SerializeField] Transform targetStorage;
-    float shakeTimer;
-    float shakeTimeTotal;
-    float shakeIntensity;
-
 
     [Header("Game Stuff")]
-    [SerializeField] string[] levelsToLoad;
-    
+    public ChunkData activeChunk;
+    [Tooltip("Don't touch this")]
+    public List<regionData> savedRegionData = new List<regionData>();
     
     [Header("UI Stuff")]
     [SerializeField] Image displayNumber;
@@ -58,14 +62,13 @@ public class GameManager : MonoBehaviour
         {
             PlayerController.instance.hasInputPaused = true;
             PlayerController.instance.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-            cam.GetCinemachineComponent<CinemachineFramingTransposer>().m_DeadZoneHeight = .5f;
         }
         else
         {
-            PlayerController.instance.GetComponent<JumpCountUpgrade>().enabled = false;
-            transform.GetChild(0).gameObject.SetActive(false);
+            // PlayerController.instance.GetComponent<JumpCountUpgrade>().enabled = false;
+            //transform.GetChild(0).gameObject.SetActive(false);
         }
-        PauseMenu.SetActive(false);
+        //PauseMenu?.SetActive(false);
     }
 
     private void Update()
@@ -76,11 +79,43 @@ public class GameManager : MonoBehaviour
             else UnPauseGame();
         }
         
-        secondTarget.position = (targetStorage == null) ? PlayerController.instance.transform.position : targetStorage.transform.position;
         
     }
 
-   
+    #region Chunk and Save Data
+    public void SetActiveChunk(ChunkData newChunk)
+    {
+        activeChunk = newChunk;
+    }
+
+    public void addRegion(RegionController newRegion)
+    {
+        if (savedRegionData.Any(x => x.RegionID == newRegion.RegionName)) return;
+
+        savedRegionData.Add(new regionData(newRegion.RegionName, newRegion.saveditemIDs));
+        
+    }
+
+    public bool CheckForData(string regionID)
+    {
+        return savedRegionData.Any(x => x.RegionID == regionID);
+    }
+
+    // switch to strings because Region is lost on unload
+
+    public List<string> GetRegionData(string regionID)
+    {
+        return savedRegionData.First(x => x.RegionID == regionID).savedData;
+    }
+
+    public void UpdateRegionData(string regionID, List<string> newData)
+    {
+        savedRegionData.First(x => x.RegionID == regionID).savedData = new List<string>(newData);
+    }
+
+
+
+    #endregion
 
     #region UI Buttons
 
@@ -123,7 +158,6 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         transform.GetChild(0).gameObject.SetActive(false);
-        StartCoroutine(LoadScenesAsync(levelsToLoad,true));
         gameStarted = true;
     }
 
@@ -156,55 +190,12 @@ public class GameManager : MonoBehaviour
     {
         UnPauseGame();
         if (PlayerController.instance.checkPoint != null) PlayerController.instance.resetToCheckpoint();
-        cam.transform.parent.transform.Rotate(Vector3.zero);
 
     }
     #endregion
 
 
-    #region Scene Management
-    private List<Scene> getOpenScenes() // Created to Avoide Deprecation fuck you unity it was a good function
-    {
-        List<Scene> temp = new List<Scene>();
-
-        for (int i = 0; i < SceneManager.sceneCount; i++)
-        {
-            temp.Add(SceneManager.GetSceneAt(i));
-        }
-        return temp;
-    }
-
-    IEnumerator LoadScenesAsync(string[] sceneNames, bool FirstTimeLoad)
-    {
-        if(!sceneNames.All(string.IsNullOrEmpty))
-        {
-            foreach (string sceneName in sceneNames)
-            {
-                if (getOpenScenes().Any(x => x.name == sceneName)) continue;
-
-
-
-                AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
-                while (!asyncLoad.isDone) // Waits to load next scene until previous one is finished
-                {
-                    yield return null;
-                }
-            }
-            Debug.Log("All Scenes Loaded!");
-        }
-
-        if(FirstTimeLoad)
-        {
-            PlayerController.instance.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-            PlayerController.instance.hasInputPaused = false;
-            Destroy(PlayerController.instance.GetComponent<JumpCountUpgrade>());
-            Destroy(GetComponent<ParticleSystem>(), 3f);
-            cam.GetCinemachineComponent<Cinemachine.CinemachineFramingTransposer>().m_DeadZoneHeight = 0.054f; // Hard coding baby! WOOO
-            yield return null;
-        }
-    }
-
-    #endregion
+    
 
 
 }

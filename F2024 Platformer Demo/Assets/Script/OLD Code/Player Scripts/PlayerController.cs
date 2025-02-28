@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float wallSlideSlow = 2.5f;
     [SerializeField] float wallJumpCD = .2f;
     [SerializeField] GameObject halfDustPrefab;
+    [SerializeField] float wallDustSpawnrate = 0.1f;
     bool dustSpawnCD;
 
     [Header("Debug")]
@@ -157,9 +158,9 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.LeftCommand))
         {
-            yield return new WaitForSeconds(.1f + wallSlideSlow / 20f);
+            yield return new WaitForSeconds(wallDustSpawnrate + wallSlideSlow / 20f);
         }
-        else yield return new WaitForSeconds(.1f);
+        else yield return new WaitForSeconds(wallDustSpawnrate);
 
 
         dustSpawnCD = false;
