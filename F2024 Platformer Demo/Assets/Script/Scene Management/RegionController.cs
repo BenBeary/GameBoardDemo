@@ -21,20 +21,26 @@ public class RegionController : MonoBehaviour
     public List<ItemData> itemsInScene = new List<ItemData>();
 
     [Header("Debug")]
-    public List<string> saveditemIDs = new List<string>();
+    public List<string> savedItemIds = new List<string>();
 
 
 
 
 
 
-    private void OnEnable()
+    private void Start()
     {
+        if (!GameManager.Instance) 
+        {
+            Debug.LogWarning("No GameManager found");
+            return;
+        } 
+
         if (GameManager.Instance.CheckForData(RegionName)) // grab any saved data that is on the game manager
         {
-            saveditemIDs = new List<string>(GameManager.Instance.GetRegionData(RegionName));
+            savedItemIds = new List<string>(GameManager.Instance.GetRegionData(RegionName));
 
-            foreach(string item in saveditemIDs)
+            foreach(string item in savedItemIds)
             {
                 Destroy(itemsInScene.First(x => x.itemId == item).obj);
             }
@@ -51,21 +57,21 @@ public class RegionController : MonoBehaviour
             return;
         }
 
-        saveditemIDs.Add(itemsInScene.First(x => x.obj == itemID).itemId);
+        savedItemIds.Add(itemsInScene.First(x => x.obj == itemID).itemId);
     }
 
 
 
     private void OnDisable()
     {
-        if(saveditemIDs.Count > 0)
+        if(savedItemIds.Count > 0)
         {
             if (!GameManager.Instance.CheckForData(RegionName)) // Send Data
             {
                 GameManager.Instance.addRegion(this);
                 return;
             }
-            GameManager.Instance.UpdateRegionData(RegionName, saveditemIDs);
+            GameManager.Instance.UpdateRegionData(RegionName, savedItemIds);
         }
     }
 

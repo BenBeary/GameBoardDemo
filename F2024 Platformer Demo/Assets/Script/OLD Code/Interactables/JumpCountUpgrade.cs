@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using DataManage;
 public class JumpCountUpgrade : MonoBehaviour
 {
 
@@ -7,7 +7,7 @@ public class JumpCountUpgrade : MonoBehaviour
     [SerializeField] float bobFrequency;
 
     bool hasBeenGrabbed;
-
+    [SerializeField] RegionController region;
 
     private void OnEnable()
     {
@@ -27,6 +27,7 @@ public class JumpCountUpgrade : MonoBehaviour
         if(hasBeenGrabbed && PlayerController.instance.grounded)
         {
             PlayerController.instance.maxDots++;
+            ItemSaver.saveItem(region,gameObject);
             Destroy(gameObject);
         }
     }
@@ -48,8 +49,6 @@ public class JumpCountUpgrade : MonoBehaviour
 
     void resetObject()
     {
-
-
         GetComponent<SpriteRenderer>().enabled = true;
         GetComponent<BoxCollider2D>().enabled = true;
         hasBeenGrabbed = false;

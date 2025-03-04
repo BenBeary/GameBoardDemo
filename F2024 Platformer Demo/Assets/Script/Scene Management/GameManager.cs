@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
     {
         if (savedRegionData.Any(x => x.RegionID == newRegion.RegionName)) return;
 
-        savedRegionData.Add(new regionData(newRegion.RegionName, newRegion.saveditemIDs));
+        savedRegionData.Add(new regionData(newRegion.RegionName, newRegion.savedItemIds));
         
     }
 

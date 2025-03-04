@@ -1,11 +1,15 @@
 using UnityEngine;
 
-public class ItemSaver : MonoBehaviour
-{
-    [SerializeField] RegionController region;
 
-    private void OnDisable()
+
+namespace DataManage
+{
+    [System.Serializable]
+    public class ItemSaver 
     {
-        region.AddCollectedItem(gameObject);
+        public static void saveItem(RegionController region, GameObject item)
+        {
+            region.AddCollectedItem(item);
+        }
     }
 }
