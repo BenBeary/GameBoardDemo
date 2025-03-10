@@ -33,8 +33,9 @@ public class ChunkData : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            GameManager.Instance.SetActiveChunk(this);
-            Camera.main.GetComponent<CameraManager>().TransitionCamera(Camera.main.GetComponent<CameraManager>().ClampMovement(Camera.main.transform.position));
+            
+            GameManager.Instance?.SetActiveChunk(this);
+            CameraManager.instance?.TransitionCamera(CameraManager.instance.ClampMovement(CameraManager.instance.transform.position));
         }
     }
 }

@@ -38,12 +38,16 @@ public class GameManager : MonoBehaviour
     [Tooltip("Don't touch this")]
     public List<regionData> savedRegionData = new List<regionData>();
     
+
+    // OBSOLETE ################### Move to seperate Script ///
     [Header("UI Stuff")]
     [SerializeField] Image displayNumber;
     [SerializeField] Sprite[] numbers;
     [SerializeField] GameObject PauseMenu;
     [SerializeField] GameObject PauseExitButton;
     [SerializeField] GameObject StartButton;
+    // ##########################
+
 
     [Header("Debug")]
     public bool DevMode = true;

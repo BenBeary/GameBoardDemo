@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
+    public static CameraManager instance;
+
 
     [Header("Camera Settings")]
+    [SerializeField] Camera cam;
     [Range(0, 100)]
     [SerializeField] int paddingX;
     [Range(0, 100)]
@@ -37,10 +40,8 @@ public class CameraManager : MonoBehaviour
     public static bool frozen;
     
 
-    Camera cam
-    {
-        get { return Camera.main; }
-    }
+    
+
     Vector2 percentConvert
     {
         get
@@ -49,6 +50,14 @@ public class CameraManager : MonoBehaviour
             return new Vector2(cam.pixelWidth / 64 * (paddingX / 100f),
                                cam.pixelHeight / 64 * (paddingY / 100f));
         }
+    }
+
+    private void Awake()
+    {
+        if(!instance) instance = this;
+        else Destroy(gameObject);
+
+        DontDestroyOnLoad(gameObject);
     }
 
     private void LateUpdate()
@@ -166,13 +175,13 @@ public class CameraManager : MonoBehaviour
 
             if (checkWithinBounds(boundary,false,false,true)) // Deadzone
             {
-                Debug.Log("Target in Deadzone");
+                //Debug.Log("Target in Deadzone");
                 catchUpSpeed += PlayerController.instance.maxVelocity + 4f;
             }
 
         }
 
-            transform.position = Vector3.Lerp(transform.position, targetPosition, (catchUpSpeed / (1+speedDampening)) * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, (catchUpSpeed / (1+speedDampening)) * Time.deltaTime);
 
         
     }
@@ -204,7 +213,7 @@ public class CameraManager : MonoBehaviour
 
     IEnumerator CameraTransition(Vector3 targetSpot)
     {
-        float timePassed = 0;
+        float timePassed = Time.deltaTime;
         Vector3 start = transform.position;
 
         if (targetSpot.y > start.y + 10) // 2 = 1 block so if 5 blocks above current camera causes boost 
@@ -215,13 +224,15 @@ public class CameraManager : MonoBehaviour
 
         PlayerController.instance.FreezePlayer();
 
+
         while (true)
         {
             timePassed += Time.deltaTime;
+            float correctTime = timePassed / transitionTime;
 
-            transform.position = Vector3.Lerp(start, targetSpot, timePassed / transitionTime);
+            transform.position = Vector3.Lerp(start, targetSpot, correctTime);
 
-            if (Vector2.Distance(transform.position,targetSpot) <= 0.1f) break;
+            if (correctTime >= 1f) break;
 
             yield return null;
         }
@@ -245,14 +256,17 @@ public class CameraManager : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position, cam.pixelRect.size / 64 - Vector2.one * deadZone);
 
+        if (target != null)
+        {
+            Gizmos.DrawWireSphere(targetPosition, .25f);
+            // Look Ahead
+            if (!useLookAhead) return;
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(target.transform.position + (Vector3)lookAheadOffset, .25f);
+        }
 
-        Gizmos.DrawWireSphere(targetPosition, .25f);
 
 
-        // Look Ahead
-        if(!useLookAhead) return;
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(target.transform.position + (Vector3)lookAheadOffset, .25f);
 
     }
 

@@ -68,6 +68,8 @@ public class PlayerController : MonoBehaviour
         if(instance  == null) instance = this;
         else Destroy(gameObject);
 
+        DontDestroyOnLoad(gameObject);
+
         currentHealth = Maxhealth;
         rb = GetComponent<Rigidbody2D>();
         animMan = GetComponent<Animator>();

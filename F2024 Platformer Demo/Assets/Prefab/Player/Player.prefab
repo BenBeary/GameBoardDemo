@@ -32,7 +32,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.4779015, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -53,14 +53,21 @@ MonoBehaviour:
   deadPrefab: {fileID: 6546377182887985787, guid: 480e6db061d093740bf8dc384ddbc4a1, type: 3}
   dotCount: 1
   maxDots: 3
-  speed: 5
+  speed: 6
   dotReplenishSpeed: 0.25
   jumpForce: 2
   dustPrefab: {fileID: 8534826118363843145, guid: f0d525781b8d03c4dad585bb1f3d21af, type: 3}
-  halfDustPrefab: {fileID: 0}
+  maxVelocity: 12
+  canDash: 0
+  dashLength: 4
+  dashCDTime: 1
+  dashCD: 0
+  dashLocked: 0
   wallSlideSpeed: 5
   wallSlideSlow: 2.5
-  wallJumpCD: 0.2
+  wallJumpCD: 0.35
+  halfDustPrefab: {fileID: 1289527508481657196, guid: c054df30d2166ff469689b05481e6d61, type: 3}
+  wallDustSpawnrate: 0.07
   dotAnim: 0
   currentAnimTime: 0
   currentHealth: 6

@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 7647027388577564173}
   - component: {fileID: 291489378337876553}
   m_Layer: 6
-  m_Name: Dropping Door
+  m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -153,8 +153,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 784433afffdaee74fabdf9e9ce68a24c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  closedPosition: {x: 0, y: 0}
+  openedPosition: {x: 0, y: 0}
   timeToClose: 20
+  doorIsOpen: 0
+  applyShake: 0
+  shakeMagnitude: 0.2
   hideGizmos: 0
 --- !u!61 &291489378337876553
 BoxCollider2D:
@@ -192,7 +195,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0.3125, y: 0.3125, z: 0.3125, w: 0.3125}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6, y: 1.5}
+    oldSize: {x: 5.875, y: 1.5}
     newSize: {x: 9.694859, y: 1.5765913}
     adaptiveTilingThreshold: 0.5
     drawMode: 2

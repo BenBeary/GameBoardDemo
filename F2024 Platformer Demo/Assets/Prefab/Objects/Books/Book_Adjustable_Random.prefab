@@ -106,4 +106,5 @@ MonoBehaviour:
   - {fileID: -1225398557, guid: 6baec140d3bdaaa48933763e7e4bb7fa, type: 3}
   - {fileID: 649555336, guid: 6baec140d3bdaaa48933763e7e4bb7fa, type: 3}
   - {fileID: 1492044245, guid: 6baec140d3bdaaa48933763e7e4bb7fa, type: 3}
-  isDomino: 1
+  tryToCopyIndex: 0
+  removeInvisible: 1

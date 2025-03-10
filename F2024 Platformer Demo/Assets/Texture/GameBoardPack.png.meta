@@ -1491,6 +1491,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Blockout_Game Piece
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 432
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 5, y: 3, z: 3, w: 5}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e842dc292204bed49a519d6a5648b5bd
+      internalID: -554427860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1512,6 +1533,7 @@ TextureImporter:
       Black_Dot_6: 306687789
       Blank_Space: 535001579
       BlockSize: -1671453251
+      Blockout_Game Piece: 401839778
       CheckPoint: 1297257507
       ChessBoard: 1344019621
       ChessBoard_Center: 1529179044
@@ -1548,7 +1570,6 @@ TextureImporter:
       GameBoardPack_1: -1913019565
       GameBoardPack_10: -739917760
       GameBoardPack_11: 1331652714
-      GameBoardPack_12: 401839778
       GameBoardPack_17: -1742082350
       GameBoardPack_18: 1975702322
       GameBoardPack_2: 299840411

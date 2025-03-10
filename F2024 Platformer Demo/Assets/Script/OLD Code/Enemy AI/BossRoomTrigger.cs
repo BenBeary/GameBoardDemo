@@ -3,7 +3,7 @@ using UnityEngine;
 public class BossRoomTrigger : MonoBehaviour
 {
 
-    [SerializeField] ClosingDoor[] doorsToClose;
+    [SerializeField] Door[] doorsToClose;
     [SerializeField] GameObject boss;
     [SerializeField] float bossCameraSize;
 
@@ -33,7 +33,7 @@ public class BossRoomTrigger : MonoBehaviour
     {
         foreach (var door in doorsToClose)
         {
-            door.MoveDoor(moveUp);
+            door.InteractWithDoor(moveUp);
         }
     }
 
@@ -42,10 +42,6 @@ public class BossRoomTrigger : MonoBehaviour
     {
         //GameManager.Instance.SetNewTarget(null, 1);
         hasBeenTriggered = false;
-        foreach(var door in doorsToClose)
-        {
-            door.ResetDoor();
-        }
         boss.SetActive(false);
     }
 

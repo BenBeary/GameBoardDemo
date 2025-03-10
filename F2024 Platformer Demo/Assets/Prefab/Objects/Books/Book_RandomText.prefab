@@ -110,7 +110,8 @@ MonoBehaviour:
   - {fileID: -946319560, guid: 6baec140d3bdaaa48933763e7e4bb7fa, type: 3}
   - {fileID: -182198843, guid: 6baec140d3bdaaa48933763e7e4bb7fa, type: 3}
   - {fileID: -220670148, guid: 6baec140d3bdaaa48933763e7e4bb7fa, type: 3}
-  isDomino: 1
+  tryToCopyIndex: 0
+  removeInvisible: 0
 --- !u!1 &5427261681003325615
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,4 +215,5 @@ MonoBehaviour:
   - {fileID: -1589466006, guid: 6baec140d3bdaaa48933763e7e4bb7fa, type: 3}
   - {fileID: -1703359093, guid: 6baec140d3bdaaa48933763e7e4bb7fa, type: 3}
   - {fileID: 834730420, guid: 6baec140d3bdaaa48933763e7e4bb7fa, type: 3}
-  isDomino: 1
+  tryToCopyIndex: 0
+  removeInvisible: 1

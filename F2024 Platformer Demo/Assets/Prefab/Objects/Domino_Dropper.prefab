@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2109589470, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
+  m_Sprite: {fileID: 1946199292, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -208,12 +208,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dots:
+  - {fileID: -2109589470, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
+  - {fileID: -1311800151, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
   - {fileID: 1946199292, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
   - {fileID: 210871149, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
   - {fileID: -191582800, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
-  - {fileID: -2109589470, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
-  - {fileID: -1311800151, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
-  isDomino: 1
+  tryToCopyIndex: 1
+  removeInvisible: 1
 --- !u!1001 &7808150497996966704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -225,11 +226,35 @@ PrefabInstance:
     - target: {fileID: 2777113596242918929, guid: 9a599b6ad5c5acc4db70aeff526cfc8b, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 920979190, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
+      objectReference: {fileID: -227849873, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
+    - target: {fileID: 4143367168401453427, guid: 9a599b6ad5c5acc4db70aeff526cfc8b, type: 3}
+      propertyPath: removeInvisible
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143367168401453427, guid: 9a599b6ad5c5acc4db70aeff526cfc8b, type: 3}
+      propertyPath: dots.Array.data[0]
+      value: 
+      objectReference: {fileID: 628121641, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
+    - target: {fileID: 4143367168401453427, guid: 9a599b6ad5c5acc4db70aeff526cfc8b, type: 3}
+      propertyPath: dots.Array.data[1]
+      value: 
+      objectReference: {fileID: -1464311298, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
+    - target: {fileID: 4143367168401453427, guid: 9a599b6ad5c5acc4db70aeff526cfc8b, type: 3}
+      propertyPath: dots.Array.data[2]
+      value: 
+      objectReference: {fileID: 1618338791, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
+    - target: {fileID: 4143367168401453427, guid: 9a599b6ad5c5acc4db70aeff526cfc8b, type: 3}
+      propertyPath: dots.Array.data[3]
+      value: 
+      objectReference: {fileID: -341448122, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
+    - target: {fileID: 4143367168401453427, guid: 9a599b6ad5c5acc4db70aeff526cfc8b, type: 3}
+      propertyPath: dots.Array.data[4]
+      value: 
+      objectReference: {fileID: -678083020, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
     - target: {fileID: 5126199248961104436, guid: 9a599b6ad5c5acc4db70aeff526cfc8b, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 1617542235, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
+      objectReference: {fileID: 306687789, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
     - target: {fileID: 5126199248961104436, guid: 9a599b6ad5c5acc4db70aeff526cfc8b, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -237,7 +262,7 @@ PrefabInstance:
     - target: {fileID: 5323652756904080358, guid: 9a599b6ad5c5acc4db70aeff526cfc8b, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -678083020, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
+      objectReference: {fileID: 1618338791, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
     - target: {fileID: 5323652756904080358, guid: 9a599b6ad5c5acc4db70aeff526cfc8b, type: 3}
       propertyPath: m_Color.a
       value: 0.75686276

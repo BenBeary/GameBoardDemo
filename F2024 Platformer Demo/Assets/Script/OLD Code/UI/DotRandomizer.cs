@@ -4,16 +4,22 @@ public class DotRandomizer : MonoBehaviour
 {
 
     [SerializeField] Sprite[] dots;
-    [SerializeField] bool isDomino;
-
-    public void RandomizeObject()
+    [SerializeField] bool tryToCopyIndex;
+    [SerializeField] bool removeInvisible;
+    public void RandomizeObject(int index = default)
     {
-  
-        int rand = Random.Range(0, dots.Length+1);
-        if(isDomino)
+        int rand = Random.Range(0, dots.Length + 1);
+
+        if (removeInvisible) rand = Random.Range(0, dots.Length);
+
+
+        if (index != default)
         {
-            rand = Random.Range(0, dots.Length);
+            if (index >= dots.Length) index = dots.Length - 1;
+            rand = index;    
+            
         }
+
 
         if (rand == dots.Length)
         {
@@ -25,8 +31,16 @@ public class DotRandomizer : MonoBehaviour
 
         for(int i = 0; i < transform.childCount; i++)
         {
-            transform.GetChild(i).GetComponent<DotRandomizer>()?.RandomizeObject();
+            if(tryToCopyIndex)
+            {
+                transform.GetChild(i).GetComponent<DotRandomizer>()?.RandomizeObject(rand);
+            }
+            else
+            {
+                transform.GetChild(i).GetComponent<DotRandomizer>()?.RandomizeObject();
+            }
         }
+
 
 
     }
