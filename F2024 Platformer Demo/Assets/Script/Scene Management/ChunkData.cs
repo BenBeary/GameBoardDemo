@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEditor;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class ChunkData : MonoBehaviour
@@ -17,6 +15,23 @@ public class ChunkData : MonoBehaviour
 
 
 
+    [ContextMenu("Parent All Objects In Chunk")]
+    private void ParentAllObjectsInChunk()
+    {
+        Collider2D[] hits = Physics2D.OverlapBoxAll(GetComponent<BoxCollider2D>().bounds.center, GetComponent<BoxCollider2D>().size, 0);
+
+        foreach (Collider2D hit in hits)
+        {
+            if(hit.CompareTag("Player") || hit.CompareTag("Static")) continue;
+
+            hit.transform.parent = transform;
+        }
+    }
+
+
+
+
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.black;
@@ -24,9 +39,6 @@ public class ChunkData : MonoBehaviour
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireCube((Vector2)transform.position + offset, cameraClampArea + new Vector2(Camera.main.pixelWidth / 64, Camera.main.pixelHeight / 64));
     }
-
-
-
 
 
     private void OnTriggerEnter2D(Collider2D collision)

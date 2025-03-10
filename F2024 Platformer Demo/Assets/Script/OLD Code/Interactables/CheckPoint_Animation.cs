@@ -38,7 +38,7 @@ public class CheckPoint_Animation : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube((Vector2)Flag.position + Vector2.up * moveAmount + Vector2.right * (Flag.GetComponent<SpriteRenderer>().sprite.bounds.size.x/2), Flag.GetComponent<SpriteRenderer>().sprite.bounds.size);
 
-        Gizmos.color = new Color(.8f, .6f, 0);
+        Gizmos.color = Color.green;
         Gizmos.DrawWireCube((Vector2)transform.position + GetComponent<BoxCollider2D>().offset, GetComponent<BoxCollider2D>().size);
     }
 

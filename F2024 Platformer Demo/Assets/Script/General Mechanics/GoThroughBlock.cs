@@ -10,7 +10,7 @@ public class GoThroughBlock : MonoBehaviour
     void Update()
     {
         // turns off collider if player is holding "S" or under
-        if (PlayerController.instance.transform.position.y < transform.position.y + GetComponent<SpriteRenderer>().size.y / 64 || Input.GetAxisRaw("Vertical") < 0) 
+        if (PlayerController.instance.transform.position.y < transform.position.y + GetComponent<SpriteRenderer>().size.y || Input.GetAxisRaw("Vertical") < 0) 
         {
             GetComponent<BoxCollider2D>().enabled = false;
         }    

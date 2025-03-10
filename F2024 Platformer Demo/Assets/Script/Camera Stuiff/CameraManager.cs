@@ -253,8 +253,11 @@ public class CameraManager : MonoBehaviour
         #endregion
 
         // Deadzone
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, cam.pixelRect.size / 64 - Vector2.one * deadZone);
+        if(cam != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(transform.position, cam.pixelRect.size / 64 - Vector2.one * deadZone);
+        }
 
         if (target != null)
         {

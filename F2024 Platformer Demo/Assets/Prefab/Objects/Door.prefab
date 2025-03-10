@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &342240909082437119
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9044431565649746381}
-  m_Layer: 6
-  m_Name: DropPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9044431565649746381
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 342240909082437119}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.369102, y: -0.000027656555, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7097399759323374528}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6279502058907864014
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,12 +28,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6279502058907864014}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.70710576, w: 0.7071079}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 238.02, y: 16.8691, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 9044431565649746381}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!212 &5052822050238307860
@@ -140,7 +108,8 @@ MonoBehaviour:
   - {fileID: -1225398557, guid: 6baec140d3bdaaa48933763e7e4bb7fa, type: 3}
   - {fileID: 649555336, guid: 6baec140d3bdaaa48933763e7e4bb7fa, type: 3}
   - {fileID: 1492044245, guid: 6baec140d3bdaaa48933763e7e4bb7fa, type: 3}
-  isDomino: 1
+  tryToCopyIndex: 0
+  removeInvisible: 0
 --- !u!114 &7647027388577564173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,10 +123,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openedPosition: {x: 0, y: 0}
-  timeToClose: 20
+  timeToClose: 5
   doorIsOpen: 0
   applyShake: 0
-  shakeMagnitude: 0.2
+  shakeMagnitude: 0.8
   hideGizmos: 0
 --- !u!61 &291489378337876553
 BoxCollider2D:

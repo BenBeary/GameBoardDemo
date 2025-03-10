@@ -8,6 +8,7 @@ TagManager:
   - Checkpoint
   - OutOfBounds
   - DeathBoxes
+  - Static
   layers:
   - Default
   - TransparentFX
