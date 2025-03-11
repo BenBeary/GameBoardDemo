@@ -213,7 +213,7 @@ public class CameraManager : MonoBehaviour
 
     IEnumerator CameraTransition(Vector3 targetSpot)
     {
-        float timePassed = Time.deltaTime;
+        float timePassed = Time.unscaledDeltaTime;
         Vector3 start = transform.position;
 
         if (targetSpot.y > start.y + 10) // 2 = 1 block so if 5 blocks above current camera causes boost 
@@ -223,11 +223,11 @@ public class CameraManager : MonoBehaviour
         }
 
         PlayerController.instance.FreezePlayer();
-
+        Time.timeScale = 0f;
 
         while (true)
         {
-            timePassed += Time.deltaTime;
+            timePassed += Time.unscaledDeltaTime;
             float correctTime = timePassed / transitionTime;
 
             transform.position = Vector3.Lerp(start, targetSpot, correctTime);
@@ -238,7 +238,7 @@ public class CameraManager : MonoBehaviour
         }
 
         PlayerController.instance.UnFreezePlayer();
-
+        Time.timeScale = 1f;
         transitioning = false;
     }
 

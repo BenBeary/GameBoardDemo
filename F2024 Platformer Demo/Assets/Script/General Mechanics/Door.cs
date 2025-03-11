@@ -7,7 +7,7 @@ public class Door : MonoBehaviour
 
     [SerializeField] Vector2 openedPosition;
     [SerializeField] float timeToClose = 1f;
-    public bool doorIsOpen;
+    [SerializeField] float delayedActivation = 0f;
 
     [Header("Camera Effects")]
     [SerializeField] bool applyShake;
@@ -16,6 +16,7 @@ public class Door : MonoBehaviour
     [Header("Debug")]
     [SerializeField] bool hideGizmos;
     Vector2 startPosition;
+    bool doorIsOpen;
 
     private void Start()
     {
@@ -38,6 +39,8 @@ public class Door : MonoBehaviour
 
     IEnumerator doorInteract(bool openDoor)
     {
+        yield return new WaitForSeconds(delayedActivation);
+
         // This should fix the snapping that happens when Lerp gets cancelled early
         float dist = Vector2.Distance(startPosition,openedPosition+startPosition);
         float curDist = openDoor ? Vector2.Distance(transform.position, openedPosition + startPosition) : Vector2.Distance(transform.position, startPosition);

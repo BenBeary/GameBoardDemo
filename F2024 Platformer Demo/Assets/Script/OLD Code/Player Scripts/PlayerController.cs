@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float currentAnimTime;
     public int currentHealth = 6;
     public bool grounded;
-    [SerializeField] bool leftWallHang, rightWallHang;
+    [SerializeField] bool leftWallHang, rightWallHang, checkHead;
     public bool doubleJump = true;
     public bool hasInputPaused;
 
@@ -177,15 +177,23 @@ public class PlayerController : MonoBehaviour
         
         motionInput = new Vector2(Input.GetAxisRaw("Horizontal"), 0);
         // Raycasts for ground / Wall Movements
-
+        
         
 
         grounded = Physics2D.BoxCast(transform.position, new Vector2(GetComponent<SpriteRenderer>().sprite.bounds.size.x * .8f, 0.1f), 0,Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
         leftWallHang = (Physics2D.Raycast(transform.position + (Vector3.left * 0.35f) + Vector3.up * .2f, Vector2.left, .1f, LayerMask.GetMask("Ground")));
         rightWallHang = (Physics2D.Raycast(transform.position + (Vector3.right * 0.35f) + Vector3.up * .2f, Vector2.right, .1f, LayerMask.GetMask("Ground")));
+        checkHead = Physics2D.BoxCast(transform.position + Vector3.up * .7f, new Vector2(GetComponent<SpriteRenderer>().sprite.bounds.size.x * .8f, 0.1f), 0, Vector2.up, 0.1f, LayerMask.GetMask("Ground"));
 
+        #region Squish Check
 
+        if(grounded && checkHead || leftWallHang && rightWallHang)
+        {
+            Debug.Log("Player is Squished");
+            DamagePlayer(currentHealth);
+        }
 
+        #endregion
 
         #region Jumping
         if (grounded) 
