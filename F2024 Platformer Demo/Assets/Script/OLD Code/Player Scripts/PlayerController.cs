@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour
     bool hasJumped;
     bool isDying;
     string animationsToPlay;
+    bool landed;
 
     Vector2 storedVelocity;
     Vector2 storedForce;
@@ -200,6 +201,18 @@ public class PlayerController : MonoBehaviour
         {
             doubleJump = true;
             dashLocked = false;
+            if (!landed)
+            {
+                landed = true;
+                SoundManager.instance.playSound("Player", "Land", .2f);
+                GameObject temp = Instantiate(dustPrefab);
+                temp.transform.position = transform.position;
+            }
+        }
+        else if(!grounded && landed)
+        {
+            landed = false;
+            // Play Jump SoundEffect here? idk
         }
 
 
@@ -221,11 +234,11 @@ public class PlayerController : MonoBehaviour
             doubleJump = false;
             dotCount--;
         }
-        if (hasJumped && rb.velocity.y == 0)
+        if (hasJumped && rb.velocity.y == 0) // ADD COYOTE TIME HERE
         {
+            grounded = false;
             hasJumped = false;
-            GameObject temp = Instantiate(dustPrefab);
-            temp.transform.position = transform.position;
+
         }
         #endregion
 

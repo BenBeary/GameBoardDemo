@@ -5,6 +5,13 @@ using UnityEngine;
 public class Facade : MonoBehaviour
 {
 
+    [System.Serializable]
+    public enum colliderType
+    {
+        none,
+        requireGrounded,
+    }
+
     [SerializeField] float fadeOutTime = .5f;
     bool fading;
 
@@ -20,6 +27,7 @@ public class Facade : MonoBehaviour
 
     IEnumerator fadeOut()
     {
+        SoundManager.instance.playSound("Triggers", "Facade");
         fading = true;
         float timePassed = 0;
         Color temp = GetComponent<SpriteRenderer>().color;
