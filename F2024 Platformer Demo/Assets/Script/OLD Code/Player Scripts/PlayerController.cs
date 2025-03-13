@@ -184,7 +184,7 @@ public class PlayerController : MonoBehaviour
         grounded = Physics2D.BoxCast(transform.position, new Vector2(GetComponent<SpriteRenderer>().sprite.bounds.size.x * .8f, 0.1f), 0,Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
         leftWallHang = (Physics2D.Raycast(transform.position + (Vector3.left * 0.35f) + Vector3.up * .2f, Vector2.left, .1f, LayerMask.GetMask("Ground")));
         rightWallHang = (Physics2D.Raycast(transform.position + (Vector3.right * 0.35f) + Vector3.up * .2f, Vector2.right, .1f, LayerMask.GetMask("Ground")));
-        checkHead = Physics2D.BoxCast(transform.position + Vector3.up * .7f, new Vector2(GetComponent<SpriteRenderer>().sprite.bounds.size.x * .8f, 0.1f), 0, Vector2.up, 0.1f, LayerMask.GetMask("Ground"));
+        checkHead = !Physics2D.BoxCast(transform.position + Vector3.up * .7f, new Vector2(GetComponent<SpriteRenderer>().sprite.bounds.size.x * .8f, 0.1f), 0, Vector2.up, 0.1f, LayerMask.GetMask("Ground")).collider.isTrigger;
 
         #region Squish Check
 

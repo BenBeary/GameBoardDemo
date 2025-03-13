@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Serialization;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
@@ -29,11 +28,16 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioSource musicAudioSource;
     [SerializeField] AudioSource audioSourcePrefab;
 
+    [Header("Music Settings")]
+    [Min(0)]
+    [SerializeField] float songFadeTime = .5f;
+    bool loadingNextSong;
+    bool loopingQueue;
 
 
     private Queue<AudioSource> audioPool = new Queue<AudioSource>();
     List<repeatAudio> repeatingAudioList = new List<repeatAudio>();
-
+    private Queue<AudioClip> songQueue = new Queue<AudioClip>();
 
     public class repeatAudio
     {
@@ -89,6 +93,27 @@ public class SoundManager : MonoBehaviour
             }
         }
         #endregion
+
+        if(musicAudioSource.isPlaying && musicAudioSource.clip != null) 
+        {
+            float timeLeft = musicAudioSource.clip.length - musicAudioSource.time;
+            
+            if(!loadingNextSong && songQueue.Count > 0 && timeLeft <= songFadeTime) // Play next Song in Queue
+            {
+                musicAudioSource.volume = currentMusicVolume * currentMasterVolume;
+                if (loopingQueue)
+                {
+                    AudioClip temp = songQueue.Peek();
+                    StartCoroutine(FadeInOutSongs(songQueue.Dequeue()));
+                    songQueue.Enqueue(temp);
+                }
+                else
+                {
+                    StartCoroutine(FadeInOutSongs(songQueue.Dequeue()));
+
+                }
+            }
+        }
     }
 
 
@@ -138,7 +163,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-
+    #region Repeating Sound System
 
     /// <summary>
     /// Creates a Dedicated AudioSource for Clip Use PlayRepeating() to play the audio
@@ -234,7 +259,9 @@ public class SoundManager : MonoBehaviour
         audioData.affectedSource.gameObject.SetActive(false);
 
     }
-
+    /// <summary>
+    /// Deletes Audio Source
+    /// </summary>
     public static void DeleteRepeating(GameObject obj, string identifier)
     {
         repeatAudio audioData;
@@ -251,7 +278,170 @@ public class SoundManager : MonoBehaviour
         instance.repeatingAudioList.Remove(audioData);
     }
 
-        IEnumerator ReturnAudioSourceToPool(AudioSource source, float delay)
+
+    #endregion
+
+
+    #region Music System
+    /// <summary>
+    /// Play a Music clip on the Music Audio Source
+    /// </summary>
+    /// <param name="fade"> Fades the old song and fades in new song</param>
+    public void PlaySingleSong(string categoryName, string soundName, bool songLooping = false, bool fade = true, bool randomSound = true, int soundIndex = 0)
+    {
+        if (sounds == null)
+        {
+            Debug.LogWarning("There is no sound Library");
+            return;
+        }
+
+        AudioClip clip = FindClip(categoryName, soundName, randomSound, soundIndex);
+
+        if (clip == null)
+        {
+            Debug.LogWarning($"No Audio Clip found in {categoryName}.{soundName}");
+            return;
+        }
+
+        if(musicAudioSource.clip == clip)
+        {
+            Debug.Log("Song is already Playing");
+            return;
+        }
+
+        if (fade)
+        {
+            StartCoroutine(FadeInOutSongs(clip));
+        }
+        else
+        {
+            musicAudioSource.Stop();
+            musicAudioSource.clip = clip;
+            musicAudioSource.Play();
+        }
+        musicAudioSource.loop = songLooping;
+    }
+    /// <summary>
+    /// Add A song to be played once last song has played
+    /// </summary>
+    public void AddSongToQueue(string categoryName, string soundName, bool randomSound = true, int soundIndex = 0)
+    {
+        musicAudioSource.loop = false;
+        if (sounds == null)
+        {
+            Debug.LogWarning("There is no sound Library");
+            return;
+        }
+
+        AudioClip clip = FindClip(categoryName, soundName, randomSound, soundIndex);
+
+        if (clip == null)
+        {
+            Debug.LogWarning($"No Audio Clip found in {categoryName}.{soundName}");
+            return;
+        }
+
+        songQueue.Enqueue(clip);
+    }
+    /// <summary>
+    /// Set the Song Queue equal to a soundList
+    /// </summary>
+    public void CreateSongList(string categoryName, string soundName,bool loopList = false, bool randomize = true)
+    {
+        if (sounds == null)
+        {
+            Debug.LogWarning("There is no sound Library");
+            return;
+        }
+        loopingQueue = loopList;
+        List<AudioClip> clips;
+        try
+        {
+            clips = sounds.AudioList.First(x => x.categoryName == categoryName).sounds.First(y => y.name == soundName).audioClips;
+        }
+        catch
+        {
+            Debug.LogWarning($"No Audio Clip found in {categoryName}.{soundName}");
+            clips = null;
+        }
+        if(clips == null) { return; }
+
+        songQueue.Clear();
+        
+
+        if (!randomize)
+        {
+            foreach(var item in clips)
+            {
+                songQueue.Enqueue(item);
+            }
+        }
+        else
+        {
+            ShuffleList(out List<AudioClip> randomizedList, clips);
+            foreach (var item in randomizedList)
+            {
+                songQueue.Enqueue(item);
+            }
+        }
+
+    }
+
+    // Creates a copy of list and shuffles
+    private void ShuffleList(out List<AudioClip> newList, List<AudioClip> oldList)
+    {
+
+        newList = new List<AudioClip>(oldList);
+
+        for (int i = 0; i < oldList.Count; i++)
+        {
+            int switchWith = Random.Range(i, oldList.Count);
+
+            AudioClip temp = newList[i];
+            newList[i] = newList[switchWith];
+            newList[switchWith] = temp;
+        }
+
+    }
+
+    IEnumerator FadeInOutSongs(AudioClip newClip)
+    {
+        loadingNextSong = true;
+        float fadeDuration = 1f;
+        float startVolume = musicAudioSource.volume;
+        float timePassed = 0;
+        float correctTime = 0;
+
+        // fade out
+        while (correctTime > 1f)
+        {
+            timePassed += Time.deltaTime;
+            correctTime = timePassed / fadeDuration;
+            musicAudioSource.volume = Mathf.Lerp(startVolume, 0, correctTime);
+            yield return null;
+        }
+        timePassed = 0;
+        correctTime = 0;
+        musicAudioSource.Stop();
+        musicAudioSource.clip = newClip;
+        musicAudioSource.Play();
+
+        // fade in
+        while(correctTime > 1f)
+        {
+            timePassed += Time.deltaTime;
+            correctTime = timePassed / fadeDuration;
+            musicAudioSource.volume = Mathf.Lerp(0, startVolume, correctTime);
+            yield return null;
+        }
+
+        loadingNextSong = false;
+    }
+
+
+    #endregion
+
+    IEnumerator ReturnAudioSourceToPool(AudioSource source, float delay)
     {
         yield return new WaitForSeconds(delay);
         source.gameObject.SetActive(false);
@@ -265,8 +455,17 @@ public class SoundManager : MonoBehaviour
 
         if (randomSound)
         {
-            SoundDataStorage.SoundDataPack selectedPack =
-                instance.sounds.AudioList.First(x => x.categoryName == categoryName).sounds.FirstOrDefault(y => y.name == soundName);
+            SoundDataStorage.SoundDataPack selectedPack;
+            try
+            {
+                selectedPack =
+                    instance.sounds.AudioList.First(x => x.categoryName == categoryName).sounds.FirstOrDefault(y => y.name == soundName);
+            }
+            catch
+            {
+                Debug.LogWarning($"No Audio Clip found in {categoryName}.{soundName}");
+                selectedPack = default;
+            }
 
             clip = selectedPack.audioClips[Random.Range(0, selectedPack.audioClips.Count)];
 
