@@ -66,9 +66,11 @@ public class SoundManager : MonoBehaviour
         InitializeAudioPool();
 
 
-        currentMasterVolume = startingMasterVolume / 100;
-        currentSfxVolume = startingSfxVolume / 100;
-        currentMusicVolume = startingMusicVolume / 100;
+        currentMasterVolume = startingMasterVolume / 100f;
+        currentSfxVolume = startingSfxVolume / 100f;
+        currentMusicVolume = startingMusicVolume / 100f;
+
+        Debug.Log($"Master: {currentMasterVolume} | SFX: {currentSfxVolume} | Music: {currentMusicVolume}");
     }
 
 
@@ -317,6 +319,7 @@ public class SoundManager : MonoBehaviour
         {
             musicAudioSource.Stop();
             musicAudioSource.clip = clip;
+            musicAudioSource.volume = currentMusicVolume;
             musicAudioSource.Play();
         }
         musicAudioSource.loop = songLooping;
