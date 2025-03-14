@@ -107,6 +107,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator PlayerDeath()
     {
         isDying = true;
+        GameManager.Instance.playerDeathCount++;
 
         #region Corpse Spawning
         GetComponent<SpriteRenderer>().enabled = false;
@@ -177,15 +178,28 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(transform.position + (Vector3.right * 0.35f) + Vector3.up * .2f, Vector2.right * .1f, Color.yellow);
         
         motionInput = new Vector2(Input.GetAxisRaw("Horizontal"), 0);
-        // Raycasts for ground / Wall Movements
         
+        
+        if(motionInput.magnitude != 0 && !GameManager.Instance.startTimer)
+        {
+            Debug.Log("Timer Has Started!");
+            GameManager.Instance.startTimer = true;
+        }
         
 
-        grounded = Physics2D.BoxCast(transform.position, new Vector2(GetComponent<SpriteRenderer>().sprite.bounds.size.x * .8f, 0.1f), 0,Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
-        leftWallHang = (Physics2D.Raycast(transform.position + (Vector3.left * 0.35f) + Vector3.up * .2f, Vector2.left, .1f, LayerMask.GetMask("Ground")));
-        rightWallHang = (Physics2D.Raycast(transform.position + (Vector3.right * 0.35f) + Vector3.up * .2f, Vector2.right, .1f, LayerMask.GetMask("Ground")));
-        //checkHead = Physics2D.BoxCast(transform.position + Vector3.up * .7f, new Vector2(GetComponent<SpriteRenderer>().sprite.bounds.size.x * .8f, 0.1f), 0, Vector2.up, 0.1f, LayerMask.GetMask("Ground"));
-        checkHead = false;
+        // Raycasts for ground / Wall Movements
+        RaycastHit2D groundHit = Physics2D.BoxCast(transform.position, new Vector2(GetComponent<SpriteRenderer>().sprite.bounds.size.x * .8f, 0.1f), 0,Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
+        RaycastHit2D leftWallHit = (Physics2D.Raycast(transform.position + (Vector3.left * 0.35f) + Vector3.up * .2f, Vector2.left, .1f, LayerMask.GetMask("Ground")));
+        RaycastHit2D rightWallHit = (Physics2D.Raycast(transform.position + (Vector3.right * 0.35f) + Vector3.up * .2f, Vector2.right, .1f, LayerMask.GetMask("Ground")));
+        RaycastHit2D headHit = Physics2D.BoxCast(transform.position + Vector3.up * .7f, new Vector2(GetComponent<SpriteRenderer>().sprite.bounds.size.x * .8f, 0.1f), 0, Vector2.up, 0.1f, LayerMask.GetMask("Ground"));
+
+        grounded = groundHit.collider != null && !groundHit.collider.isTrigger;
+        leftWallHang = leftWallHit.collider != null && !leftWallHit.collider.isTrigger;
+        rightWallHang = rightWallHit.collider != null && !rightWallHit.collider.isTrigger;
+        checkHead = headHit.collider != null && !headHit.collider.isTrigger;
+
+
+
         #region Squish Check
 
         if(grounded && checkHead || leftWallHang && rightWallHang)

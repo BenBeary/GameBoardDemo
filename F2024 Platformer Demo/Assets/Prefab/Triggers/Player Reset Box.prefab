@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4320347235335279423}
   m_Layer: 3
   m_Name: Player Reset Box
-  m_TagString: OutOfBounds
+  m_TagString: DeathBoxes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -16.4889, y: -11.3435, z: 0}
-  m_LocalScale: {x: 28.0222, y: 15.582687, z: 1}
+  m_LocalScale: {x: 15.022, y: 1.0837084, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.30296713, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

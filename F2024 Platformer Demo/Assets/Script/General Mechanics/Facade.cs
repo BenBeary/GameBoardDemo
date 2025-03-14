@@ -13,8 +13,9 @@ public class Facade : MonoBehaviour
     }
 
     [SerializeField] float fadeOutTime = .5f;
+    [SerializeField] Facade cascadingObject;
     bool fading;
-
+    bool isCascading;
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -22,12 +23,21 @@ public class Facade : MonoBehaviour
         if (collision.CompareTag("Player") && !fading)
         {
             StartCoroutine(fadeOut());
+            if (cascadingObject) cascadingObject.triggerCascade();
         }
+    }
+
+
+    public void triggerCascade()
+    {
+        StartCoroutine(fadeOut());
+        isCascading = true;
     }
 
     IEnumerator fadeOut()
     {
-        SoundManager.instance.playSound("Triggers", "Facade");
+        // If Cascading, dont repeat the sound call
+        if(!isCascading) SoundManager.instance.playSound("Triggers", "Facade");
         fading = true;
         float timePassed = 0;
         Color temp = GetComponent<SpriteRenderer>().color;

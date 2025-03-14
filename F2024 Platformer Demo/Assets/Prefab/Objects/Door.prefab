@@ -124,7 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openedPosition: {x: 0, y: 0}
   timeToClose: 5
-  doorIsOpen: 0
+  delayedActivation: 0
   applyShake: 0
   shakeMagnitude: 0.8
   hideGizmos: 0

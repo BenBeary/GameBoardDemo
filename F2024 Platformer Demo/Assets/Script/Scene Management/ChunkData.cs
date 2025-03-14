@@ -27,6 +27,9 @@ public class ChunkData : MonoBehaviour
         {
             if(hit.CompareTag("Player") || hit.CompareTag("Static")) continue;
 
+            // Skip Object if it already has a parent that isnt another Chunk
+            if(hit.transform.parent != null && hit.transform.parent.GetComponent<ChunkData>() == null) continue;
+
             hit.transform.parent = transform;
         }
     }

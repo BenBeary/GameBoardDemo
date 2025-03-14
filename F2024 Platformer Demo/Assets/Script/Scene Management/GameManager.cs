@@ -37,7 +37,9 @@ public class GameManager : MonoBehaviour
     public ChunkData activeChunk;
     [Tooltip("Don't touch this")]
     public List<regionData> savedRegionData = new List<regionData>();
-    
+    public int playerDeathCount = 0;
+    public float timePlayedInGame = 0;
+    public bool startTimer;
 
     // OBSOLETE ################### Move to seperate Script ///
     [Header("UI Stuff")]
@@ -83,6 +85,11 @@ public class GameManager : MonoBehaviour
             else UnPauseGame();
         }
         
+        if(startTimer)
+        {
+            timePlayedInGame += Time.deltaTime;
+
+        }
         
     }
 

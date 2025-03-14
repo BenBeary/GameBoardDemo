@@ -62,7 +62,7 @@ public class ButtonTrigger : MonoBehaviour
 
 
 
-        Gizmos.DrawWireCube(transform.position + Vector3.down * pushDownDistance, GetComponent<SpriteRenderer>().size);
+        Gizmos.DrawWireCube(transform.position + Vector3.down * (pushDownDistance - GetComponent<SpriteRenderer>().size.y/2), GetComponent<SpriteRenderer>().size);
     }
 
 

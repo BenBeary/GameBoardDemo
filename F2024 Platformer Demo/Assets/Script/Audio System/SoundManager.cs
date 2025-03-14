@@ -311,6 +311,8 @@ public class SoundManager : MonoBehaviour
             return;
         }
 
+        musicAudioSource.volume = currentMusicVolume;
+
         if (fade)
         {
             StartCoroutine(FadeInOutSongs(clip));
@@ -319,7 +321,6 @@ public class SoundManager : MonoBehaviour
         {
             musicAudioSource.Stop();
             musicAudioSource.clip = clip;
-            musicAudioSource.volume = currentMusicVolume;
             musicAudioSource.Play();
         }
         musicAudioSource.loop = songLooping;
