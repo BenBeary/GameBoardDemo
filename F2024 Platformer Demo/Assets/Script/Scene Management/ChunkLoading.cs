@@ -24,6 +24,9 @@ public class ChunkLoading : MonoBehaviour
             Debug.Log("Unloading Scene " +  unloadScene.SceneName);
         }
 
+        Debug.Log(loadScene + " | " + loadScene.SceneName);
+        if(loadScene.SceneName == string.Empty) return;
+
         if(!SceneManager.GetSceneByName(loadScene.SceneName).isLoaded)
         {
             loadingScene = true;

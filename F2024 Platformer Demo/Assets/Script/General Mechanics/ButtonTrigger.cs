@@ -21,7 +21,7 @@ public class ButtonTrigger : MonoBehaviour
 
     private void Start()
     {
-        startPos = transform.position;
+        startPos = transform.localPosition;
     }
 
     IEnumerator pressedTimeDelay()
@@ -29,7 +29,7 @@ public class ButtonTrigger : MonoBehaviour
         
         yield return new WaitForSeconds(downTimeLength);
 
-        transform.position = startPos;
+        transform.localPosition = startPos;
 
         onRelease.Invoke();
         yield return null;
@@ -41,7 +41,7 @@ public class ButtonTrigger : MonoBehaviour
         {
             isPressed = true;
             StopAllCoroutines();
-            transform.position = startPos + Vector2.down * pushDownDistance;
+            transform.localPosition = startPos + Vector2.down * pushDownDistance;
             onPressed.Invoke();
         }
     }
@@ -62,7 +62,7 @@ public class ButtonTrigger : MonoBehaviour
 
 
 
-        Gizmos.DrawWireCube(transform.position + Vector3.down * (pushDownDistance - GetComponent<SpriteRenderer>().size.y/2), GetComponent<SpriteRenderer>().size);
+        Gizmos.DrawWireCube(transform.localPosition + Vector3.down * (pushDownDistance - GetComponent<SpriteRenderer>().size.y/2), GetComponent<SpriteRenderer>().size);
     }
 
 

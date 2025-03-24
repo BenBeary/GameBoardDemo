@@ -9,12 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3941191518737694655}
+  - component: {fileID: 4007034567130701551}
   - component: {fileID: 287607432224024157}
   - component: {fileID: 2961115655903880218}
   m_Layer: 3
-  m_Name: Chunk Transporter
+  m_Name: Chunk Loader
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -33,6 +34,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4007034567130701551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7507286071610626101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a798d81938c66754ba32fca6c8d81144, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadScene:
+    m_SceneAsset: {fileID: 102900000, guid: 2d04b704779fa144b806043b84e9974c, type: 3}
+    m_SceneName: Section1R2 It Begins
+  unloadScene:
+    m_SceneAsset: {fileID: 0}
+    m_SceneName: Section 1R1 Tutorial Region
 --- !u!212 &287607432224024157
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -79,7 +98,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 0.5, y: 8}
+  m_Size: {x: 1, y: 6.000003}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -114,7 +133,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -122,7 +141,7 @@ BoxCollider2D:
     border: {x: 0.15625, y: 0.09375, z: 0.09375, w: 0.15625}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
-    newSize: {x: 0.5, y: 8}
+    newSize: {x: 1, y: 6.000003}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0

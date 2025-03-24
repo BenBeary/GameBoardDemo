@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6271775896570080021, guid: fd1daaf4a12df5f408788c66f73fb2b5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6817180563416533290, guid: fd1daaf4a12df5f408788c66f73fb2b5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.7722206
@@ -117,7 +121,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0.3125, y: 0.3125, z: 0.3125, w: 0.3125}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6, y: 1.5}
+    oldSize: {x: 5.875, y: 1.5}
     newSize: {x: 9.6861725, y: 1.4058952}
     adaptiveTilingThreshold: 0.5
     drawMode: 2

@@ -24,7 +24,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] bool useLookAhead;
     [SerializeField] Vector2 lookAheadDistance;
     [SerializeField] float lookAheadSpeed;
-    
+    [SerializeField] Vector2 _lookAheadSavedPos;
 
     
 
@@ -160,8 +160,8 @@ public class CameraManager : MonoBehaviour
                 lookAheadOffset.y = Mathf.Lerp(lookAheadOffset.y, -lookAheadDistance.y, lookAheadSpeed * Time.deltaTime);
             }
 
-            lookAheadOffset.x = PlayerController.instance.currentMomentum.x == 0 ? 0f : lookAheadOffset.x;
-            lookAheadOffset.y = PlayerController.instance.currentMomentum.y == 0 ? 0f : lookAheadOffset.y;
+/*            lookAheadOffset.x = PlayerController.instance.currentMomentum.x == 0 ? 0f : lookAheadOffset.x;
+            lookAheadOffset.y = PlayerController.instance.currentMomentum.y == 0 ? 0f : lookAheadOffset.y;*/
 
         }
 
@@ -181,7 +181,9 @@ public class CameraManager : MonoBehaviour
 
         }
 
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, (catchUpSpeed / (1+speedDampening)) * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, targetPosition, catchUpSpeed * Time.deltaTime);
+
+            // transform.position = Vector3.MoveTowards(transform.position, targetPosition, (catchUpSpeed / (1+speedDampening)) * Time.deltaTime);
 
         
     }

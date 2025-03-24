@@ -16,11 +16,18 @@ public class PlayerController : MonoBehaviour
     public int dotCount = 1;
     public int maxDots = 1;
     public float speed = 5f;
-    [Space(10)]
+
+
+    [Header("Jump System")]
+    [SerializeField] Material playerMat;
+    [SerializeField] Color dotColorOnDoubleJump = Color.blue;
+    Color baseDotColor;
     public float dotReplenishSpeed = 1f;
     [SerializeField] float jumpForce = 3f;
     [SerializeField] GameObject dustPrefab;
     public float maxVelocity = 10f;
+
+
 
     [Header("Dash Settings")]
     public bool canDash;
@@ -77,7 +84,7 @@ public class PlayerController : MonoBehaviour
         
         animSpeed = animMan.speed;
         animMan.speed = 0f;
-
+        baseDotColor = playerMat ? playerMat.GetColor("_DotColor") : Color.black;
     }
 
     private void Update()
@@ -91,6 +98,11 @@ public class PlayerController : MonoBehaviour
 
         if(!isDying && !hasInputPaused) MovementManager();
         AnimManager();
+    }
+
+    private void OnDisable()
+    {
+        playerMat.SetColor("_DotColor", baseDotColor);
     }
 
     public void DamagePlayer(int damage)
@@ -123,7 +135,7 @@ public class PlayerController : MonoBehaviour
 
         #endregion
 
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSeconds(2f);
         GetComponent<SpriteRenderer>().enabled = true;
         rb.bodyType = RigidbodyType2D.Dynamic;
         //GameManager.Instance?.clearCameraShake();
@@ -132,6 +144,11 @@ public class PlayerController : MonoBehaviour
         isDying = false;
     }
     
+    private void delayedReset()
+    {
+        playerReset?.Invoke();
+    }
+
     public void resetToCheckpoint()
     {
         transform.position = checkPoint.position;
@@ -191,7 +208,7 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D groundHit = Physics2D.BoxCast(transform.position, new Vector2(GetComponent<SpriteRenderer>().sprite.bounds.size.x * .8f, 0.1f), 0,Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
         RaycastHit2D leftWallHit = (Physics2D.Raycast(transform.position + (Vector3.left * 0.35f) + Vector3.up * .2f, Vector2.left, .1f, LayerMask.GetMask("Ground")));
         RaycastHit2D rightWallHit = (Physics2D.Raycast(transform.position + (Vector3.right * 0.35f) + Vector3.up * .2f, Vector2.right, .1f, LayerMask.GetMask("Ground")));
-        RaycastHit2D headHit = Physics2D.BoxCast(transform.position + Vector3.up * .7f, new Vector2(GetComponent<SpriteRenderer>().sprite.bounds.size.x * .8f, 0.1f), 0, Vector2.up, 0.1f, LayerMask.GetMask("Ground"));
+        RaycastHit2D headHit = Physics2D.BoxCast(transform.position + Vector3.up * .6f, new Vector2(GetComponent<SpriteRenderer>().sprite.bounds.size.x * .5f, 0.1f), 0, Vector2.up, 0.1f, LayerMask.GetMask("Ground"));
 
         grounded = groundHit.collider != null && !groundHit.collider.isTrigger;
         leftWallHang = leftWallHit.collider != null && !leftWallHit.collider.isTrigger;
@@ -213,6 +230,7 @@ public class PlayerController : MonoBehaviour
         #region Jumping
         if (grounded) 
         {
+            playerMat.SetColor("_DotColor", baseDotColor);
             doubleJump = true;
             dashLocked = false;
             if (!landed)
@@ -247,6 +265,7 @@ public class PlayerController : MonoBehaviour
             JumpCall();
             doubleJump = false;
             dotCount--;
+            playerMat.SetColor("_DotColor", dotColorOnDoubleJump);
         }
         if (hasJumped && rb.velocity.y == 0) // ADD COYOTE TIME HERE
         {

@@ -12,8 +12,9 @@ public class ChunkData : MonoBehaviour
     [SerializeField] RegionController rgController;
 
     [Header("Camera Settings")]
+    [SerializeField] Vector2 resolution = new Vector2(768, 512);
     [SerializeField] int PixelPerUnit = 32;
-    public Vector2 cameraClampArea { get { return Vector2.one * 2 + GetComponent<BoxCollider2D>().size - Camera.main.pixelRect.size / PixelPerUnit; } }
+    public Vector2 cameraClampArea { get { return Vector2.one * 2 + GetComponent<BoxCollider2D>().size - resolution / PixelPerUnit; } }
     public Vector2 offset { get { return GetComponent<BoxCollider2D>().offset; } }
 
 
@@ -43,7 +44,7 @@ public class ChunkData : MonoBehaviour
         Gizmos.color = Color.black;
         Gizmos.DrawWireCube((Vector2)transform.position + offset, cameraClampArea);
         Gizmos.color = Color.magenta;
-        Gizmos.DrawWireCube((Vector2)transform.position + offset, cameraClampArea + new Vector2(Camera.main.pixelWidth / PixelPerUnit, Camera.main.pixelHeight / PixelPerUnit));
+        Gizmos.DrawWireCube((Vector2)transform.position + offset, cameraClampArea + new Vector2(resolution.x / PixelPerUnit, resolution.y / PixelPerUnit));
     }
 
 
@@ -51,9 +52,19 @@ public class ChunkData : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            
+            if (GameManager.Instance && GameManager.Instance.activeChunk == this) return;
+
+
             GameManager.Instance?.SetActiveChunk(this);
-            CameraManager.instance?.TransitionCamera(CameraManager.instance.ClampMovement(CameraManager.instance.transform.position));
+            CameraManager.instance?.TransitionCamera(CameraManager.instance.ClampMovement(CameraManager.instance.transform.position + Vector3.up * 4));
+            isActiveChunk = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            isActiveChunk = false;
         }
     }
 }

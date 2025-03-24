@@ -13,18 +13,59 @@ public class MovingBlock : MonoBehaviour
     Vector2 startPos;
     int currentPos;
     int dir = 1;
+    bool active;
+
 
     private void Start()
     {
         startPos = transform.position;
+        if(transform.parent == null) 
+        {
+            Debug.LogError(name + " does not have a chunk parent");
+        }
+
+        PlayerController.playerReset += resetToStartPos;
     }
 
 
+    private void OnDisable()
+    {
+        PlayerController.playerReset -= resetToStartPos;
+    }
+
+    private void Update()
+    {
+        if(transform.parent == null)
+        {
+            return;
+        }
+
+        if(transform.parent.GetComponent<ChunkData>().isActiveChunk && active == false)
+        {
+            active = true;
+        }
+        else if(!transform.parent.GetComponent<ChunkData>().isActiveChunk && active) 
+        {
+            Invoke("resetToStartPos", 0.5f);
+        }
+
+    }
+
+
+    public void resetToStartPos()
+    {
+        transform.position = startPos;
+        active = false;
+        currentPos = 0;
+    }
+
     private void FixedUpdate()
     {
+        if (!active) return;
+
         transform.position = Vector2.MoveTowards(transform.position, startPos + positions[currentPos], speed * Time.deltaTime);
 
-        if (Vector2.Distance(transform.position, startPos + positions[currentPos]) <= 0.1f) 
+        if (Vector2.Distance(transform.position, startPos + positions[currentPos]) == 0) 
         {
             
             currentPos += dir;
