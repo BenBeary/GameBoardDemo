@@ -208,18 +208,20 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D groundHit = Physics2D.BoxCast(transform.position, new Vector2(GetComponent<SpriteRenderer>().sprite.bounds.size.x * .8f, 0.1f), 0,Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
         RaycastHit2D leftWallHit = (Physics2D.Raycast(transform.position + (Vector3.left * 0.35f) + Vector3.up * .2f, Vector2.left, .1f, LayerMask.GetMask("Ground")));
         RaycastHit2D rightWallHit = (Physics2D.Raycast(transform.position + (Vector3.right * 0.35f) + Vector3.up * .2f, Vector2.right, .1f, LayerMask.GetMask("Ground")));
-        RaycastHit2D headHit = Physics2D.BoxCast(transform.position + Vector3.up * .6f, new Vector2(GetComponent<SpriteRenderer>().sprite.bounds.size.x * .5f, 0.1f), 0, Vector2.up, 0.1f, LayerMask.GetMask("Ground"));
+        RaycastHit2D headHit = Physics2D.BoxCast(transform.position + Vector3.up * (GetComponent<SpriteRenderer>().size.y /2), GetComponent<SpriteRenderer>().size / 4, 0, Vector2.up, 0.1f, LayerMask.GetMask("Ground"));
+
 
         grounded = groundHit.collider != null && !groundHit.collider.isTrigger;
         leftWallHang = leftWallHit.collider != null && !leftWallHit.collider.isTrigger;
         rightWallHang = rightWallHit.collider != null && !rightWallHit.collider.isTrigger;
         checkHead = headHit.collider != null && !headHit.collider.isTrigger;
 
+        //Debug.Log(headHit.collider + " | " + checkHead + " | " + grounded);
 
 
         #region Squish Check
 
-        if(grounded && checkHead || leftWallHang && rightWallHang)
+        if (checkHead)
         {
             Debug.Log("Player is Squished");
             DamagePlayer(currentHealth);
@@ -315,6 +317,7 @@ public class PlayerController : MonoBehaviour
                 }
                 dotCount--;
             }
+            if(dotCount == 1) playerMat.SetColor("_DotColor", dotColorOnDoubleJump);
         }
 
         if (wallJump && motionInput.x < 0 && rb.velocity.x > 0 || wallJump && motionInput.x > 0 && rb.velocity.x < 0)

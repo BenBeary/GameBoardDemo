@@ -23,7 +23,12 @@ public class Door : MonoBehaviour
         startPosition = transform.position;
     }
 
-   
+    private void OnDisable()
+    {
+        StopCoroutine(doorInteract(default));
+        StopAllCoroutines();
+    }
+
     public void InteractWithDoor(bool openDoor)
     {
         if (!doorIsOpen && !openDoor || doorIsOpen && openDoor) return;

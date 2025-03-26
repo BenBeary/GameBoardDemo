@@ -36,7 +36,10 @@ public class ChunkData : MonoBehaviour
     }
 
 
-
+    private void LateUpdate()
+    {
+        isActiveChunk = GameManager.Instance?.activeChunk == this ? true : false;
+    }
 
 
     private void OnDrawGizmos()
@@ -57,14 +60,6 @@ public class ChunkData : MonoBehaviour
 
             GameManager.Instance?.SetActiveChunk(this);
             CameraManager.instance?.TransitionCamera(CameraManager.instance.ClampMovement(CameraManager.instance.transform.position + Vector3.up * 4));
-            isActiveChunk = true;
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            isActiveChunk = false;
         }
     }
 }

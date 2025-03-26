@@ -21,6 +21,9 @@ public class BasicEnemy : MonoBehaviour
     [Space(15)]
     public Transform[] targetPoints;
 
+    [Header("Killed Player")]
+    [SerializeField] Animator anim;
+    [SerializeField] float hideDelay = 1.5f;
 
     [Header("Debug")]
     [SerializeField] bool finishedJump = true;
@@ -33,6 +36,7 @@ public class BasicEnemy : MonoBehaviour
     {
         if (transform.childCount == 0) Debug.LogError("No Child Jump Point on " + gameObject.name);
         jumpPoint = transform.GetChild(0);
+        anim.gameObject.SetActive(false);
     }
 
     private void FixedUpdate()
@@ -102,6 +106,23 @@ public class BasicEnemy : MonoBehaviour
         stopJumpCylce = false;
     }
 
+    IEnumerator playerDeathTrigger()
+    {
+        anim.gameObject.SetActive(true);
 
+        anim.Play("Death");
+
+        yield return new WaitForSeconds(hideDelay);
+
+        anim.gameObject.SetActive(false);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            StartCoroutine(playerDeathTrigger());
+        }
+    }
 }
 

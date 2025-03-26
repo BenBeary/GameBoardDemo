@@ -13,7 +13,7 @@ public class MovingBlock : MonoBehaviour
     Vector2 startPos;
     int currentPos;
     int dir = 1;
-    bool active;
+    [SerializeField] bool active;
 
 
     private void Start()
@@ -40,7 +40,7 @@ public class MovingBlock : MonoBehaviour
             return;
         }
 
-        if(transform.parent.GetComponent<ChunkData>().isActiveChunk && active == false)
+        if(transform.parent.GetComponent<ChunkData>().isActiveChunk && !active)
         {
             active = true;
         }
