@@ -25,6 +25,10 @@ public class BasicEnemy : MonoBehaviour
     [SerializeField] Animator anim;
     [SerializeField] float hideDelay = 1.5f;
 
+    [Header("Background Prop")]
+    [SerializeField] bool killOnDestination;
+
+
     [Header("Debug")]
     [SerializeField] bool finishedJump = true;
     public bool backOnGround;
@@ -53,7 +57,15 @@ public class BasicEnemy : MonoBehaviour
         {
             StartCoroutine(Curve(transform.position, targetPoints[currentTarget].position,timeToJump,jumpHeight));
             currentTarget++;
-            if (currentTarget > targetPoints.Length - 1) currentTarget = 0;
+            if (currentTarget > targetPoints.Length - 1)
+            {
+                if(killOnDestination)
+                {
+                    Destroy(gameObject);
+                    return;
+                }
+                currentTarget = 0;
+            }
         }
         else // Using Jump point instead of target
         {

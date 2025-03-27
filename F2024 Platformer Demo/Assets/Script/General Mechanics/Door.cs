@@ -17,16 +17,18 @@ public class Door : MonoBehaviour
     [SerializeField] bool hideGizmos;
     Vector2 startPosition;
     bool doorIsOpen;
+    bool stayOpen;
 
     private void Start()
     {
         startPosition = transform.position;
+        PlayerController.playerReset += ResetToDefault;
     }
 
     private void OnDisable()
     {
-        StopCoroutine(doorInteract(default));
-        StopAllCoroutines();
+        PlayerController.playerReset -= ResetToDefault;
+        if(applyShake) Camera.main?.GetComponent<CameraShake>()?.CancelShake();
     }
 
     public void InteractWithDoor(bool openDoor)
@@ -39,6 +41,19 @@ public class Door : MonoBehaviour
         doorIsOpen = openDoor;
 
 
+    }
+
+    public void KeepDoorOpen()
+    {
+        stayOpen = true;
+    }
+
+    void ResetToDefault()
+    {
+        if (stayOpen) return;
+        doorIsOpen = false;
+        StopAllCoroutines();
+        transform.position = startPosition;
     }
 
 

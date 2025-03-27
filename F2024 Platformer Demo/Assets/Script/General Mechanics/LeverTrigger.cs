@@ -25,6 +25,12 @@ public class LeverTrigger : MonoBehaviour
     private void Start()
     {
         SetInitialState();
+        PlayerController.playerReset += resetToDefault;
+    }
+
+    private void OnDisable()
+    {
+        PlayerController.playerReset -= resetToDefault;
     }
 
     void SetInitialState()
@@ -37,6 +43,12 @@ public class LeverTrigger : MonoBehaviour
         {
             transform.GetChild(0).transform.localRotation = Quaternion.Euler(0, 0, leverRotation);
         }
+    }
+
+    void resetToDefault()
+    {
+        isActive = false;
+        SetInitialState();
     }
 
 

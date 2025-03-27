@@ -41,5 +41,11 @@ public class CameraShake : MonoBehaviour
             StartCoroutine(Shake(duration, magnitude));
         }
     }
+
+
+    public void CancelShake()
+    {
+        StopAllCoroutines();
+    }
 }
 
