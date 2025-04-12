@@ -24,10 +24,12 @@ public class TutorialUIFiller : MonoBehaviour
         if(Instance == null) Instance = this;
         else Destroy(gameObject);
 
-        CloseTutorial();
     }
 
-
+    private void Start()
+    {
+        CloseTutorial();
+    }
 
     public void OpenTutorial()
     {

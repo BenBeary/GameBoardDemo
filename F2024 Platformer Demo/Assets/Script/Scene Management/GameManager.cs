@@ -196,7 +196,7 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         UnPauseGame();
-        SceneManager.LoadScene("LoadFirst");
+        SceneManager.LoadScene(0);
     }
 
     public void ResetToCheckpoint()

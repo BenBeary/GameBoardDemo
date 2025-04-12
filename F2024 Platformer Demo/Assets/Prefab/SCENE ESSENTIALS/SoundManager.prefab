@@ -52,6 +52,7 @@ MonoBehaviour:
   sfxPoolSize: 3
   musicAudioSource: {fileID: 2088581697656723482}
   audioSourcePrefab: {fileID: 2088581697656723482}
+  songFadeTime: 0.5
 --- !u!1 &7757103955672322408
 GameObject:
   m_ObjectHideFlags: 0
