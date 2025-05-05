@@ -144,6 +144,7 @@ MonoBehaviour:
   - {fileID: 0}
   anim: {fileID: 7091352778429671165}
   hideDelay: 1.5
+  killOnDestination: 0
   finishedJump: 1
   backOnGround: 0
   stopJumpCylce: 0
@@ -206,14 +207,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dots:
-  - {fileID: 1005473492, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
-  - {fileID: 1266182882, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
-  - {fileID: 752097986, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
-  - {fileID: -1439702360, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
-  - {fileID: 1879859249, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
-  - {fileID: 767680840, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
+  - {fileID: -252671194, guid: c9f5870882a2f3642a3d072d9cb86e4d, type: 3}
+  - {fileID: 1842954740, guid: c9f5870882a2f3642a3d072d9cb86e4d, type: 3}
+  - {fileID: -146882061, guid: c9f5870882a2f3642a3d072d9cb86e4d, type: 3}
+  - {fileID: 1483713956, guid: c9f5870882a2f3642a3d072d9cb86e4d, type: 3}
+  - {fileID: -759855899, guid: c9f5870882a2f3642a3d072d9cb86e4d, type: 3}
+  - {fileID: -958849402, guid: c9f5870882a2f3642a3d072d9cb86e4d, type: 3}
   tryToCopyIndex: 0
-  removeInvisible: 0
+  removeInvisible: 1
 --- !u!1 &1244488844373256398
 GameObject:
   m_ObjectHideFlags: 0

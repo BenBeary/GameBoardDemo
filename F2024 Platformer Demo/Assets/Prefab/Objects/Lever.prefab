@@ -184,7 +184,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leverRotation: -45
-  downTimeLength: 1
+  coolDown: 1
+  isActive: 0
   onActive:
     m_PersistentCalls:
       m_Calls: []

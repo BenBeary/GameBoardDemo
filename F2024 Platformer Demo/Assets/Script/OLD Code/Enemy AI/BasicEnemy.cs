@@ -28,9 +28,13 @@ public class BasicEnemy : MonoBehaviour
     [Header("Background Prop")]
     [SerializeField] bool killOnDestination;
 
+    [Header("Extras")]
+    public ColorVarients[] dotColors;
+    [HideInInspector] public ColorVarients colorSelected;
+    public bool colorOnColorViolence;
 
     [Header("Debug")]
-    [SerializeField] bool finishedJump = true;
+    public bool finishedJump = true;
     public bool backOnGround;
     public bool stopJumpCylce;
     public int currentTarget = 0;
@@ -129,12 +133,34 @@ public class BasicEnemy : MonoBehaviour
         anim.gameObject.SetActive(false);
     }
 
+    public void killEnemy()
+    {
+        Destroy(gameObject);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             StartCoroutine(playerDeathTrigger());
         }
+        if (collision.GetComponent<BasicEnemy>() && collision.GetComponent<BasicEnemy>().colorSelected != colorSelected && stopJumpCylce)
+        {
+            collision.GetComponent<BasicEnemy>().killEnemy();
+            StartCoroutine(playerDeathTrigger());
+        }
+    }
+
+
+    [System.Serializable]
+    public enum ColorVarients
+    {
+        Red,
+        Green,
+        Blue,
+        Yellow,
+        White,
+        Black
     }
 }
 

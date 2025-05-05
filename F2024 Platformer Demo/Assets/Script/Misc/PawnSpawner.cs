@@ -30,6 +30,11 @@ public class PawnSpawner : MonoBehaviour
 
         tempData.stopJumpCylce = false;
         temp.GetComponent<DotRandomizer>().RandomizeObject();
+        if(tempData.dotColors.Length > 0 )
+        {
+            tempData.colorSelected = tempData.dotColors[temp.GetComponent<DotRandomizer>().spriteNumber];
+        }
+
         temp.transform.position = transform.position;
 
     }

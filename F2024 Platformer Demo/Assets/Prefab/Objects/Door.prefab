@@ -109,7 +109,8 @@ MonoBehaviour:
   - {fileID: 649555336, guid: 6baec140d3bdaaa48933763e7e4bb7fa, type: 3}
   - {fileID: 1492044245, guid: 6baec140d3bdaaa48933763e7e4bb7fa, type: 3}
   tryToCopyIndex: 0
-  removeInvisible: 0
+  removeInvisible: 1
+  spriteNumber: 0
 --- !u!114 &7647027388577564173
 MonoBehaviour:
   m_ObjectHideFlags: 0

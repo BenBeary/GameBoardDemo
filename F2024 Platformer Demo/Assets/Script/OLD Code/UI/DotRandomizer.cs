@@ -6,13 +6,20 @@ public class DotRandomizer : MonoBehaviour
     [SerializeField] Sprite[] dots;
     [SerializeField] bool tryToCopyIndex;
     [SerializeField] bool removeInvisible;
+    [HideInInspector] public int spriteNumber;
+
     public void RandomizeObject(int index = default)
     {
         int rand = Random.Range(0, dots.Length + 1);
+        spriteNumber = rand;
 
         if (dots.Length != 0)
         {
-            if (removeInvisible) rand = Random.Range(0, dots.Length);
+            if (removeInvisible) 
+            {
+                rand = Random.Range(0, dots.Length);
+                spriteNumber = rand;
+            }
 
 
             if (index != default)
