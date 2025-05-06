@@ -17,7 +17,7 @@ MonoBehaviour:
     - name: Gate Keeper
       icon: {fileID: -958849402, guid: c9f5870882a2f3642a3d072d9cb86e4d, type: 3}
       dialogueStrips:
-      - You may be the last di. But I still don't trust you.
+      - You may be the last die. But I still don't trust you.
       - Be wary of the SORRY pieces ahead.
       - ...
       - They don't play by the same rules.
