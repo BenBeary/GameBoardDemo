@@ -54,7 +54,9 @@ MonoBehaviour:
   dotCount: 1
   maxDots: 3
   speed: 6
-  dotReplenishSpeed: 0.25
+  playerMat: {fileID: 2100000, guid: b9f76048a3692094ab83c63af57b6e84, type: 2}
+  dotColorOnDoubleJump: {r: 0.9150943, g: 0, b: 0.1524462, a: 1}
+  dotReplenishSpeed: 0.15
   jumpForce: 2
   dustPrefab: {fileID: 8534826118363843145, guid: f0d525781b8d03c4dad585bb1f3d21af, type: 3}
   maxVelocity: 12
@@ -74,6 +76,7 @@ MonoBehaviour:
   grounded: 0
   leftWallHang: 0
   rightWallHang: 0
+  checkHead: 0
   doubleJump: 1
   hasInputPaused: 0
   currentMomentum: {x: 0, y: 0}
@@ -97,7 +100,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: b9f76048a3692094ab83c63af57b6e84, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

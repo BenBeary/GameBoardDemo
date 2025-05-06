@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ad4107edbfe5ca45805e4ee7176fa73, type: 3}
+  m_Name: Meeting The Sorry Leader
+  m_EditorClassIdentifier: 
+  EntryData:
+    entries:
+    - name: Leader Pin
+      icon: {fileID: -759855899, guid: c9f5870882a2f3642a3d072d9cb86e4d, type: 3}
+      dialogueStrips:
+      - Testing The Dialogue.
+      - Adding Extra Dialogue to test the auto Continue Feature
+      - Longer text to see the speed working properly. God I hope this works first
+        go that would be sick as hell
+      - The blue Tiles consume the map, they may dissapear into the ether once books
+        are added, but they never trully leave.

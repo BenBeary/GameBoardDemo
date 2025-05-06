@@ -192,6 +192,7 @@ MonoBehaviour:
   dots: []
   tryToCopyIndex: 0
   removeInvisible: 1
+  spriteNumber: 0
 --- !u!1 &2674568060140853809
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,6 +299,7 @@ MonoBehaviour:
   - {fileID: -191582800, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
   tryToCopyIndex: 1
   removeInvisible: 1
+  spriteNumber: 0
 --- !u!1001 &7808150497996966704
 PrefabInstance:
   m_ObjectHideFlags: 0

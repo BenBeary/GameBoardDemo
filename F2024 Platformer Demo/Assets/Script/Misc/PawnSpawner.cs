@@ -14,7 +14,7 @@ public class PawnSpawner : MonoBehaviour
         {
             CancelInvoke();
         }
-        else if (!isSpawning) 
+        else if (turnOn && !isSpawning) 
         {
             isSpawning = true;
             InvokeRepeating("SpawnPawn", 0, spawnSpeed);

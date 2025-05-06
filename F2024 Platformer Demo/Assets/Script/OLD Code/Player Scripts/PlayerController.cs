@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
 
     Animator animMan;
     Rigidbody2D rb;
-    Vector2 motionInput;
+    public Vector2 motionInput;
     float animSpeed;
     int oldDot = 1;
     bool replenishing;
@@ -97,6 +97,7 @@ public class PlayerController : MonoBehaviour
         if (rb.velocity.magnitude > maxVelocity) rb.velocity = rb.velocity.normalized * maxVelocity;
 
         if(!isDying && !hasInputPaused) MovementManager();
+        currentMomentum = motionInput + Vector2.up * rb.velocity.y;
         AnimManager();
     }
 
@@ -349,7 +350,6 @@ public class PlayerController : MonoBehaviour
 
         if (motionInput.x == 0) rb.velocity.Set(0, rb.velocity.y);
 
-        currentMomentum = motionInput + Vector2.up * rb.velocity.y;
     }
 
     IEnumerator DashCooldown() // doesnt WorK ##########################################################################################################
@@ -415,7 +415,7 @@ public class PlayerController : MonoBehaviour
         if (forceDir == default) forceDir = Vector2.up;
         rb.velocity = Vector2.zero;
         rb.AddForce(forceDir * jumpForce * 1000);
-        Debug.Log("Jump! ");
+        // Debug.Log("Jump! ");
     }
 
     private void AnimManager()

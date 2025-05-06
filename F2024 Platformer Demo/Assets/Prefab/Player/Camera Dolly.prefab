@@ -9,7 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3503196926932626579}
+  - component: {fileID: 9080466522062684129}
   - component: {fileID: 8646721458053611723}
+  - component: {fileID: 6025667198011267406}
   - component: {fileID: 5553875274448868007}
   - component: {fileID: 7003495397446951872}
   - component: {fileID: 6993337585227610455}
@@ -35,6 +37,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1093006799059742349}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9080466522062684129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3368749573242805808}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf6975dc4d37ae84e931f13c00e1fa5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8646721458053611723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48,17 +62,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ComponentVersion: 1
-  m_AssetsPPU: 64
-  m_RefResolutionX: 1536
-  m_RefResolutionY: 1024
+  m_AssetsPPU: 32
+  m_RefResolutionX: 768
+  m_RefResolutionY: 512
   m_CropFrame: 4
   m_GridSnapping: 1
-  m_FilterMode: 0
+  m_FilterMode: 1
   m_UpscaleRT: 0
   m_PixelSnapping: 0
   m_CropFrameX: 0
   m_CropFrameY: 0
   m_StretchFill: 0
+--- !u!114 &6025667198011267406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3368749573242805808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef7631758b65dc48be51832feea1421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!20 &5553875274448868007
 Camera:
   m_ObjectHideFlags: 0
@@ -105,7 +131,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
+  m_AllowDynamicResolution: 1
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -175,7 +201,7 @@ GameObject:
   m_Layer: 0
   m_Name: Camera Dolly
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -215,9 +241,10 @@ MonoBehaviour:
   catchUpSpeed: 1
   dynamicSpeed: 1
   useLookAhead: 1
-  lookAheadDistance: {x: 10, y: 6}
-  lookAheadSpeed: 1
-  transitionTime: 0.5
+  lookAheadDistance: {x: 8, y: 4}
+  lookAheadSpeed: 0.75
+  _lookAheadSavedPos: {x: 0, y: 0}
+  transitionTime: 0.25
   transitioning: 0
   targetPosition: {x: 0, y: 0, z: 0}
   lookAheadOffset: {x: 0, y: 0}

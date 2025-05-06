@@ -33,7 +33,7 @@ public class Slider : MonoBehaviour
         int dir = GetComponent<SpriteRenderer>().flipX ? -1 : 1;
 
         Vector2 newPosition = moveVertical ? (Vector2)target.position + Vector2.up * ((GetComponent<SpriteRenderer>().size.x - 1) * dir) :
-                                             (Vector2)target.position + Vector2.right * ((GetComponent<SpriteRenderer>().size.x - .5f) * dir);
+                                             (Vector2)target.position + Vector2.right * ((GetComponent<SpriteRenderer>().size.x - 1f) * dir);
         Vector2 startPosition = target.position;
 
         float time = Time.deltaTime;
