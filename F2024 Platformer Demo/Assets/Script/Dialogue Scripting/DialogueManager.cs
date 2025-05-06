@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
@@ -21,6 +22,9 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] Toggle autoContinueToggle;
     [SerializeField] float autoContinueDelay = 1f;
 
+    [Header("Cutscene Stuff")]
+    [SerializeField] UIMovement topBar;
+    [SerializeField] UIMovement bottomBar;
 
     [Header("Debug")]
     [SerializeField] DialogueData currentDialogue;
@@ -43,6 +47,27 @@ public class DialogueManager : MonoBehaviour
     }
 
 
+    public void MoveBars(bool turnOn)
+    {
+        if (turnOn)
+        {
+            topBar.MoveToTarget();
+            bottomBar.MoveToTarget();
+        }
+        else
+        {
+            topBar.MoveToStart();
+            bottomBar.MoveToStart();
+        }
+    }
+
+    public void CancelDialogue()
+    {
+        StopAllCoroutines();
+        EndDialogue();
+        dialogueIsDone = false;
+    }
+
     /// <summary>
     /// Initializes the dialogue system with a new dialogue dataset.
     /// Resets entry and line positions, and shows the first line.
@@ -52,6 +77,10 @@ public class DialogueManager : MonoBehaviour
     {
         textContainer.MoveToTarget();
         characterIcon.GetComponent<UIMovement>().MoveToTarget();
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(autoContinueToggle.transform.parent.GetChild(0).gameObject);
+        Debug.Log(autoContinueToggle.transform.parent.GetChild(0).gameObject.name + " has been selected");
 
         finishedTyping = false;
         currentDialogue = data;
@@ -101,6 +130,7 @@ public class DialogueManager : MonoBehaviour
     {
         DialogueData.data entry = GetCurrentEntry();
         characterIcon.sprite = entry.icon ? entry.icon : null;
+        characterIcon.color = characterIcon.sprite == null ? Color.clear : Color.white;
 
         if (typingCoroutine != null)
             StopCoroutine(typingCoroutine);
@@ -185,6 +215,9 @@ public class DialogueManager : MonoBehaviour
     {
         Debug.Log("dialogue Complete");
         finishedTyping = true;
+
+        EventSystem.current.SetSelectedGameObject(null);
+
         // Optional: disable UI or call event
         dialogueIsDone = true;
         currentDialogue = null;

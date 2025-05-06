@@ -14,6 +14,11 @@ public class CutscenePlayerMovement : MonoBehaviour
         StartCoroutine(movePlayer());
     }
 
+    public void CancelMovement()
+    {
+        StopAllCoroutines();
+    }
+
     IEnumerator movePlayer()
     {
         yield return new WaitUntil(() => PlayerController.instance.currentMomentum == Vector2.zero);

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ad4107edbfe5ca45805e4ee7176fa73, type: 3}
+  m_Name: Side Quest Guys
+  m_EditorClassIdentifier: 
+  EntryData:
+    entries:
+    - name: Prisoner
+      icon: {fileID: -252671194, guid: c9f5870882a2f3642a3d072d9cb86e4d, type: 3}
+      dialogueStrips:
+      - Help us!
+    - name: Side Quest Guys
+      icon: {fileID: 1842954740, guid: c9f5870882a2f3642a3d072d9cb86e4d, type: 3}
+      dialogueStrips:
+      - This is Start of Side Quest

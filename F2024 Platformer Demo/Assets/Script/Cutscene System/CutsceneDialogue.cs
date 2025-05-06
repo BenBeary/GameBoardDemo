@@ -23,6 +23,12 @@ public class CutsceneDialogue : MonoBehaviour
     }
 
 
+    public void CancelDialogue()
+    {
+        DialogueManager.instance.CancelDialogue();
+        running = false;
+    }
+
     public void runDialogue()
     {
         DialogueManager.instance.TriggerDialogue(dialogueData.EntryData);
