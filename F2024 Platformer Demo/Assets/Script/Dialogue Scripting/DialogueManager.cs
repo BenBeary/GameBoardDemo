@@ -213,7 +213,7 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     void EndDialogue()
     {
-        Debug.Log("dialogue Complete");
+        // Debug.Log("dialogue Complete");
         finishedTyping = true;
 
         EventSystem.current.SetSelectedGameObject(null);

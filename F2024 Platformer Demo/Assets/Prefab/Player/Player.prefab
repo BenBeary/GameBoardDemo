@@ -79,6 +79,7 @@ MonoBehaviour:
   checkHead: 0
   doubleJump: 1
   hasInputPaused: 0
+  motionInput: {x: 0, y: 0}
   currentMomentum: {x: 0, y: 0}
 --- !u!212 &4185716319996758202
 SpriteRenderer:

@@ -26,7 +26,7 @@ public class Slider : MonoBehaviour
 
     IEnumerator movement(Transform target)
     {
-        Debug.Log("Sliding enemy");
+        // Debug.Log("Sliding enemy");
 
         yield return new WaitForSeconds(target.GetComponent<BasicEnemy>().pauseInBetween);
 
