@@ -14,7 +14,7 @@ public class LeverTrigger : MonoBehaviour
     [Header("Lever Settings")]
     [SerializeField] float leverRotation = .1f;
     [SerializeField] float coolDown = 1f;
-    [SerializeField] bool isActive;
+    public bool isActive;
 
     [Space(20)]
     public UnityEvent onActive;
@@ -60,24 +60,28 @@ public class LeverTrigger : MonoBehaviour
         onCooldown = false;
     }
 
+    public void ActivateLever()
+    {
+        StartCoroutine(ChangeDelay());
+        isActive = true;
+        onActive.Invoke();
+        transform.GetChild(0).transform.localRotation = Quaternion.Euler(0, 0, leverRotation);
+    }
+
+    public void DeactivateLever()
+    {
+        StartCoroutine(ChangeDelay());
+        isActive = false;
+        onDeactive.Invoke();
+        transform.GetChild(0).transform.localRotation = Quaternion.Euler(0, 0, -leverRotation);
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (!onCooldown && collision.CompareTag("Player") && Input.GetAxisRaw("Activate") == 1f)
         {
-            if (!isActive)
-            {
-                StartCoroutine(ChangeDelay());
-                isActive = true;
-                onActive.Invoke();
-                transform.GetChild(0).transform.localRotation = Quaternion.Euler(0, 0, leverRotation);
-            }
-            else
-            {
-                StartCoroutine(ChangeDelay());
-                isActive = false;
-                onDeactive.Invoke();
-                transform.GetChild(0).transform.localRotation = Quaternion.Euler(0, 0, -leverRotation);
-            }
+            if (!isActive) ActivateLever();
+            else DeactivateLever();
         }
     }
 

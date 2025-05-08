@@ -9,6 +9,7 @@ public class CameraManager : MonoBehaviour
 
     [Header("Camera Settings")]
     [SerializeField] Camera cam;
+    public Camera CutSceneCamera;
     [Range(0, 100)]
     [SerializeField] int paddingX;
     [Range(0, 100)]
