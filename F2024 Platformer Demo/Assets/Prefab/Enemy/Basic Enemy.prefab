@@ -142,9 +142,13 @@ MonoBehaviour:
   targetPoints:
   - {fileID: 0}
   - {fileID: 0}
+  useAnim: 1
   anim: {fileID: 7091352778429671165}
   hideDelay: 1.5
   killOnDestination: 0
+  dotColors: 
+  colorSelected: 0
+  colorOnColorViolence: 0
   finishedJump: 1
   backOnGround: 0
   stopJumpCylce: 0
@@ -215,6 +219,7 @@ MonoBehaviour:
   - {fileID: -958849402, guid: c9f5870882a2f3642a3d072d9cb86e4d, type: 3}
   tryToCopyIndex: 0
   removeInvisible: 1
+  spriteNumber: 0
 --- !u!1 &1244488844373256398
 GameObject:
   m_ObjectHideFlags: 0

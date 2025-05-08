@@ -22,6 +22,7 @@ public class BasicEnemy : MonoBehaviour
     public Transform[] targetPoints;
 
     [Header("Killed Player")]
+    [SerializeField] bool useAnim;
     [SerializeField] Animator anim;
     [SerializeField] float hideDelay = 1.5f;
 
@@ -124,13 +125,15 @@ public class BasicEnemy : MonoBehaviour
 
     IEnumerator playerDeathTrigger()
     {
-        anim.gameObject.SetActive(true);
-
-        anim.Play("Death");
+        if (useAnim)
+        {
+            anim.gameObject.SetActive(true);
+            anim.Play("Death");
+        }
 
         yield return new WaitForSeconds(hideDelay);
 
-        anim.gameObject.SetActive(false);
+        if(useAnim) anim.gameObject.SetActive(false);
     }
 
     public void killEnemy()

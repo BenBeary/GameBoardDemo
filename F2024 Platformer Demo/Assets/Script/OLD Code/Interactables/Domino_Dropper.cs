@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Domino_Dropper : MonoBehaviour
 {
-
+    [SerializeField] bool vertical;
     [SerializeField] float timeBeforeDrop;
     [SerializeField] float timeAfterDrop;
     [SerializeField] float shakeMagnitude = .5f;
@@ -15,11 +15,9 @@ public class Domino_Dropper : MonoBehaviour
     [SerializeField] GameObject dominoDroppedState;
 
 
-    Transform playerPos;
     private void Start()
     {
         dominoDroppedState.SetActive(false);
-        playerPos = PlayerController.instance.transform;
     }
 
 
@@ -67,13 +65,12 @@ public class Domino_Dropper : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         
-        if(PlayerController.instance.grounded && !triggered && collision.CompareTag("Player") || !triggered && collision.CompareTag("Enemy"))
+        if(PlayerController.instance.grounded && !triggered && collision.CompareTag("Player") || !triggered && collision.CompareTag("Enemy") || vertical && !triggered && collision.CompareTag("Player"))
         {
             Debug.Log("Dropper Triggered");
             triggered = true;
             StartCoroutine(dropper());
         }
-       
     }
 
 }

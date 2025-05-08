@@ -21,7 +21,7 @@ public class Door : MonoBehaviour
 
     private void Start()
     {
-        startPosition = transform.position;
+        startPosition = transform.localPosition;
         PlayerController.playerReset += ResetToDefault;
     }
 
@@ -53,7 +53,7 @@ public class Door : MonoBehaviour
         if (stayOpen) return;
         doorIsOpen = false;
         StopAllCoroutines();
-        transform.position = startPosition;
+        transform.localPosition = startPosition;
     }
 
 
@@ -63,7 +63,7 @@ public class Door : MonoBehaviour
 
         // This should fix the snapping that happens when Lerp gets cancelled early
         float dist = Vector2.Distance(startPosition,openedPosition+startPosition);
-        float curDist = openDoor ? Vector2.Distance(transform.position, openedPosition + startPosition) : Vector2.Distance(transform.position, startPosition);
+        float curDist = openDoor ? Vector2.Distance(transform.localPosition, openedPosition + startPosition) : Vector2.Distance(transform.localPosition, startPosition);
         float distPercent = ( 1 - curDist / dist) * timeToClose;
 
 
@@ -79,11 +79,11 @@ public class Door : MonoBehaviour
             //Debug.Log($"Door has moved {(overallTime * 100).ToString("#.")}%");   
             if (openDoor)
             {
-                transform.position = Vector2.Lerp(startPosition, openedPosition + startPosition, overallTime);
+                transform.localPosition = Vector2.Lerp(startPosition, openedPosition + startPosition, overallTime);
             }
             else
             {
-                transform.position = Vector2.Lerp(startPosition + openedPosition, startPosition, overallTime);
+                transform.localPosition = Vector2.Lerp(startPosition + openedPosition, startPosition, overallTime);
             }
             if(overallTime >= 1f) break;
             yield return null;
