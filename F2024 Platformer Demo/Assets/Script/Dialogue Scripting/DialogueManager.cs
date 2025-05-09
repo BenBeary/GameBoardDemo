@@ -40,7 +40,11 @@ public class DialogueManager : MonoBehaviour
     private void Awake()
     {
         if(instance == null) instance = this;
-        else Destroy(gameObject);
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
 
         DontDestroyOnLoad(gameObject);
 

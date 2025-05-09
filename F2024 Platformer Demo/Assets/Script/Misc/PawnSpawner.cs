@@ -12,6 +12,7 @@ public class PawnSpawner : MonoBehaviour
     {
         if(!turnOn && isSpawning)
         {
+            isSpawning = false;
             CancelInvoke();
         }
         else if (turnOn && !isSpawning) 

@@ -15,7 +15,7 @@ public class LeverTrigger : MonoBehaviour
     [SerializeField] float leverRotation = .1f;
     [SerializeField] float coolDown = 1f;
     public bool isActive;
-
+    bool originalState;
     [Space(20)]
     public UnityEvent onActive;
     public UnityEvent onDeactive;
@@ -24,6 +24,7 @@ public class LeverTrigger : MonoBehaviour
 
     private void Start()
     {
+        originalState = isActive;
         SetInitialState();
         PlayerController.playerReset += resetToDefault;
     }
@@ -38,16 +39,18 @@ public class LeverTrigger : MonoBehaviour
         if (!isActive)
         {
             transform.GetChild(0).transform.localRotation = Quaternion.Euler(0,0, -leverRotation);
+            DeactivateLever();
         }
         else
         {
             transform.GetChild(0).transform.localRotation = Quaternion.Euler(0, 0, leverRotation);
+            ActivateLever();
         }
     }
 
     void resetToDefault()
     {
-        isActive = false;
+        isActive = originalState;
         SetInitialState();
     }
 

@@ -11,8 +11,8 @@ public class LeverEnemy : MonoBehaviour
 
     [Header("Lever Stats")]
     public LeverTrigger lever;
-    float leverPullDelay = 1f;
-    float delayedReaction = 3f;
+    [SerializeField] float leverPullDelay = 1f;
+    [SerializeField] float delayedReaction = 3f;
 
     [Header("Reactions")]
     [SerializeField] Sprite firstIdleSprite;
@@ -21,7 +21,7 @@ public class LeverEnemy : MonoBehaviour
     [SerializeField] Sprite reactDelayFinishSprite;
     [SerializeField] float reactionDurations = 1f;
     [Tooltip("0 = infinite")]
-    [SerializeField] int idleReactionLimit = 3;
+    [SerializeField] int idleReactionEmoteLimit = 3;
     int currentReactions;
 
     bool enemyIsActive;
@@ -106,7 +106,7 @@ public class LeverEnemy : MonoBehaviour
         idling = true;
         if(reaction)
         {
-            if(idleReactionLimit == 0 || idleReactionLimit > currentReactions)
+            if(idleReactionEmoteLimit == 0 || idleReactionEmoteLimit > currentReactions)
             {
                 if(currentReactions == 0 && firstIdleSprite)
                 {

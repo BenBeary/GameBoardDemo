@@ -7,6 +7,7 @@ public class CutsceneCameraFocus : MonoBehaviour
     public Transform target;
     [SerializeField] float moveDuration = 1f;
     public float duration = 5;
+    [SerializeField] bool stackingTargerts;
 
     [Header("Zoom Setting")]
     [SerializeField] bool turnOnZoom;
@@ -18,9 +19,15 @@ public class CutsceneCameraFocus : MonoBehaviour
 
     Camera cam;
 
-    public void TriggerCameraCutscene()
+    private void Start()
     {
         cam = CameraManager.instance.CutSceneCamera;
+        baseZoom = cam.orthographicSize;
+    }
+
+
+    public void TriggerCameraCutscene()
+    {
         cam.gameObject.SetActive(true);
         if (turnOnZoom) ZoomCamera(false);
         PanTo(target.position);
@@ -34,12 +41,11 @@ public class CutsceneCameraFocus : MonoBehaviour
     void ZoomCamera(bool reverseZoom)
     {
 
-        baseZoom = cam.orthographicSize;
 
         float targetSize = baseZoom;
         
         if(!reverseZoom) targetSize /= targetZoom;
-        else targetSize *= targetZoom;
+        else targetSize = baseZoom;
 
         LeanTween.value(gameObject, cam.orthographicSize, targetSize, zoomSpeed)
             .setEase(LeanTweenType.easeOutQuad)
@@ -70,8 +76,17 @@ public class CutsceneCameraFocus : MonoBehaviour
 
     void revertBackToPlayer()
     {
-        if (turnOnZoom) ZoomCamera(true);
-        PanTo(CameraManager.instance.transform.position, true);
+        if (!stackingTargerts && turnOnZoom) ZoomCamera(true);
+        if(!stackingTargerts) PanTo(CameraManager.instance.transform.position, true);
+        else
+        {
+            Invoke(nameof(invokeFinished),moveDuration);
+        }
+    }
+
+    void invokeFinished()
+    {
+        onFinished.Invoke();
     }
 
 
