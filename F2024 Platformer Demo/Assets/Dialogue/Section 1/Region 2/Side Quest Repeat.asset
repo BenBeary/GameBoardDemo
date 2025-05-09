@@ -10,16 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ad4107edbfe5ca45805e4ee7176fa73, type: 3}
-  m_Name: Side Quest Guys Complete
+  m_Name: Side Quest Repeat
   m_EditorClassIdentifier: 
   EntryData:
     entries:
     - name: Green Pin 1
       icon: {fileID: 1842954740, guid: c9f5870882a2f3642a3d072d9cb86e4d, type: 3}
       dialogueStrips:
-      - Thanks for that!
-    - name: Green Pin 2
-      icon: {fileID: 1842954740, guid: c9f5870882a2f3642a3d072d9cb86e4d, type: 3}
-      dialogueStrips:
-      - I'm glad we could reach an agreement.
-      - Now for our side of the deal...
+      - If you want your reward, you're gonna need to find that item!

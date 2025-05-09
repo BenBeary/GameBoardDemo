@@ -81,6 +81,12 @@ public class BasicEnemy : MonoBehaviour
         finishedJump = false;
     }
 
+    public void turnOnPathing()
+    {
+        stopJumpCylce = false;
+    }
+
+
     public IEnumerator Curve(Vector2 start, Vector2 target, float timeToJump, float jumpHeight)
     {
         float timePassed = 0f;

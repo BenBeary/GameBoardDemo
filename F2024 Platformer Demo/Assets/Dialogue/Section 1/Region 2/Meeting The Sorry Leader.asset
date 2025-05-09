@@ -17,9 +17,10 @@ MonoBehaviour:
     - name: Leader Pin
       icon: {fileID: -759855899, guid: c9f5870882a2f3642a3d072d9cb86e4d, type: 3}
       dialogueStrips:
-      - Testing The Dialogue.
-      - Adding Extra Dialogue to test the auto Continue Feature
-      - Longer text to see the speed working properly. God I hope this works first
-        go that would be sick as hell
-      - The blue Tiles consume the map, they may dissapear into the ether once books
-        are added, but they never trully leave.
+      - So the rumors are true, the Savior has returned!
+      - "But you\u2019re too late. Chaos grips the shelf."
+      - The Two Kings battle for control of the entire bookshelf.
+      - "I want to believe you're the one\u2026 but I can\u2019t let you through."
+      - Not until you prove yourself worthy. Face the trials ahead. Show me you're
+        ready.
+      - Only then will the seal be broken!

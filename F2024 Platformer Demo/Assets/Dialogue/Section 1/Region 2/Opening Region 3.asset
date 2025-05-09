@@ -17,7 +17,8 @@ MonoBehaviour:
     - name: Leader
       icon: {fileID: -759855899, guid: c9f5870882a2f3642a3d072d9cb86e4d, type: 3}
       dialogueStrips:
-      - "You\u2019ve proven yourself worthy."
+      - "You\u2019ve proven yourself worthy. You have brought hope back into my eyes
+        that there is still a future!"
       - As promised, the seal to the higher levels is now open.
       - Only you can restore balance to the shelf.
       - ' I wish I could help more, but this is your path now.'

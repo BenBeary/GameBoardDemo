@@ -257,7 +257,7 @@ TextureImporter:
         width: 24
         height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -265,6 +265,69 @@ TextureImporter:
       bones: []
       spriteID: 555965ce02cee8d4ab3889ebbcf4e489
       internalID: 61968144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dialogue_Emotes_7
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 40
+        width: 17
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfc69628039d38a40b64ad20e133bb74
+      internalID: -2060147009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dialogue_Emotes_8
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 18
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5aee10b63b59fb4cbc1556e92c09e9b
+      internalID: 385728188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dialogue_Emotes_9
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 1
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c30909ef55f75e542958f0acda592e36
+      internalID: 1653404294
       vertices: []
       indices: 
       edges: []
@@ -287,6 +350,9 @@ TextureImporter:
       Dialogue_Emotes_4: -1111682597
       Dialogue_Emotes_5: -1735899093
       Dialogue_Emotes_6: 61968144
+      Dialogue_Emotes_7: -2060147009
+      Dialogue_Emotes_8: 385728188
+      Dialogue_Emotes_9: 1653404294
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

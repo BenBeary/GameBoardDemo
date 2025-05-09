@@ -17,8 +17,19 @@ MonoBehaviour:
     - name: Prisoner
       icon: {fileID: -252671194, guid: c9f5870882a2f3642a3d072d9cb86e4d, type: 3}
       dialogueStrips:
-      - Help us!
-    - name: Side Quest Guys
+      - "Help us! We\u2019ve done nothing wrong!"
+    - name: Green Pin 1
       icon: {fileID: 1842954740, guid: c9f5870882a2f3642a3d072d9cb86e4d, type: 3}
       dialogueStrips:
-      - This is Start of Side Quest
+      - Shut it, bluey!
+      - "\u2026"
+      - What are you looking at? Mind your own business, false prophet!
+    - name: Green Pin 2
+      icon: {fileID: 1842954740, guid: c9f5870882a2f3642a3d072d9cb86e4d, type: 3}
+      dialogueStrips:
+      - Easy now, this one could be useful.
+      - Do you want to see this filth get freed?
+      - "Tell you what, you bring us something we need, and we\u2019ll make it worth
+        your while."
+      - "A little boost for you\u2026 and maybe we let these pieces of garbage go."
+      - Whadda you say?
