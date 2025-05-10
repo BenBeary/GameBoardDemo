@@ -15,6 +15,7 @@ public class ReactionSpawner : MonoBehaviour
         GameObject newReaction = new GameObject("reaction");
         SpriteRenderer sr = newReaction.AddComponent<SpriteRenderer>();
         sr.sprite = sprite;
+        sr.sortingOrder = 5;
 
         newReaction.transform.position = (Vector2)transform.position + Vector2.up * spriteRenderer.size.y/2;
         Vector3 targetPosition = (Vector2)newReaction.transform.position + spriteRenderer.size + new Vector2(Random.Range(-.5f,.2f), Random.Range(-.2f, .2f));
