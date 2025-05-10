@@ -108,3 +108,4 @@ MonoBehaviour:
   - {fileID: 1492044245, guid: 6baec140d3bdaaa48933763e7e4bb7fa, type: 3}
   tryToCopyIndex: 0
   removeInvisible: 1
+  spriteNumber: 0
