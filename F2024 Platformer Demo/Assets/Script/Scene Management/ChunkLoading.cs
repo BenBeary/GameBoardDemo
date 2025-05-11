@@ -50,6 +50,8 @@ public class ChunkLoading : MonoBehaviour
             yield return null;
         }
 
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(loadScene.SceneName));
+
         count *= 100f;
         count = Mathf.Round(count) / 100f;
 

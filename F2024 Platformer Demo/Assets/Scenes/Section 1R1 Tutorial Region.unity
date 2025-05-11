@@ -105951,18 +105951,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
-    - target: {fileID: 9082077101577328376, guid: 87f361821709d5a4d818c4a2826a8672, type: 3}
-      propertyPath: sfxPoolSize
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9082077101577328376, guid: 87f361821709d5a4d818c4a2826a8672, type: 3}
-      propertyPath: songFadeTime
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9082077101577328376, guid: 87f361821709d5a4d818c4a2826a8672, type: 3}
-      propertyPath: startingMusicVolume
-      value: 12.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -106164,11 +106152,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5553875274448868007, guid: 76556ed1df1e2f64eac098b6af8b1715, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 1
+      value: 0.5045992
       objectReference: {fileID: 0}
     - target: {fileID: 5553875274448868007, guid: 76556ed1df1e2f64eac098b6af8b1715, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 1
+      value: 0.5577342
       objectReference: {fileID: 0}
     - target: {fileID: 7829439527335277255, guid: 76556ed1df1e2f64eac098b6af8b1715, type: 3}
       propertyPath: m_IsActive

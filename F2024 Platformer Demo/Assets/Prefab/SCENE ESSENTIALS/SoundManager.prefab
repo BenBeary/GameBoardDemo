@@ -48,11 +48,11 @@ MonoBehaviour:
   sounds: {fileID: 11400000, guid: 4afadee925459d44e8c3f7cbea4efb80, type: 2}
   startingMasterVolume: 100
   startingSfxVolume: 100
-  startingMusicVolume: 100
-  sfxPoolSize: 3
+  startingMusicVolume: 12.5
+  sfxPoolSize: 5
   musicAudioSource: {fileID: 2088581697656723482}
   audioSourcePrefab: {fileID: 2088581697656723482}
-  songFadeTime: 0.5
+  songFadeTime: 2
 --- !u!1 &7757103955672322408
 GameObject:
   m_ObjectHideFlags: 0
