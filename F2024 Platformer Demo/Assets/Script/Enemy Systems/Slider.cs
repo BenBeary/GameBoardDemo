@@ -33,7 +33,6 @@ public class Slider : MonoBehaviour
 
         PlayerController.instance.doubleJump = true;
         PlayerController.instance.sliding = true;
-        PlayerController.instance.slidesLeft--;
         PlayerController.instance.FreezePlayer();
         // ########################
 
@@ -59,6 +58,7 @@ public class Slider : MonoBehaviour
         yield return new WaitForSeconds(.1f);
 
         // ########################
+        PlayerController.instance.slidesLeft--;
         PlayerController.instance.sliding = false;
         PlayerController.instance.UnFreezePlayer();
         PlayerController.instance.ClearPlayerMomentum();   

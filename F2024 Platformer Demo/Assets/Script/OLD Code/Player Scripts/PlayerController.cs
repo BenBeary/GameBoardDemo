@@ -156,6 +156,7 @@ public class PlayerController : MonoBehaviour
         transform.position = checkPoint.position;
         currentHealth = Maxhealth;
         currentSlideColor = BasicEnemy.ColorVarients.White;
+        PlayerSlideColorChange.currentlySelected = null;
         playerReset?.Invoke();
     }
 
@@ -237,9 +238,9 @@ public class PlayerController : MonoBehaviour
         
 
         // Raycasts for ground / Wall Movements
-        RaycastHit2D groundHit = Physics2D.BoxCast(transform.position, new Vector2(GetComponent<SpriteRenderer>().sprite.bounds.size.x * .8f, 0.1f), 0,Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
-        RaycastHit2D leftWallHit = (Physics2D.Raycast(transform.position + (Vector3.left * 0.35f) + Vector3.up * .2f, Vector2.left, .1f, LayerMask.GetMask("Ground")));
-        RaycastHit2D rightWallHit = (Physics2D.Raycast(transform.position + (Vector3.right * 0.35f) + Vector3.up * .2f, Vector2.right, .1f, LayerMask.GetMask("Ground")));
+        RaycastHit2D groundHit = Physics2D.BoxCast(transform.position, new Vector2(GetComponent<SpriteRenderer>().sprite.bounds.size.x * .8f, 0.1f), 0,Vector2.down, 0.1f, LayerMask.GetMask("Ground", "Wall"));
+        RaycastHit2D leftWallHit = (Physics2D.Raycast(transform.position + (Vector3.left * 0.35f) + Vector3.up * .2f, Vector2.left, .1f, LayerMask.GetMask("Ground", "Wall")));
+        RaycastHit2D rightWallHit = (Physics2D.Raycast(transform.position + (Vector3.right * 0.35f) + Vector3.up * .2f, Vector2.right, .1f, LayerMask.GetMask("Ground", "Wall")));
         RaycastHit2D headHit = Physics2D.BoxCast(transform.position + Vector3.up * (GetComponent<SpriteRenderer>().size.y /2), GetComponent<SpriteRenderer>().size / 4, 0, Vector2.up, 0.1f, LayerMask.GetMask("Ground"));
 
 
