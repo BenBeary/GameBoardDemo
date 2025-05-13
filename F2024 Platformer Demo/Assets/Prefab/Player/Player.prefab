@@ -60,11 +60,10 @@ MonoBehaviour:
   jumpForce: 2
   dustPrefab: {fileID: 8534826118363843145, guid: f0d525781b8d03c4dad585bb1f3d21af, type: 3}
   maxVelocity: 12
-  canDash: 0
-  dashLength: 4
-  dashCDTime: 1
-  dashCD: 0
-  dashLocked: 0
+  currentSlideColor: 4
+  skinColorSwatch: {fileID: 11400000, guid: 0b9989bed6de405458e2524ecdf24bef, type: 2}
+  slidesLeft: 0
+  sliding: 0
   wallSlideSpeed: 5
   wallSlideSlow: 2.5
   wallJumpCD: 0.35

@@ -28,13 +28,11 @@ public class PlayerController : MonoBehaviour
     public float maxVelocity = 10f;
 
 
-
-    [Header("Dash Settings")]
-    public bool canDash;
-    public float dashLength = 4f;
-    public float dashCDTime = 1f;
-    [SerializeField] bool dashCD;
-    [SerializeField] bool dashLocked;
+    [Header("Sliding (Debug)")]
+    public BasicEnemy.ColorVarients currentSlideColor = BasicEnemy.ColorVarients.White; // White = none
+    [SerializeField] SkinColorSwatches skinColorSwatch;
+    public int slidesLeft;
+    public bool sliding;
 
 
     [Header("Wall Slide")]
@@ -99,11 +97,14 @@ public class PlayerController : MonoBehaviour
         if(!isDying && !hasInputPaused) MovementManager();
         currentMomentum = motionInput + Vector2.up * rb.velocity.y;
         AnimManager();
+        BaseColorChanger();
     }
 
     private void OnDisable()
     {
         playerMat.SetColor("_DotColor", baseDotColor);
+        currentSlideColor = BasicEnemy.ColorVarients.White;
+        BaseColorChanger();
     }
 
     public void DamagePlayer(int damage)
@@ -154,6 +155,7 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = checkPoint.position;
         currentHealth = Maxhealth;
+        currentSlideColor = BasicEnemy.ColorVarients.White;
         playerReset?.Invoke();
     }
 
@@ -186,6 +188,35 @@ public class PlayerController : MonoBehaviour
 
 
         dustSpawnCD = false;
+    }
+
+    void BaseColorChanger()
+    {
+        if(slidesLeft == 0) currentSlideColor = BasicEnemy.ColorVarients.White;
+
+        switch (currentSlideColor)
+        {
+            case BasicEnemy.ColorVarients.Red:
+                playerMat.SetColor("_MainColor", skinColorSwatch.colorSwatches[0].mainColor);
+                playerMat.SetColor("_OutlineColor", skinColorSwatch.colorSwatches[0].outlineColor);
+                break;
+            case BasicEnemy.ColorVarients.Green:
+                playerMat.SetColor("_MainColor", skinColorSwatch.colorSwatches[1].mainColor);
+                playerMat.SetColor("_OutlineColor", skinColorSwatch.colorSwatches[1].outlineColor);
+                break;
+            case BasicEnemy.ColorVarients.Blue:
+                playerMat.SetColor("_MainColor", skinColorSwatch.colorSwatches[2].mainColor);
+                playerMat.SetColor("_OutlineColor", skinColorSwatch.colorSwatches[2].outlineColor);
+                break;
+            case BasicEnemy.ColorVarients.Yellow:
+                playerMat.SetColor("_MainColor", skinColorSwatch.colorSwatches[3].mainColor);
+                playerMat.SetColor("_OutlineColor", skinColorSwatch.colorSwatches[3].outlineColor);
+                break;
+            default:
+                playerMat.SetColor("_MainColor", skinColorSwatch.colorSwatches[4].mainColor);
+                playerMat.SetColor("_OutlineColor", skinColorSwatch.colorSwatches[4].outlineColor);
+                break;
+        }
     }
 
 
@@ -231,11 +262,19 @@ public class PlayerController : MonoBehaviour
         #endregion
 
         #region Jumping
-        if (grounded) 
+
+        if(doubleJump && dotCount > 1)
         {
             playerMat.SetColor("_DotColor", baseDotColor);
+        }
+        else
+        {
+            playerMat.SetColor("_DotColor", dotColorOnDoubleJump);
+        }
+
+        if (grounded) 
+        {
             doubleJump = true;
-            dashLocked = false;
             if (!landed)
             {
                 landed = true;
@@ -268,7 +307,6 @@ public class PlayerController : MonoBehaviour
             JumpCall();
             doubleJump = false;
             dotCount--;
-            playerMat.SetColor("_DotColor", dotColorOnDoubleJump);
         }
         if (hasJumped && rb.velocity.y == 0) // ADD COYOTE TIME HERE
         {
@@ -333,38 +371,10 @@ public class PlayerController : MonoBehaviour
 
 
 
-        #region Dashing
-
-        if (canDash && !dashCD && !dashLocked && Input.GetKeyDown(KeyCode.LeftShift))
-        {
-
-            StartCoroutine(DashCooldown());
-            dashLocked = true;
-        }
-
-        #endregion
-
-
-
         transform.Translate(motionInput * speed * Time.deltaTime);
 
         if (motionInput.x == 0) rb.velocity.Set(0, rb.velocity.y);
 
-    }
-
-    IEnumerator DashCooldown() // doesnt WorK ##########################################################################################################
-    {
-        dashCD = true;
-        float timePassed = Time.deltaTime;
-
-        while (timePassed < dashCDTime)
-        {
-            rb.velocity.Set(dashLength, rb.velocity.y);
-            timePassed += Time.deltaTime;
-            yield return null;
-        }
-        rb.velocity.Set(1, rb.velocity.y);
-        dashCD = false;
     }
 
     IEnumerator wallJumpVelocityCooldown() // cant stop jumping away from wall
@@ -394,7 +404,10 @@ public class PlayerController : MonoBehaviour
         hasInputPaused = true;
         storedVelocity = rb.velocity;
         storedForce = rb.totalForce;
-        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+
+        rb.velocity = Vector2.zero;
+        rb.totalForce = Vector2.zero;
+        rb.gravityScale = 0;
         animMan.enabled = false;
         
     }
@@ -402,13 +415,19 @@ public class PlayerController : MonoBehaviour
     public void UnFreezePlayer()
     {
         hasInputPaused = false;
-        rb.constraints = RigidbodyConstraints2D.None;
-        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        rb.gravityScale = 2f;
         rb.velocity = storedVelocity;
         rb.totalForce = storedForce;
         animMan.enabled = true;
        
     }
+
+    public void ClearPlayerMomentum()
+    {
+        rb.velocity = Vector2.zero;
+        rb.totalForce = Vector2.zero;
+    }
+
 
     public void JumpCall(Vector2 forceDir = default)
     {

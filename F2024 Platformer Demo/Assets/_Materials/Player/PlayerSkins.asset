@@ -13,15 +13,21 @@ MonoBehaviour:
   m_Name: PlayerSkins
   m_EditorClassIdentifier: 
   colorSwatches:
+  - mainColor: {r: 0.8018868, g: 0.29449823, b: 0.26099145, a: 1}
+    outlineColor: {r: 0.3490566, g: 0.09453616, b: 0.08726415, a: 1}
+    dotColor: {r: 0, g: 0, b: 0, a: 1}
+  - mainColor: {r: 0.3949635, g: 0.7735849, b: 0.20069422, a: 1}
+    outlineColor: {r: 0.10524209, g: 0.4056604, b: 0.18734232, a: 1}
+    dotColor: {r: 0, g: 0, b: 0, a: 1}
+  - mainColor: {r: 0.15881987, g: 0.3825372, b: 0.7830189, a: 1}
+    outlineColor: {r: 0.08517267, g: 0.18957865, b: 0.5471698, a: 1}
+    dotColor: {r: 0, g: 0, b: 0, a: 1}
+  - mainColor: {r: 0.9150943, g: 0.80416226, b: 0.14244394, a: 1}
+    outlineColor: {r: 0.5377358, g: 0.42415935, b: 0.17501779, a: 1}
+    dotColor: {r: 0, g: 0, b: 0, a: 1}
   - mainColor: {r: 0.9254902, g: 0.9254902, b: 0.9254902, a: 1}
     outlineColor: {r: 0.63529414, g: 0.63529414, b: 0.63529414, a: 1}
     dotColor: {r: 0, g: 0, b: 0, a: 1}
   - mainColor: {r: 0, g: 0, b: 0, a: 1}
     outlineColor: {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 1}
     dotColor: {r: 1, g: 1, b: 1, a: 1}
-  - mainColor: {r: 0, g: 0.31764707, b: 0.8862745, a: 1}
-    outlineColor: {r: 0, g: 0.15686275, b: 0.69411767, a: 1}
-    dotColor: {r: 1, g: 1, b: 1, a: 1}
-  - mainColor: {r: 0.8862745, g: 0.05554723, b: 0, a: 1}
-    outlineColor: {r: 0.5660378, g: 0.01750086, b: 0, a: 1}
-    dotColor: {r: 0, g: 0, b: 0, a: 1}

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEditor;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class ChunkData : MonoBehaviour
@@ -57,6 +56,8 @@ public class ChunkData : MonoBehaviour
         {
             if (GameManager.Instance && GameManager.Instance.activeChunk == this) return;
 
+            PlayerController.instance.currentSlideColor = BasicEnemy.ColorVarients.White;
+            PlayerSlideColorChange.currentlySelected = null;
 
             GameManager.Instance?.SetActiveChunk(this);
             CameraManager.instance?.TransitionCamera(CameraManager.instance.ClampMovement(CameraManager.instance.transform.position + Vector3.up * 4));

@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Section 1R1 Tutorial Region.unity
     guid: e28b4029cacd9ca44ab9c35e4c8e11bd
   - enabled: 1
-    path: Assets/Scenes/Section1R2 It Begins.unity
+    path: Assets/Scenes/Section 1R2 It Begins.unity
     guid: 2d04b704779fa144b806043b84e9974c
+  - enabled: 1
+    path: Assets/Scenes/Section 1R3 Chaos.unity
+    guid: 479e1918b82d0ac4493e4a36687d7d7b
   m_configObjects: {}

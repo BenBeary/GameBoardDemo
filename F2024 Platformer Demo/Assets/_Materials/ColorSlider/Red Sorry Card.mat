@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerSkin
+  m_Name: Red Sorry Card
   m_Shader: {fileID: -6465566751694194690, guid: e0d8efad936b361429016010e350c66e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -24,7 +24,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 07ad20217e04f9d439cff362ba077efe, type: 3}
+        m_Texture: {fileID: 2800000, guid: c9f5870882a2f3642a3d072d9cb86e4d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -42,14 +42,14 @@ Material:
     m_Ints: []
     m_Floats: []
     m_Colors:
-    - _DotColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MainColor: {r: 0.9254902, g: 0.9254902, b: 0.9254902, a: 1}
-    - _OG_Base: {r: 0.9254903, g: 0.9254903, b: 0.9254903, a: 1}
-    - _OG_Dot: {r: 0, g: 0, b: 0, a: 1}
-    - _OG_Outline: {r: 0.635294, g: 0.635294, b: 0.635294, a: 1}
-    - _OutlineColor: {r: 0.63529414, g: 0.63529414, b: 0.63529414, a: 1}
+    - _DotColor: {r: 0.735849, g: 0.18396226, b: 0.18396226, a: 1}
+    - _MainColor: {r: 0.9019608, g: 0.40735963, b: 0.372549, a: 1}
+    - _OG_Base: {r: 0.6, g: 0.90196085, b: 0.37254903, a: 1}
+    - _OG_Dot: {r: 0.07450981, g: 0.29803923, b: 0.29411766, a: 1}
+    - _OG_Outline: {r: 0.04705883, g: 0.18039216, b: 0.26666668, a: 1}
+    - _OutlineColor: {r: 0.34905657, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &6200017582081568375
+--- !u!114 &4476999241916649278
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
