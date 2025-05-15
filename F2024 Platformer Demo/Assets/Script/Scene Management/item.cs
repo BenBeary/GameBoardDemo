@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class item : MonoBehaviour
 {
+    [SerializeField] float bobIntensity;
+    [SerializeField] float bobFrequency;
+
 
     [SerializeField] RegionController region;
     [SerializeField] SpriteRenderer sprite;
@@ -33,6 +36,10 @@ public class item : MonoBehaviour
             Destroy(gameObject);
         }
 
+    }
+    private void FixedUpdate()
+    {
+        transform.Translate(Vector3.up * Mathf.Cos(Time.time * bobFrequency) * bobIntensity);
     }
 
 

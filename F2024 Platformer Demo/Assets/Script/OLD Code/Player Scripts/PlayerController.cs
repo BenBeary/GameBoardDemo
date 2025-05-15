@@ -519,6 +519,7 @@ public class PlayerController : MonoBehaviour
         }
         if (collision.CompareTag("DeathBoxes"))
         {
+            if(collision.GetComponent<BasicEnemy>() && collision.GetComponent<BasicEnemy>().colorSelected == currentSlideColor) return;
             DamagePlayer(currentHealth);
         }
     }

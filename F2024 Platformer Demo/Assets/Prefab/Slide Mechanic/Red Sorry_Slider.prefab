@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4509767532126515412}
   - component: {fileID: 3007941972352771514}
   m_Layer: 0
-  m_Name: Sorry_Slider
+  m_Name: Red Sorry_Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 687bde9c253095444875b507565f9ddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bobIntensity: 0.005
+  bobFrequency: 1
   region: {fileID: 0}
   sprite: {fileID: 7750255207722137534}
 --- !u!61 &2521420768418664844
