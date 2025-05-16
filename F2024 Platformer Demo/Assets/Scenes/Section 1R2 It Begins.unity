@@ -739,7 +739,7 @@ Transform:
   m_GameObject: {fileID: 13160080}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.35, y: -4.7299995, z: 1.1392173}
+  m_LocalPosition: {x: 108.75, y: 39.375, z: 1.1392173}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -30399,7 +30399,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: -5
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.023529412, g: 0.015686275, b: 0.047058824, a: 1}
+  m_Color: {r: 0.09019608, g: 0.09803922, b: 0.14117648, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -31918,7 +31918,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: -5
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.023529412, g: 0.015686275, b: 0.047058824, a: 1}
+  m_Color: {r: 0.09019608, g: 0.09803922, b: 0.14117648, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -85241,7 +85241,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6346192418758519649, guid: 0c4d32d7ee237364a9b0cfc5cc5fabf9, type: 3}
       propertyPath: requiredItemToPlay
-      value: SideQuestItemRegion2
+      value: Collectable5
       objectReference: {fileID: 0}
     - target: {fileID: 6346192418758519649, guid: 0c4d32d7ee237364a9b0cfc5cc5fabf9, type: 3}
       propertyPath: turnOnCutsceneBars
@@ -107623,11 +107623,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5553875274448868007, guid: 76556ed1df1e2f64eac098b6af8b1715, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 1
+      value: 0.520678
       objectReference: {fileID: 0}
     - target: {fileID: 5553875274448868007, guid: 76556ed1df1e2f64eac098b6af8b1715, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 1
+      value: 0.5577342
       objectReference: {fileID: 0}
     - target: {fileID: 7829439527335277255, guid: 76556ed1df1e2f64eac098b6af8b1715, type: 3}
       propertyPath: m_IsActive
@@ -110510,7 +110510,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: -5
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.023529412, g: 0.015686275, b: 0.047058824, a: 1}
+  m_Color: {r: 0.09019608, g: 0.09803922, b: 0.14117648, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -112735,7 +112735,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: -5
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.023529412, g: 0.015686275, b: 0.047058824, a: 1}
+  m_Color: {r: 0.09019608, g: 0.09803922, b: 0.14117648, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -157,6 +157,7 @@ public class PlayerController : MonoBehaviour
         currentHealth = Maxhealth;
         currentSlideColor = BasicEnemy.ColorVarients.White;
         PlayerSlideColorChange.currentlySelected = null;
+        CameraManager.instance.TransitionCamera(CameraManager.instance.ClampMovement(transform.position));
         playerReset?.Invoke();
     }
 
