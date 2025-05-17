@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ad4107edbfe5ca45805e4ee7176fa73, type: 3}
+  m_Name: Boss Dialogue
+  m_EditorClassIdentifier: 
+  EntryData:
+    entries:
+    - name: Black Knight
+      icon: {fileID: -1332059373, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
+      dialogueStrips:
+      - asd
