@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Section 1R3 Chaos.unity
     guid: 479e1918b82d0ac4493e4a36687d7d7b
+  - enabled: 1
+    path: Assets/Scenes/Section 1R4 Boss.unity
+    guid: 92aeab99aa646d24b916add112d7a46a
   m_configObjects: {}

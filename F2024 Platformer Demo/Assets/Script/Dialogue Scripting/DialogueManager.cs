@@ -220,7 +220,7 @@ public class DialogueManager : MonoBehaviour
         // Debug.Log("dialogue Complete");
         finishedTyping = true;
 
-        EventSystem.current.SetSelectedGameObject(null);
+        if(EventSystem.current) EventSystem.current.SetSelectedGameObject(null);
 
         // Optional: disable UI or call event
         dialogueIsDone = true;

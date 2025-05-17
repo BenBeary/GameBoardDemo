@@ -95,7 +95,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.08899963, g: 0.09803791, b: 0.14150941, a: 1}
+  m_BackGroundColor: {r: 0.13725491, g: 0.16862746, b: 0.24313727, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -113,9 +113,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
-    width: 1
-    height: 1
+    y: 0.021786492
+    width: 0.48250732
+    height: 0.48075527
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -314,9 +314,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
-    width: 1
-    height: 1
+    y: 0.021786492
+    width: 0.48250732
+    height: 0.48075527
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 92.8

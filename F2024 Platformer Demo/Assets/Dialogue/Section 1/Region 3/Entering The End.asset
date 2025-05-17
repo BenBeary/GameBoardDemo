@@ -10,15 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ad4107edbfe5ca45805e4ee7176fa73, type: 3}
-  m_Name: Introducing Slide
+  m_Name: Entering The End
   m_EditorClassIdentifier: 
   EntryData:
     entries:
-    - name: Sowwy Yellow Pin 2
-      icon: {fileID: -146882061, guid: c9f5870882a2f3642a3d072d9cb86e4d, type: 3}
+    - name: Sowwy Red Pin 4
+      icon: {fileID: 1483713956, guid: c9f5870882a2f3642a3d072d9cb86e4d, type: 3}
       dialogueStrips:
-      - Hey! Careful - this path has been filled with traps to deal with the Chess
-        invasion.
-      - You'll need to use those sliders to move around.
-      - This item should allow you to move with the sliders. Just remember, the power
-        is limited.
+      - The chosen one has made it!
+      - The Black Knight is further ahead!
+      - I can help you, but you are gonna need to move that book by yourself.
+      - Good Luck! We Sowwy pieces are rooting for you!
