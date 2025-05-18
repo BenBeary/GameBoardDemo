@@ -31,7 +31,7 @@ public class CutsceneCameraFocus : MonoBehaviour
         cam.gameObject.SetActive(true);
         if (turnOnZoom) ZoomCamera(false);
         PanTo(target.position);
-
+        cam.gameObject.SetActive(true);
 
         Invoke(nameof(revertBackToPlayer), duration-moveDuration);
 
@@ -87,6 +87,7 @@ public class CutsceneCameraFocus : MonoBehaviour
     void invokeFinished()
     {
         onFinished.Invoke();
+        cam.gameObject.SetActive(false);
     }
 
 

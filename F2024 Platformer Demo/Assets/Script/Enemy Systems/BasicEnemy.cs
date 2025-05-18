@@ -28,11 +28,17 @@ public class BasicEnemy : MonoBehaviour
 
     [Header("Background Prop")]
     [SerializeField] bool killOnDestination;
+    public bool dontLoopMovement;
 
     [Header("Extras")]
     public ColorVarients[] dotColors;
     [HideInInspector] public ColorVarients colorSelected;
     public bool colorOnColorViolence;
+
+    [Header("Camera Shake")]
+    [SerializeField] bool shakeCamera;
+    [SerializeField] float magnitude = 0.9f;
+    [SerializeField] float duration = 0.25f;
 
     [Header("Debug")]
     public bool finishedJump = true;
@@ -45,7 +51,7 @@ public class BasicEnemy : MonoBehaviour
     {
         if (transform.childCount == 0) Debug.LogError("No Child Jump Point on " + gameObject.name);
         jumpPoint = transform.GetChild(0);
-        anim.gameObject.SetActive(false);
+        if(anim) anim.gameObject.SetActive(false);
     }
 
     private void FixedUpdate()
@@ -70,6 +76,7 @@ public class BasicEnemy : MonoBehaviour
                     return;
                 }
                 currentTarget = 0;
+                if (dontLoopMovement) stopJumpCylce = true;
             }
         }
         else // Using Jump point instead of target
@@ -86,6 +93,13 @@ public class BasicEnemy : MonoBehaviour
         stopJumpCylce = false;
     }
 
+    public void turnOffPathing()
+    {
+        StopAllCoroutines();
+        currentTarget = 0;
+        finishedJump = true;
+        stopJumpCylce = true;
+    }
 
     public IEnumerator Curve(Vector2 start, Vector2 target, float timeToJump, float jumpHeight)
     {
@@ -94,7 +108,7 @@ public class BasicEnemy : MonoBehaviour
         backOnGround = false;
 
         // flips to face target (Default View is Left)
-        if(flipSpriteTowardTarget) GetComponent<SpriteRenderer>().flipX = (targetPoints[currentTarget].position.x > transform.position.x) ? true : false;
+        if(flipSpriteTowardTarget) GetComponent<SpriteRenderer>().flipX = (targetPoints[currentTarget].position.x > transform.position.x) ? false : true;
 
 
         while (timePassed < timeToJump)
@@ -109,6 +123,9 @@ public class BasicEnemy : MonoBehaviour
             transform.position = Vector2.Lerp(start, end, linearT) + new Vector2(0, height);
             yield return null;
         }
+
+        if(shakeCamera) Camera.main.GetComponent<CameraShake>().StartShake(duration,magnitude, true);
+
         GameObject temp = Instantiate(dustPrefab);
         temp.transform.position = transform.position;
         backOnGround = true;
