@@ -93,6 +93,11 @@ public class BasicEnemy : MonoBehaviour
         stopJumpCylce = false;
     }
 
+    public void pausePathing()
+    {
+        stopJumpCylce = true;
+    }
+
     public void turnOffPathing()
     {
         StopAllCoroutines();

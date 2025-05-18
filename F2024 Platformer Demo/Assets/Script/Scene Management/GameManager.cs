@@ -1,5 +1,4 @@
-using Cinemachine;
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -51,6 +50,9 @@ public class GameManager : MonoBehaviour
     // ##########################
 
 
+    public static event Action destroyOnMainMenuLoad;
+    int currentSceneIndex;
+
     [Header("Debug")]
     public bool DevMode = true;
     public bool isPaused;
@@ -63,9 +65,12 @@ public class GameManager : MonoBehaviour
         else Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
+        destroyOnMainMenuLoad += KillYourself;
     }
     private void Start()
     {
+        currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
         if (!DevMode)
         {
             PlayerController.instance.hasInputPaused = true;
@@ -78,6 +83,18 @@ public class GameManager : MonoBehaviour
         }
         //PauseMenu?.SetActive(false);
     }
+
+
+    private void OnDestroy()
+    {
+        destroyOnMainMenuLoad -= KillYourself;
+    }
+
+    void KillYourself()
+    {
+        Destroy(gameObject);
+    }
+
 
     private void Update()
     {
@@ -93,6 +110,25 @@ public class GameManager : MonoBehaviour
 
         }
         
+
+
+
+    }
+
+    private void LateUpdate()
+    {
+        int activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        if (currentSceneIndex != activeSceneIndex)
+        {
+            currentSceneIndex = activeSceneIndex;
+
+            if(currentSceneIndex == 0)
+            {
+                destroyOnMainMenuLoad?.Invoke();
+            }
+
+        }
     }
 
     #region Chunk and Save Data

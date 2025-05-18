@@ -17,6 +17,8 @@ public class CutscenePlayerMovement : MonoBehaviour
     public void CancelMovement()
     {
         StopAllCoroutines();
+        CancelInvoke();
+        Debug.Log("Movement Cutscene Cancelled");
     }
 
     IEnumerator movePlayer()

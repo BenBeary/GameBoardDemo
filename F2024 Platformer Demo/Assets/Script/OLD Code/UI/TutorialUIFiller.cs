@@ -29,6 +29,17 @@ public class TutorialUIFiller : MonoBehaviour
     private void Start()
     {
         CloseTutorial();
+        GameManager.destroyOnMainMenuLoad += KillYourself;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.destroyOnMainMenuLoad -= KillYourself;
+    }
+
+    void KillYourself()
+    {
+        Destroy(gameObject);
     }
 
     public void OpenTutorial()

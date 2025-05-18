@@ -85,6 +85,22 @@ public class PlayerController : MonoBehaviour
         baseDotColor = playerMat ? playerMat.GetColor("_DotColor") : Color.black;
     }
 
+    private void Start()
+    {
+        GameManager.destroyOnMainMenuLoad += KillYourself;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.destroyOnMainMenuLoad -= KillYourself;
+    }
+
+    void KillYourself()
+    {
+        Destroy(gameObject);
+    }
+
+
     private void Update()
     {
         if(Input.GetKey(KeyCode.Alpha1) && Input.GetKey(KeyCode.Alpha2))

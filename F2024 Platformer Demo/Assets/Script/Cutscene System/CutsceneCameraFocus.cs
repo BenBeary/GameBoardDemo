@@ -17,6 +17,8 @@ public class CutsceneCameraFocus : MonoBehaviour
 
     public UnityEvent onFinished;
 
+    bool isActive;
+
     Camera cam;
 
     private void Start()
@@ -26,12 +28,24 @@ public class CutsceneCameraFocus : MonoBehaviour
     }
 
 
+    public void CancelCameraCutscene()
+    {
+        LeanTween.cancelAll(gameObject);
+        
+        cam.gameObject.SetActive(false);
+        CancelInvoke();
+        Debug.Log("Cancelled Camera Cutscene");
+    }
+
+
+
     public void TriggerCameraCutscene()
     {
         cam.gameObject.SetActive(true);
         if (turnOnZoom) ZoomCamera(false);
         PanTo(target.position);
         cam.gameObject.SetActive(true);
+        isActive = true;
 
         Invoke(nameof(revertBackToPlayer), duration-moveDuration);
 
@@ -88,6 +102,7 @@ public class CutsceneCameraFocus : MonoBehaviour
     {
         onFinished.Invoke();
         cam.gameObject.SetActive(false);
+        isActive = false;
     }
 
 

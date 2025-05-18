@@ -61,6 +61,24 @@ public class CameraManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+
+    private void Start()
+    {
+        GameManager.destroyOnMainMenuLoad += KillYourself;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.destroyOnMainMenuLoad -= KillYourself;
+    }
+
+    void KillYourself()
+    {
+        Destroy(gameObject);
+    }
+
+
+
     private void LateUpdate()
     {
         if (target == null)

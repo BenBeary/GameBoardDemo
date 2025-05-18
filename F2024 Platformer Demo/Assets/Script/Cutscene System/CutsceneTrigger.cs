@@ -49,6 +49,13 @@ public class CutsceneTrigger : MonoBehaviour
         }
     }
 
+    public void PlayCutscene(bool temp)
+    {
+        if (hasBeenPlayed && !repeatableCutscene && playingCutscene || CutsceneRunning || onCooldown) return;
+        playingCutscene = true;
+        token = true;
+        CutsceneRunning = true;
+    }
 
     void PlayCutscene()
     {
@@ -100,11 +107,14 @@ public class CutsceneTrigger : MonoBehaviour
 
         DialogueManager.instance.MoveBars(false);
         PlayerController.instance.hasInputPaused = false;
+        Debug.Log("Cancelled Cutscene Trigger");
 
         CutsceneDialogue anyDialogue = GetComponent<CutsceneDialogue>();
         if (anyDialogue) anyDialogue.CancelDialogue();
         CutscenePlayerMovement anyMovement = GetComponent<CutscenePlayerMovement>();
         if (anyMovement) anyMovement.CancelMovement();
+        CutsceneCameraFocus anyFocus = GetComponent<CutsceneCameraFocus>();
+        if(anyFocus) anyFocus.CancelCameraCutscene();
 
     }
 

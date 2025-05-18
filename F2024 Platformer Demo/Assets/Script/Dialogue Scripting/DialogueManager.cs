@@ -50,6 +50,20 @@ public class DialogueManager : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        GameManager.destroyOnMainMenuLoad += KillYourself;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.destroyOnMainMenuLoad -= KillYourself;
+    }
+
+    void KillYourself()
+    {
+        Destroy(gameObject);
+    }
 
     public void MoveBars(bool turnOn)
     {

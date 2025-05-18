@@ -522,27 +522,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Domino_Black
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 160
-        width: 32
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c111ddf63269d7741a2e93b5d0617c50
-      internalID: -2068989769
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Domino_Green
       rect:
         serializedVersion: 2
@@ -1558,6 +1537,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Masked_Dice
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 453333119c0276346ac1f840a9cbbd01
+      internalID: -191339815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1653,6 +1653,7 @@ TextureImporter:
       GameBoardPack_8: 1566384333
       GameBoardPack_9: -1841217523
       Hint Card: -112161361
+      Masked_Dice: -191339815
       Pawn_White: 357392294
       Pencil: -861225712
       Pin_Black: 1005473492

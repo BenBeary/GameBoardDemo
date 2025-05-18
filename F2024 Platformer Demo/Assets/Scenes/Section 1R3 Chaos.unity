@@ -4353,6 +4353,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  allowAllTriggers: 0
 --- !u!4 &257679737 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3941191518737694655, guid: 0df885a3ac059304db0d2f6ab6cd264c, type: 3}
@@ -5214,7 +5215,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 48.99999, y: 6.0000124}
+  m_Size: {x: 56.99999, y: 6.0000153}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -5229,7 +5230,7 @@ Transform:
   m_GameObject: {fileID: 293718995}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.70710576, w: 0.70710784}
-  m_LocalPosition: {x: 43, y: 123.5, z: 0}
+  m_LocalPosition: {x: 43, y: 127.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -77772,7 +77773,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5553875274448868007, guid: 76556ed1df1e2f64eac098b6af8b1715, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: 0.001447178
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5553875274448868007, guid: 76556ed1df1e2f64eac098b6af8b1715, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
@@ -77780,7 +77781,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5553875274448868007, guid: 76556ed1df1e2f64eac098b6af8b1715, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.996382
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5553875274448868007, guid: 76556ed1df1e2f64eac098b6af8b1715, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
@@ -83472,7 +83473,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5937344423675373591, guid: 33be3e980f390574992299c87b9db009, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 174
+      value: 168.875
       objectReference: {fileID: 0}
     - target: {fileID: 5937344423675373591, guid: 33be3e980f390574992299c87b9db009, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -85303,6 +85304,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  allowAllTriggers: 0
 --- !u!4 &1823239131 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3941191518737694655, guid: 0df885a3ac059304db0d2f6ab6cd264c, type: 3}
