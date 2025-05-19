@@ -17,4 +17,7 @@ MonoBehaviour:
     - name: Black Knight
       icon: {fileID: -1332059373, guid: 65c88195fe917754bb3e23d55f5a2720, type: 3}
       dialogueStrips:
-      - asd
+      - "I must applaud you on your Efforts\u2026"
+      - "I honestly didn\u2019t think the rumors were true, but here you are."
+      - "It\u2019s a shame really\u2026"
+      - You worked so hard just to die.

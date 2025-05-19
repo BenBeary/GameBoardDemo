@@ -49,6 +49,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject StartButton;
     // ##########################
 
+    [Header("Collectable Stuff")]
+    [SerializeField] GameObject UIPrefab;
+    [SerializeField] Canvas collectableCanvas;
+    [SerializeField] Transform collectableContainer;
+    [Space(20)]
+    public float fadeDuration = 0.2f;
+    public float arcDuration = 1f;
+    public float delayBefore = 0.1f;
+    public float delayAfter = 0.1f;
+    [Space(20)]
+    public bool[] Collectables = new bool[10];
+
 
     public static event Action destroyOnMainMenuLoad;
     int currentSceneIndex;
@@ -59,6 +71,7 @@ public class GameManager : MonoBehaviour
     public bool gameStarted;
     public bool cantPause;
 
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -66,6 +79,7 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         destroyOnMainMenuLoad += KillYourself;
+        
     }
     private void Start()
     {
@@ -109,9 +123,6 @@ public class GameManager : MonoBehaviour
             timePlayedInGame += Time.deltaTime;
 
         }
-        
-
-
 
     }
 
@@ -142,6 +153,7 @@ public class GameManager : MonoBehaviour
         if (savedRegionData.Any(x => x.RegionID == newRegion.RegionName)) return;
 
         savedRegionData.Add(new regionData(newRegion.RegionName, newRegion.savedItemIds));
+        GrabCollectableData(newRegion.savedItemIds);
         
     }
 
@@ -160,8 +172,52 @@ public class GameManager : MonoBehaviour
     public void UpdateRegionData(string regionID, List<string> newData)
     {
         savedRegionData.First(x => x.RegionID == regionID).savedData = new List<string>(newData);
+        GrabCollectableData(newData);
     }
 
+    void GrabCollectableData(List<string> Data)
+    {
+        foreach(var item in Data)
+        {
+            if (item.Contains("Collectable"))
+            {
+                string numberPart = item.Substring("Collectable".Length);
+                if(int.TryParse(numberPart,out int number))
+                {
+                    if (!Collectables[number - 1])
+                    {
+                        Debug.Log("New Collectable Added");
+                        Collectables[number - 1] = true;
+                        SpawnAndAnimate(number - 1);
+                    }
+
+                }
+            }
+        }
+    }
+
+    public void SpawnAndAnimate(int spriteLocation)
+    {
+       
+        CanvasGroup canvasGroup = collectableContainer.GetComponent<CanvasGroup>();
+
+        canvasGroup.alpha = 0f;
+        LeanTween.alphaCanvas(canvasGroup, 1f, fadeDuration)
+
+        // Step 2: Arc animation (starts after fade in)
+        .setOnComplete(() =>
+        {
+           
+            collectableContainer.GetChild(spriteLocation).GetComponent<Image>().color = Color.yellow;
+
+            LeanTween.alphaCanvas(canvasGroup, 0f, fadeDuration)
+                .setDelay(delayAfter)
+                .setOnComplete(() =>
+                {
+                    Debug.Log("Collectable Added?");
+                });
+        });
+    }
 
 
     #endregion

@@ -94,6 +94,7 @@ public class CutsceneTrigger : MonoBehaviour
 
     void resetCutscene()
     {
+        if(!playingCutscene) return;
         // Debug.Log("Resetting Cutscene...");
         playingCutscene = false;
 

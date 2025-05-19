@@ -101,7 +101,7 @@ public class CutsceneCameraFocus : MonoBehaviour
     void invokeFinished()
     {
         onFinished.Invoke();
-        cam.gameObject.SetActive(false);
+        if(!stackingTargerts) cam.gameObject.SetActive(false);
         isActive = false;
     }
 

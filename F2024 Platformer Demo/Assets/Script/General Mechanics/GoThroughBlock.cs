@@ -8,6 +8,8 @@ public class GoThroughBlock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PlayerController.instance == null) { Debug.LogWarning("No Player Detected"); return; }
+
         // turns off collider if player is holding "S" or under
         if (PlayerController.instance.transform.position.y < transform.position.y + GetComponent<SpriteRenderer>().size.y) 
         {

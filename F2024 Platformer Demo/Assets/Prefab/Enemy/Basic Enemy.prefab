@@ -146,9 +146,13 @@ MonoBehaviour:
   anim: {fileID: 7091352778429671165}
   hideDelay: 1.5
   killOnDestination: 0
+  dontLoopMovement: 0
   dotColors: 
   colorSelected: 0
   colorOnColorViolence: 0
+  shakeCamera: 0
+  magnitude: 0.9
+  duration: 0.25
   finishedJump: 1
   backOnGround: 0
   stopJumpCylce: 0

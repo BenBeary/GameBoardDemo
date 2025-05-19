@@ -57,13 +57,14 @@ public class RegionController : MonoBehaviour
         }
 
         savedItemIds.Add(itemsInScene.First(x => x.obj == itemID).itemId);
+        SaveRegionData();
     }
 
 
 
-    private void OnDisable()
+    void SaveRegionData()
     {
-        if(savedItemIds.Count > 0)
+        if (savedItemIds.Count > 0)
         {
             if (!GameManager.Instance.CheckForData(RegionName)) // Send Data
             {
@@ -72,6 +73,11 @@ public class RegionController : MonoBehaviour
             }
             GameManager.Instance.UpdateRegionData(RegionName, savedItemIds);
         }
+    }
+
+    private void OnDisable()
+    {
+        SaveRegionData();
     }
 
 

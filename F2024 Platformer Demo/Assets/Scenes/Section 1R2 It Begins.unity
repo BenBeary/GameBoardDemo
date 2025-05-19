@@ -1240,7 +1240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 260220538256720885, guid: e9fbcde9d9fe9f5449d95d82a10851ed, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 3
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 461825906299477683, guid: e9fbcde9d9fe9f5449d95d82a10851ed, type: 3}
       propertyPath: m_Size.x
@@ -4981,6 +4981,18 @@ PrefabInstance:
     - target: {fileID: 8950695064413776894, guid: ad44ffaab325e9b419bbbdc747af03ea, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210281871190346959, guid: ad44ffaab325e9b419bbbdc747af03ea, type: 3}
+      propertyPath: m_Color.b
+      value: 0.21893907
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210281871190346959, guid: ad44ffaab325e9b419bbbdc747af03ea, type: 3}
+      propertyPath: m_Color.g
+      value: 0.30832568
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210281871190346959, guid: ad44ffaab325e9b419bbbdc747af03ea, type: 3}
+      propertyPath: m_Color.r
+      value: 0.42452827
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9567,6 +9579,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  allowAllTriggers: 0
 --- !u!61 &263263471
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -27412,6 +27425,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  allowAllTriggers: 0
 --- !u!61 &662104831
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -30761,7 +30775,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 2.0000002, y: 1}
+  m_Size: {x: 2.0000002, y: 2.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -30776,7 +30790,7 @@ Transform:
   m_GameObject: {fileID: 735899827}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 72.38, y: 40.72, z: 0}
+  m_LocalPosition: {x: 72.38, y: 41.345, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -33841,6 +33855,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 590036177}
     m_Modifications:
+    - target: {fileID: 260220538256720885, guid: e9fbcde9d9fe9f5449d95d82a10851ed, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 461825906299477683, guid: e9fbcde9d9fe9f5449d95d82a10851ed, type: 3}
       propertyPath: m_Size.y
       value: 3
@@ -79994,6 +80012,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  allowAllTriggers: 0
 --- !u!61 &906615191
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -80753,6 +80772,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  allowAllTriggers: 0
 --- !u!61 &927900961
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -89730,6 +89750,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  allowAllTriggers: 0
 --- !u!61 &1175116762
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -92264,6 +92285,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  allowAllTriggers: 0
 --- !u!61 &1247142261
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -94287,6 +94309,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1112736280}
     m_Modifications:
+    - target: {fileID: 260220538256720885, guid: e9fbcde9d9fe9f5449d95d82a10851ed, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 260220538256720885, guid: e9fbcde9d9fe9f5449d95d82a10851ed, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 461825906299477683, guid: e9fbcde9d9fe9f5449d95d82a10851ed, type: 3}
       propertyPath: m_Size.x
       value: 2
@@ -98037,7 +98067,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6817180563416533290, guid: fd1daaf4a12df5f408788c66f73fb2b5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 126.75
+      value: 126.5
       objectReference: {fileID: 0}
     - target: {fileID: 6817180563416533290, guid: fd1daaf4a12df5f408788c66f73fb2b5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -98077,7 +98107,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7287978814907004844, guid: fd1daaf4a12df5f408788c66f73fb2b5, type: 3}
       propertyPath: m_Size.x
-      value: 4.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7287978814907004844, guid: fd1daaf4a12df5f408788c66f73fb2b5, type: 3}
       propertyPath: m_Size.y
@@ -98482,7 +98512,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 2.0000002, y: 1}
+  m_Size: {x: 2.0000002, y: 2.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -98497,7 +98527,7 @@ Transform:
   m_GameObject: {fileID: 1401347272}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 68.38, y: 40.72, z: 0}
+  m_LocalPosition: {x: 68.38, y: 41.345, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -98903,6 +98933,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  allowAllTriggers: 0
 --- !u!61 &1415272814
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -107623,7 +107654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5553875274448868007, guid: 76556ed1df1e2f64eac098b6af8b1715, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.520678
+      value: 0.5585455
       objectReference: {fileID: 0}
     - target: {fileID: 5553875274448868007, guid: 76556ed1df1e2f64eac098b6af8b1715, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
@@ -116444,6 +116475,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  allowAllTriggers: 0
 --- !u!61 &1900817100
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -125100,6 +125132,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  allowAllTriggers: 0
 --- !u!1001 &8834547529161465939
 PrefabInstance:
   m_ObjectHideFlags: 0
