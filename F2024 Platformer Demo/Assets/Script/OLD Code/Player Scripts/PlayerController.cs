@@ -52,7 +52,6 @@ public class PlayerController : MonoBehaviour
     public bool doubleJump = true;
     public bool hasInputPaused;
 
-
     Animator animMan;
     Rigidbody2D rb;
     public Vector2 motionInput;
@@ -103,11 +102,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.Alpha1) && Input.GetKey(KeyCode.Alpha2))
-        {
-            Debug.Log("Application Closing");
-            Application.Quit();
-        }
+
         if (rb.velocity.magnitude > maxVelocity) rb.velocity = rb.velocity.normalized * maxVelocity;
 
         if(!isDying && !hasInputPaused) MovementManager();

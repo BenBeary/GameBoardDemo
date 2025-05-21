@@ -17,7 +17,6 @@ public class CutsceneCameraFocus : MonoBehaviour
 
     public UnityEvent onFinished;
 
-    bool isActive;
 
     Camera cam;
 
@@ -45,7 +44,6 @@ public class CutsceneCameraFocus : MonoBehaviour
         if (turnOnZoom) ZoomCamera(false);
         PanTo(target.position);
         cam.gameObject.SetActive(true);
-        isActive = true;
 
         Invoke(nameof(revertBackToPlayer), duration-moveDuration);
 
@@ -102,7 +100,6 @@ public class CutsceneCameraFocus : MonoBehaviour
     {
         onFinished.Invoke();
         if(!stackingTargerts) cam.gameObject.SetActive(false);
-        isActive = false;
     }
 
 

@@ -8,7 +8,7 @@ public class SceneChanger : MonoBehaviour
     [SerializeField] bool loadSceneAdditive;
     [SerializeField] TransitionManager.TransitionType transitionMode;
     [Header("Scene Input")]
-    [SerializeField] SceneField loadThisScene;
+    public SceneField loadThisScene;
     [Header("Indexing Settings")]
     [SerializeField] bool useIndexInstead;
     public int SceneIndex;

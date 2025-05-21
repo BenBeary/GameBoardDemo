@@ -1579,6 +1579,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: GameBoardPack_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 192
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 32, y: 0, z: 32, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 662a921d12c80d44cb156335dac4ca44
+      internalID: 2111390174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1640,6 +1661,7 @@ TextureImporter:
       GameBoardPack_12: 171583625
       GameBoardPack_13: 83028579
       GameBoardPack_14: -1403898093
+      GameBoardPack_15: 2111390174
       GameBoardPack_17: -1742082350
       GameBoardPack_18: 1975702322
       GameBoardPack_2: 299840411

@@ -189,10 +189,10 @@ TextureImporter:
       name: UI_2
       rect:
         serializedVersion: 2
-        x: 52
-        y: 71
-        width: 88
-        height: 48
+        x: 55
+        y: 40
+        width: 91
+        height: 49
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,132 +202,6 @@ TextureImporter:
       bones: []
       spriteID: 6c08ed4e2dc1c2e478aae7efb4f9dcb2
       internalID: 47082596
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI_3
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 33
-        width: 16
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b16516b30b43270409ace3f6db65af3f
-      internalID: -1843529438
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI_4
-      rect:
-        serializedVersion: 2
-        x: 52
-        y: 32
-        width: 10
-        height: 23
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f0366aea807628b4c9c105f66ca7994f
-      internalID: 298641935
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI_5
-      rect:
-        serializedVersion: 2
-        x: 66
-        y: 32
-        width: 19
-        height: 23
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f1f8dbf422e5c1c44bb8b2f02a45b20c
-      internalID: 7507765
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI_6
-      rect:
-        serializedVersion: 2
-        x: 92
-        y: 32
-        width: 20
-        height: 23
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c116d692188ff45408dd2d8b54d01ce0
-      internalID: 1880842260
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI_7
-      rect:
-        serializedVersion: 2
-        x: 119
-        y: 32
-        width: 18
-        height: 23
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e8e2fe5aa8de00b4284d996edd6ec4bc
-      internalID: 2044043425
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI_8
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 49
-        width: 16
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2ea21790cdda82f469b5ecc17aacf634
-      internalID: -909119217
       vertices: []
       indices: 
       edges: []

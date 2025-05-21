@@ -62,6 +62,11 @@ public class GameManager : MonoBehaviour
     public bool[] Collectables = new bool[10];
 
 
+    [Header("Game Done Where To Load")]
+    [SerializeField] SceneField newScore;
+    [SerializeField] SceneField backToMenu;
+    public LevelData newGame;
+
     public static event Action destroyOnMainMenuLoad;
     int currentSceneIndex;
 
@@ -110,9 +115,37 @@ public class GameManager : MonoBehaviour
     }
 
 
+    public void SaveHighscore(ref SceneChanger whereToGo)
+    {
+        
+        newGame.name = CharRandomizer().ToString() + CharRandomizer().ToString() + CharRandomizer().ToString();
+        newGame.timePlayed = timePlayedInGame;
+        newGame.JacksCollected = Collectables.ToList();
+        newGame.totalDeaths = playerDeathCount;
+        
+        if(GameSaveData.instance.checkIfNewHighscore(newGame) ) 
+        {
+            whereToGo.loadThisScene = newScore;
+        }
+        else
+        {
+            whereToGo.loadThisScene = backToMenu;
+        }
+
+        GameSaveData.instance.AddNewHighscore(newGame);
+        whereToGo.LoadNewScene();
+    }
+
+
+    char CharRandomizer()
+    {
+        return (char)('a' + UnityEngine.Random.Range(0, 26));
+    }
+
+
     private void Update()
     {
-        if(Input.GetButtonDown("Pause") && !cantPause)
+        if(Input.GetButtonDown("Pause") && !cantPause || Input.GetKeyDown(KeyCode.Alpha1) && !cantPause)
         {
             if(!isPaused) PauseGame();
             else UnPauseGame();

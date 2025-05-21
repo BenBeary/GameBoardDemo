@@ -61,6 +61,13 @@ public class RegionController : MonoBehaviour
     }
 
 
+    public void GameFinished()
+    {
+        if (GetComponent<SceneChanger>() == null) return;
+        SceneChanger sceneChanger = GetComponent<SceneChanger>();
+        GameManager.Instance.SaveHighscore(ref sceneChanger);
+    }
+
 
     void SaveRegionData()
     {

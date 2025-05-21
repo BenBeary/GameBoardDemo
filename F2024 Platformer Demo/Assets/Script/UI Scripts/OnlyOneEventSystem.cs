@@ -7,11 +7,9 @@ public class OnlyOneEventSystem : MonoBehaviour
     {
         if(EventSystem.current != null && EventSystem.current != GetComponent<EventSystem>())
         {
-            Destroy(gameObject);
-        }
-        else
-        {
-            DontDestroyOnLoad(gameObject);
+            Destroy(EventSystem.current.gameObject);
+
+            EventSystem.current = GetComponent<EventSystem>();
         }
     }
 }
