@@ -131,9 +131,10 @@ public class GameManager : MonoBehaviour
         {
             whereToGo.loadThisScene = backToMenu;
         }
-
+        
         GameSaveData.instance.AddNewHighscore(newGame);
         whereToGo.LoadNewScene();
+        CutsceneTrigger.CutsceneRunning = false;
     }
 
 

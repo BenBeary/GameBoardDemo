@@ -21,12 +21,15 @@ public class LeverTrigger : MonoBehaviour
     public UnityEvent onDeactive;
 
     bool onCooldown;
+    float timeStayed = 0;
 
     private void Start()
     {
         originalState = isActive;
         SetInitialState();
         PlayerController.playerReset += resetToDefault;
+        transform.GetChild(1).gameObject.SetActive(false);
+
     }
 
     private void OnDisable()
@@ -86,8 +89,26 @@ public class LeverTrigger : MonoBehaviour
             if (!isActive) ActivateLever();
             else DeactivateLever();
         }
+        if (collision.CompareTag("Player"))
+        {
+            if(timeStayed > 3)
+            {
+                transform.GetChild(1).gameObject.SetActive(true);
+            }
+
+            timeStayed += Time.deltaTime;
+        }
     }
 
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            timeStayed = 0;
+            transform.GetChild(1).gameObject.SetActive(false);
+        }
+    }
 
 
 

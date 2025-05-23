@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PawnSpawner : MonoBehaviour
 {
@@ -37,7 +38,7 @@ public class PawnSpawner : MonoBehaviour
         }
 
         temp.transform.position = transform.position;
-
+        SceneManager.MoveGameObjectToScene(temp, gameObject.scene);
     }
 
 

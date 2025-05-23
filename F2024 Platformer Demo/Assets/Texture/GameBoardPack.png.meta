@@ -1538,7 +1538,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Masked_Dice
+      name: GameBoardPack_
       rect:
         serializedVersion: 2
         x: 0
@@ -1588,7 +1588,7 @@ TextureImporter:
         width: 192
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 32, y: 0, z: 32, w: 0}
       outline: []
       physicsShape: []
@@ -1596,6 +1596,27 @@ TextureImporter:
       bones: []
       spriteID: 662a921d12c80d44cb156335dac4ca44
       internalID: 2111390174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameBoardPack_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 611f0f361c9bf9b448dc6c9a5b726da1
+      internalID: -1182240930
       vertices: []
       indices: 
       edges: []
@@ -1654,6 +1675,7 @@ TextureImporter:
       Flag_6: 413929335
       Flag_7: -1333386061
       Flag_8: 1390299945
+      GameBoardPack_: -191339815
       GameBoardPack_0: -1974951954
       GameBoardPack_1: -1913019565
       GameBoardPack_10: -739917760
@@ -1662,6 +1684,7 @@ TextureImporter:
       GameBoardPack_13: 83028579
       GameBoardPack_14: -1403898093
       GameBoardPack_15: 2111390174
+      GameBoardPack_16: -1182240930
       GameBoardPack_17: -1742082350
       GameBoardPack_18: 1975702322
       GameBoardPack_2: 299840411
@@ -1697,7 +1720,6 @@ TextureImporter:
       GameBoardPack_8: 1566384333
       GameBoardPack_9: -1841217523
       Hint Card: -112161361
-      Masked_Dice: -191339815
       Pawn_White: 357392294
       Pencil: -861225712
       Pin_Black: 1005473492
