@@ -503,14 +503,6 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            DamagePlayer(1);
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Checkpoint"))
@@ -526,7 +518,6 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("OutOfBounds"))
         {
             rb.velocity = Vector2.zero;
-            resetToCheckpoint();
             resetToCheckpoint();
         }
         if (collision.CompareTag("DeathBoxes"))
